@@ -44,11 +44,12 @@ body{
 }
 .lang-switcher button{
   font-family:var(--serif);font-size:.8em;line-height:1;
-  padding:6px 10px;border:0;border-radius:999px;background:none;color:var(--muted);
+  padding:6px 10px;border:0;border-radius:999px;background:#F1E7E2;color:#7E2A2E;
   cursor:pointer;letter-spacing:.04em;transition:background .15s,color .15s;
 }
-.lang-switcher button:hover{color:var(--crimson)}
-.lang-switcher button[aria-pressed="true"]{background:var(--crimson);color:var(--paper)}
+.lang-switcher button:hover{background:#FBF3F1;color:var(--crimson)}
+.lang-switcher button[aria-pressed="true"]{background:#77282C;color:var(--paper)}
+.lang-switcher button[aria-pressed="true"]:hover{background:#8C3236;color:var(--paper)}
 
 /* ───────── 页头 ───────── */
 .site-header{position:relative;padding:38px 20px 0;text-align:center}
@@ -77,13 +78,13 @@ h1 .accent{color:var(--crimson)}
 #charInput:focus{border-color:var(--crimson);box-shadow:0 0 0 4px rgba(159,54,58,.13)}
 #searchBtn{
   padding:13px 28px;font-family:var(--serif);font-size:1.05em;letter-spacing:.16em;
-  color:var(--paper);background:var(--crimson);border:2px solid var(--crimson);
+  color:var(--paper);background:#77282C;border:2px solid #77282C;
   border-radius:10px;cursor:pointer;white-space:nowrap;
-  box-shadow:0 2px 10px rgba(159,54,58,.26);
+  box-shadow:0 2px 10px rgba(119,40,44,.26);
   transition:background .15s,border-color .15s,box-shadow .15s;
 }
-#searchBtn:hover{background:#7E2A2E;border-color:#7E2A2E}
-#searchBtn:active{background:#6C2427;border-color:#6C2427}
+#searchBtn:hover{background:var(--crimson);border-color:var(--crimson)}
+#searchBtn:active{background:#B04B4F;border-color:#B04B4F}
 #searchBtn:focus-visible{outline:3px solid rgba(159,54,58,.35);outline-offset:2px}
 #searchBtn:disabled{opacity:.55;cursor:progress}
 
@@ -161,12 +162,12 @@ main{flex:1 0 auto}
 .chips{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:16px}
 .chip{
   font-family:var(--serif);font-size:1em;letter-spacing:.04em;
-  padding:7px 16px;background:var(--paper);color:var(--text);
-  border:1px solid var(--line);border-radius:999px;cursor:pointer;
+  padding:7px 16px;background:#77282C;color:var(--paper);
+  border:1px solid #77282C;border-radius:999px;cursor:pointer;
   transition:border-color .15s,color .15s,background .15s,transform .1s;
 }
-.chip:hover{border-color:var(--crimson);color:var(--crimson);background:#FBF3F1}
-.chip:active{transform:translateY(1px)}
+.chip:hover{background:var(--crimson);border-color:var(--crimson);color:var(--paper)}
+.chip:active{transform:translateY(1px);background:#B04B4F;border-color:#B04B4F}
 #results:not(:empty) ~ .empty{display:none}
 
 /* 音系入口 */
@@ -177,7 +178,7 @@ main{flex:1 0 auto}
   border-radius:12px;cursor:pointer;box-shadow:0 2px 10px rgba(28,21,18,.04);
   transition:background .15s,border-color .15s;
 }
-.scheme-bar:hover{background:#FDF9F6;border-color:#DFCCC3}
+.scheme-bar:hover{background:#FFFDFC;border-color:#F0E3DC}
 .scheme-bar:focus-visible{outline:3px solid rgba(159,54,58,.28);outline-offset:2px}
 .scheme-title{font-size:1em;letter-spacing:.05em;color:var(--ink)}
 .scheme-desc{margin-top:4px;font-size:.82em;color:var(--muted);letter-spacing:.02em}
@@ -212,7 +213,8 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   border:0;background:none;font-size:1.6em;line-height:1;color:var(--crimson);
   cursor:pointer;padding:0 4px;border-radius:6px;
 }
-.modal-close:hover{background:#F7ECEA}
+.modal-close{background:#F7ECEA}
+.modal-close:hover{background:#FDF7F5}
 .modal-body{padding:6px 22px 28px;overflow:auto;-webkit-overflow-scrolling:touch}
 .modal-body h3{
   display:flex;align-items:center;gap:9px;
@@ -325,7 +327,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 
 <footer>
   <div id="tFooter">字音取自 <a href="https://github.com/osfans/MCPDict" target="_blank" rel="noopener">MCPDict《西安》数据表</a><span class="sep">|</span>拼音方案 <a href="https://github.com/SiqYin/xinganhua-fuvufa" target="_blank" rel="noopener">西安话拼音</a><span class="sep">|</span>字体 <a href="https://github.com/lxgw/LxgwWenKai" target="_blank" rel="noopener">霞鹜文楷</a>（OFL）</div>
-  <div class="sig" id="tSig">玄为秦，绛为汉<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.4</div>
+  <div class="sig" id="tSig">玄为秦，绛为汉<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.5</div>
 </footer>
 
 <div class="modal" id="modal" aria-hidden="true">
@@ -424,7 +426,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
       document.getElementById('tSchemeMore').textContent = d.schemeMore || '';
       document.getElementById('tFooter').innerHTML = d.footerLine || '';
       document.getElementById('tSig').innerHTML = esc(d.sig || '')
-        + '<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.4';
+        + '<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.5';
       modalTitle.textContent = d.modalTitle || '';
       modalClose.setAttribute('aria-label', d.modalClose || 'Close');
       if (modal.classList.contains('open')) buildModal();
