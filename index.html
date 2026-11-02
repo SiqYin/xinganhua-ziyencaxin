@@ -18,140 +18,192 @@
   --paper:#ffffff;
   --crimson:#9F363A;
   --hair:rgba(0,0,0,.14);
-  --muted:rgba(0,0,0,.60);
-  --faint:rgba(0,0,0,.42);
-  --wash:rgba(159,54,58,.06);
+  --muted:rgba(0,0,0,.62);
+  --faint:rgba(0,0,0,.44);
+  --wash:rgba(159,54,58,.07);
   --serif:"LXGW WenKai","SimSun-ExtB","MingLiU-ExtB","I.Ming","HanaMinB","BabelStone Han","Songti SC","Noto Serif CJK SC",Georgia,"SimSun",serif;
 }
 html,body{height:100%}
 body{
   min-height:100vh;display:flex;flex-direction:column;
   font-family:var(--serif);color:var(--ink);background:var(--paper);
-  -webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;
+  -webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
 }
-/* 三色条：黑（秦）· 绛红（汉）· 白 */
-.tricolor-bar{
-  height:10px;flex-shrink:0;
-  background:linear-gradient(to right,
-    var(--ink) 0 33.333%,
-    var(--crimson) 33.333% 66.666%,
-    var(--paper) 66.666% 100%);
-  border-bottom:1px solid var(--ink);
+
+/* ───────── 黑色首屏（秦） ───────── */
+.hero{position:relative;flex-shrink:0;background:var(--ink);color:var(--paper);overflow:hidden}
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px),
+    linear-gradient(0deg,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:26px 26px;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 58%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 58%,transparent 100%);
 }
-main{flex:1}
-.container{max-width:880px;margin:0 auto;padding:36px 20px 28px}
-header{text-align:center;margin-bottom:26px}
-h1{
-  font-size:2.15em;font-weight:700;letter-spacing:.06em;line-height:1.25;
-  display:flex;align-items:center;justify-content:center;gap:.42em;flex-wrap:wrap;
-}
-h1 .seal{
+.hero-inner{position:relative;max-width:880px;margin:0 auto;padding:46px 20px 30px;text-align:center}
+.brand{display:flex;align-items:center;justify-content:center;gap:15px;flex-wrap:wrap}
+.seal{
   display:inline-flex;align-items:center;justify-content:center;
-  width:1.32em;height:1.32em;font-size:.62em;
-  border:2px solid var(--crimson);border-radius:4px;
-  color:var(--crimson);letter-spacing:0;font-weight:700;
+  width:46px;height:46px;flex-shrink:0;
+  background:var(--crimson);color:var(--paper);
+  border-radius:5px;font-size:25px;font-weight:700;letter-spacing:0;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 4px 14px rgba(159,54,58,.4);
 }
-h1 .accent{color:var(--crimson)}
-.subtitle{margin-top:10px;font-size:.95em;color:var(--muted);letter-spacing:.02em}
-.subtitle b{font-weight:400;color:var(--ink)}
+h1{font-size:2.1em;font-weight:700;letter-spacing:.1em;line-height:1.25;color:var(--paper)}
+/* 「字音」用绛红底白字，黑底上才够清楚，也让绛红占到面积 */
+h1 .accent{
+  background:var(--crimson);color:var(--paper);
+  padding:.02em .16em .06em;border-radius:3px;margin:0 .04em;
+}
+.subtitle{margin-top:14px;font-size:.95em;line-height:1.75;color:rgba(255,255,255,.7);letter-spacing:.02em}
+.subtitle b{font-weight:400;color:var(--paper);border-bottom:1px solid rgba(255,255,255,.42);padding-bottom:1px}
+
 .search-box{display:flex;gap:10px;justify-content:center;align-items:stretch;margin-top:26px;min-width:0}
 #charInput{
-  flex:0 1 470px;max-width:100%;min-width:0;padding:13px 18px;
-  font-family:var(--serif);font-size:1.3em;color:var(--ink);
-  background:var(--paper);border:2px solid var(--ink);border-radius:8px;outline:none;
+  flex:0 1 460px;max-width:100%;min-width:0;
+  padding:13px 18px;font-family:var(--serif);font-size:1.25em;color:var(--ink);
+  background:var(--paper);border:2px solid var(--paper);border-radius:8px;outline:none;
   transition:border-color .15s,box-shadow .15s;
 }
-#charInput::placeholder{color:var(--faint);font-size:.86em;letter-spacing:.02em}
-#charInput:focus{border-color:var(--crimson);box-shadow:0 0 0 3px var(--wash)}
+#charInput::placeholder{color:rgba(0,0,0,.38);font-size:.84em;letter-spacing:.02em}
+#charInput:focus{border-color:var(--crimson);box-shadow:0 0 0 4px rgba(159,54,58,.3)}
 #searchBtn{
-  padding:13px 26px;font-family:var(--serif);font-size:1.1em;letter-spacing:.08em;
+  padding:13px 30px;font-family:var(--serif);font-size:1.06em;letter-spacing:.16em;
   color:var(--paper);background:var(--crimson);border:2px solid var(--crimson);
-  border-radius:8px;cursor:pointer;transition:filter .15s;white-space:nowrap;
+  border-radius:8px;cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s;
 }
-#searchBtn:hover{filter:brightness(.88)}
-#searchBtn:active{filter:brightness(.78)}
-#searchBtn:focus-visible{outline:3px solid var(--wash);outline-offset:2px}
+#searchBtn:hover{background:#7E2A2E;border-color:#7E2A2E}
+#searchBtn:active{background:#6C2427;border-color:#6C2427}
+#searchBtn:focus-visible{outline:3px solid rgba(255,255,255,.55);outline-offset:2px}
+#searchBtn:disabled{opacity:.55;cursor:progress}
+
 .meta-row{
-  display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;align-items:center;
-  margin-top:14px;font-size:.85em;color:var(--faint);letter-spacing:.02em;
+  display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;align-items:center;
+  margin-top:16px;font-size:.84em;color:rgba(255,255,255,.52);letter-spacing:.03em;
 }
-.meta-row .dot{width:3px;height:3px;border-radius:50%;background:var(--faint);display:inline-block;margin-right:18px;vertical-align:middle}
+.meta-row .dot{display:inline-block;width:3px;height:3px;border-radius:50%;background:var(--crimson);margin-right:14px;vertical-align:middle}
+
 .legend{
-  margin-top:12px;padding:10px 14px;border:1px solid var(--hair);border-left:3px solid var(--crimson);
-  border-radius:6px;background:var(--wash);font-size:.86em;color:var(--muted);
-  display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;
+  display:flex;flex-wrap:wrap;gap:7px 18px;justify-content:center;align-items:center;
+  margin-top:18px;padding:10px 16px;font-size:.85em;letter-spacing:.02em;
+  color:rgba(255,255,255,.76);
+  background:rgba(159,54,58,.22);
+  border:1px solid rgba(159,54,58,.62);border-radius:8px;
 }
-.legend b{font-weight:700;color:var(--crimson)}
+.legend b{color:var(--paper);font-weight:700}
+.legend .ex{color:rgba(255,255,255,.55)}
+.legend .ex b{color:var(--paper)}
+
+/* 绛红分隔带（汉） */
+.crimson-rule{height:7px;flex-shrink:0;background:var(--crimson)}
+
+/* ───────── 白色结果区 ───────── */
+main{flex:1 0 auto;background:var(--paper)}
+.container{max-width:880px;margin:0 auto;padding:28px 20px 44px}
+
 .error-msg{
-  margin:22px 0;padding:13px 16px;text-align:center;font-size:.95em;
-  color:var(--crimson);background:var(--wash);border:1px solid rgba(159,54,58,.38);border-radius:8px;
+  margin:4px 0 18px;padding:13px 16px;text-align:center;font-size:.95em;
+  color:var(--crimson);background:var(--wash);
+  border:1px solid rgba(159,54,58,.4);border-radius:8px;
 }
-.results{margin-top:26px}
+.no-result{margin:22px 0;text-align:center;color:var(--muted);font-size:.95em}
+.results{margin-top:2px}
+
 .card{
-  background:var(--paper);border:1px solid var(--hair);border-left:3px solid var(--crimson);
-  border-radius:10px;padding:20px 22px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,.05);
+  background:var(--paper);
+  border:1px solid var(--hair);border-left:4px solid var(--crimson);
+  border-radius:10px;padding:18px 22px;margin-bottom:14px;
+  box-shadow:0 3px 16px rgba(0,0,0,.055);
 }
-.card-head{display:flex;align-items:flex-start;gap:20px}
-.glyph{flex:0 0 auto;text-align:center;min-width:96px}
-.glyph .main{font-size:3.5em;line-height:1.05;font-weight:400}
-.glyph .alt{margin-top:4px;font-size:.9em;color:var(--faint);letter-spacing:.06em}
+.card-head{display:flex;align-items:flex-start;gap:22px}
+.glyph{flex:0 0 auto;text-align:center;min-width:104px}
+.glyph .main{
+  font-size:3.4em;line-height:1.1;font-weight:400;
+  display:inline-block;border-bottom:3px solid var(--crimson);padding:0 .06em .04em;
+}
+.glyph .alt{margin-top:8px;font-size:.86em;letter-spacing:.08em;color:var(--faint)}
+.glyph .count{margin-top:4px;font-size:.74em;letter-spacing:.08em;color:var(--faint)}
 .glyph .tag{
-  display:inline-block;margin-top:7px;padding:1px 8px;font-size:.72em;letter-spacing:.06em;
-  color:var(--crimson);border:1px solid rgba(159,54,58,.4);border-radius:999px;background:var(--wash);
+  display:inline-block;margin-top:8px;padding:1px 9px;font-size:.72em;letter-spacing:.06em;
+  color:var(--crimson);border:1px solid rgba(159,54,58,.42);border-radius:999px;background:var(--wash);
 }
-.readings{flex:1 1 auto;min-width:0;border-left:1px dashed var(--hair);padding-left:20px}
-.count{font-size:.74em;letter-spacing:.08em;color:var(--faint);margin-top:6px}
-.reading{padding:9px 0;border-bottom:1px dashed var(--hair)}
+.readings{flex:1 1 auto;min-width:0;border-left:1px dashed var(--hair);padding-left:22px}
+.reading{padding:9px 0;border-bottom:1px dashed rgba(0,0,0,.09)}
 .reading:last-child{border-bottom:0;padding-bottom:2px}
-.reading:first-child{padding-top:2px}
-.read-line{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.reading:first-child{padding-top:3px}
+.read-line{display:flex;align-items:baseline;gap:13px;flex-wrap:wrap}
 .py{font-size:1.42em;font-weight:700;letter-spacing:.02em}
 .py .tn{color:var(--crimson)}
-.ipa{font-size:1.06em;color:rgba(0,0,0,.78)}
-.ipa .tone{font-size:.82em;vertical-align:super;color:var(--crimson);letter-spacing:0}
+.ipa{font-size:1.06em;color:rgba(0,0,0,.76)}
+.ipa .tone{font-size:.8em;vertical-align:super;color:var(--crimson);letter-spacing:0}
 .tone-tag{
-  font-size:.76em;letter-spacing:.08em;color:var(--crimson);
-  padding:1px 8px;border:1px solid rgba(159,54,58,.34);border-radius:999px;background:var(--wash);
+  font-size:.75em;letter-spacing:.1em;color:var(--crimson);
+  padding:1px 9px;border:1px solid rgba(159,54,58,.34);border-radius:999px;background:var(--wash);
 }
 .note{
-  margin-top:5px;padding-left:9px;font-size:.88em;line-height:1.6;color:var(--muted);
-  border-left:2px solid rgba(159,54,58,.45);
+  margin-top:6px;padding-left:10px;font-size:.88em;line-height:1.65;color:var(--muted);
+  border-left:2px solid rgba(159,54,58,.5);
 }
-.note .lbl{color:var(--crimson);margin-right:4px}
-.missing .glyph .main{color:var(--faint)}
+.note .lbl{color:var(--crimson);margin-right:5px}
+
+.missing{border-left-color:rgba(0,0,0,.22)}
+.missing .glyph .main{color:var(--faint);border-bottom-color:rgba(0,0,0,.22)}
 .missing-tip{color:var(--muted);font-size:.95em}
-.no-result{margin-top:22px;text-align:center;color:var(--muted);font-size:.95em}
-.count-line{margin:0 0 10px;font-size:.85em;color:var(--faint);letter-spacing:.02em}
-footer{
-  flex-shrink:0;border-top:1px solid var(--hair);background:var(--paper);
-  padding:16px 20px 20px;text-align:center;font-size:.84em;color:var(--faint);line-height:1.9;
+
+/* 首屏下方的引导 */
+.empty{margin:26px auto 0;max-width:660px;text-align:center}
+.empty .lead{font-size:1em;letter-spacing:.06em;color:var(--muted)}
+.empty .lead b{color:var(--ink);font-weight:400;border-bottom:2px solid rgba(159,54,58,.55);padding-bottom:1px}
+.chips{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:16px}
+.chip{
+  font-family:var(--serif);font-size:1em;letter-spacing:.04em;
+  padding:7px 16px;background:var(--paper);color:var(--ink);
+  border:1px solid var(--hair);border-radius:999px;cursor:pointer;transition:all .15s;
 }
-footer a{color:var(--crimson);text-decoration:none;border-bottom:1px solid rgba(159,54,58,.35)}
-footer a:hover{border-bottom-color:var(--crimson)}
-footer .sep{margin:0 8px;color:var(--hair)}
+.chip:hover{border-color:var(--crimson);color:var(--crimson);background:var(--wash)}
+#results:not(:empty) ~ .empty{display:none}
+
+/* ───────── 绛红页脚（汉） ───────── */
+footer{
+  flex-shrink:0;background:var(--crimson);color:rgba(255,255,255,.88);
+  padding:20px 20px 22px;text-align:center;font-size:.84em;line-height:1.95;
+}
+footer a{color:var(--paper);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.5)}
+footer a:hover{border-bottom-color:var(--paper)}
+footer .sep{margin:0 9px;color:rgba(255,255,255,.42)}
+footer .sig{letter-spacing:.12em;color:rgba(255,255,255,.72)}
+
 @media (max-width:600px){
-  .container{padding:26px 14px 22px}
-  h1{font-size:1.72em}
-  .search-box{flex-direction:column}
+  .hero-inner{padding:30px 16px 24px}
+  .seal{width:38px;height:38px;font-size:21px}
+  h1{font-size:1.6em;letter-spacing:.06em}
+  .subtitle{font-size:.9em}
+  .search-box{flex-direction:column;margin-top:20px}
   #charInput{flex:1 1 auto;width:100%;min-width:0}
-  #searchBtn{width:100%}
+  #searchBtn{width:100%;letter-spacing:.2em}
+  .legend{gap:5px 12px;font-size:.8em;padding:9px 10px}
+  .container{padding:20px 14px 34px}
+  .card{padding:15px 15px}
   .card-head{gap:12px}
-  .glyph{min-width:74px}
-  .glyph .main{font-size:2.6em}
-  .readings{padding-left:13px}
+  .glyph{min-width:76px}
+  .glyph .main{font-size:2.7em}
+  .readings{padding-left:14px}
   .py{font-size:1.24em}
+  footer{font-size:.78em}
 }
 </style>
 </head>
 <body>
-<div class="tricolor-bar" aria-hidden="true"></div>
-
-<main>
-  <div class="container">
-    <header>
-      <h1><span class="seal">秦</span>西安话<span class="accent">字音</span>查询</h1>
-      <p class="subtitle">输入汉字，查它在西安话（关中片）里的<b>拼音</b>与<b>国际音标</b>；有释注一并列出</p>
-    </header>
+<header class="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="brand">
+      <span class="seal" aria-hidden="true">秦</span>
+      <h1>西安话<span class="accent">字音</span>查询</h1>
+    </div>
+    <p class="subtitle">输入汉字，查它在西安话（关中片）里的<b>拼音</b>与<b>国际音标</b>；有释注一并列出</p>
 
     <form class="search-box" id="searchForm" autocomplete="off">
       <input id="charInput" type="text" maxlength="60" spellcheck="false"
@@ -162,7 +214,7 @@ footer .sep{margin:0 8px;color:var(--hair)}
     <div class="meta-row">
       <span>简繁皆可</span><span class="dot"></span>
       <span>一次最多 30 字</span><span class="dot"></span>
-      <span>字音 3,647 条 · 字头 3,344</span>
+      <span>字音 3,648 条 · 字头 3,345</span>
     </div>
 
     <div class="legend">
@@ -170,11 +222,29 @@ footer .sep{margin:0 8px;color:var(--hair)}
       <span><b>2</b> 阳平 24</span>
       <span><b>3</b> 上声 53</span>
       <span><b>4</b> 去声 44</span>
-      <span>例：<b>bfeng4</b> 中 · <b>jyuen1</b> 軍</span>
+      <span class="ex">例 <b>bfeng4</b> 中 · <b>jyuen1</b> 軍</span>
     </div>
+  </div>
+</header>
 
+<div class="crimson-rule" aria-hidden="true"></div>
+
+<main>
+  <div class="container">
     <div id="message"></div>
     <div class="results" id="results"></div>
+
+    <div class="empty">
+      <p class="lead">输入一个或多个汉字试试，比如 <b>西安话</b>、<b>着</b>、<b>鵝</b></p>
+      <div class="chips">
+        <button type="button" class="chip" data-q="西安话">西安话</button>
+        <button type="button" class="chip" data-q="着">着</button>
+        <button type="button" class="chip" data-q="鵝">鵝</button>
+        <button type="button" class="chip" data-q="邊">邊</button>
+        <button type="button" class="chip" data-q="𰻞">𰻞</button>
+        <button type="button" class="chip" data-q="大">大</button>
+      </div>
+    </div>
   </div>
 </main>
 
@@ -186,7 +256,7 @@ footer .sep{margin:0 8px;color:var(--hair)}
     <span class="sep">|</span>
     字体 <a href="https://github.com/lxgw/LxgwWenKai" target="_blank" rel="noopener">霞鹜文楷</a>（OFL）
   </div>
-  <div style="margin-top:4px">xinganhua-ziyencaxin<span class="sep">|</span>黑为秦色，绛红为汉色</div>
+  <div class="sig">黑为秦色 · 绛红为汉色<span class="sep">|</span>xinganhua-ziyencaxin</div>
 </footer>
 
 <script>
@@ -285,7 +355,7 @@ footer .sep{margin:0 8px;color:var(--hair)}
   function doSearch(text, pushState) {
     if (!ready) { setMessage('字表还在载入，请稍候…'); return; }
     var raw = Array.prototype.slice.call(String(text || '').replace(/\s+/g, ''));
-    var CJK = /[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF\u{20000}-\u{2FA1F}]/u;
+    var CJK = /[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF\u{20000}-\u{2FA1F}\u{30000}-\u{323AF}]/u;
     var chars = raw.filter(function (c) { return CJK.test(c); });
     if (!raw.length) { results.innerHTML = ''; setMessage('请输入至少一个汉字。'); input.focus(); return; }
     if (!chars.length) { results.innerHTML = ''; setMessage('请输汉字（本页暂不支持拼音反查或拉丁字母）。'); return; }
@@ -342,6 +412,15 @@ footer .sep{margin:0 8px;color:var(--hair)}
     setMessage('数据载入失败。若是本地打开，请通过 HTTP 访问（例如在项目目录运行 python -m http.server），不要直接双击 HTML 文件。', true);
   });
 })();
+</script>
+<script>
+document.querySelectorAll('.chip').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var i = document.getElementById('charInput');
+    i.value = b.getAttribute('data-q');
+    document.getElementById('searchForm').dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+  });
+});
 </script>
 </body>
 </html>
