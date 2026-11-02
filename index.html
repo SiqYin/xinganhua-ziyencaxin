@@ -10,7 +10,7 @@
 @font-face{
   font-family:"LXGW WenKai";
   font-style:normal;font-weight:400;font-display:swap;
-  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2") format("woff2");
+  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=2") format("woff2");
 }
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -256,7 +256,7 @@ footer .sig{letter-spacing:.12em;color:rgba(255,255,255,.72)}
     <span class="sep">|</span>
     字体 <a href="https://github.com/lxgw/LxgwWenKai" target="_blank" rel="noopener">霞鹜文楷</a>（OFL）
   </div>
-  <div class="sig">黑为秦色 · 绛红为汉色<span class="sep">|</span>xinganhua-ziyencaxin</div>
+  <div class="sig">黑为秦色 · 绛红为汉色<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.2</div>
 </footer>
 
 <script>
@@ -280,8 +280,8 @@ footer .sig{letter-spacing:.12em;color:rgba(255,255,255,.72)}
 
   function loadData() {
     return Promise.all([
-      fetch('data/xian.json').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/variants.json').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      fetch('data/xian.json?v=2').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json?v=2').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     ]).then(function (out) {
       out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
       variants = out[1];
