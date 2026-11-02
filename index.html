@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>西安话字音查询 · xinganhua-ziyencaxin</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%279%27 fill=%27%239F363A%27/%3E%3Ctext x=%2732%27 y=%2747%27 font-size=%2742%27 text-anchor=%27middle%27 fill=%27%23fff%27 font-family=%27serif%27%3E%E7%A7%A6%3C/text%3E%3C/svg%3E">
+<meta name="description" content="输入汉字，查西安话（关中片）的字音：西安话拼音、国际音标、声调与词典释注。支持简体、繁体，一次最多 30 字。">
+<style>
+@font-face{
+  font-family:"LXGW WenKai";
+  font-style:normal;font-weight:400;font-display:swap;
+  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2") format("woff2");
+}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#000000;
+  --paper:#ffffff;
+  --crimson:#9F363A;
+  --hair:rgba(0,0,0,.14);
+  --muted:rgba(0,0,0,.60);
+  --faint:rgba(0,0,0,.42);
+  --wash:rgba(159,54,58,.06);
+  --serif:"LXGW WenKai","SimSun-ExtB","MingLiU-ExtB","I.Ming","HanaMinB","BabelStone Han","Songti SC","Noto Serif CJK SC",Georgia,"SimSun",serif;
+}
+html,body{height:100%}
+body{
+  min-height:100vh;display:flex;flex-direction:column;
+  font-family:var(--serif);color:var(--ink);background:var(--paper);
+  -webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;
+}
+/* 三色条：黑（秦）· 绛红（汉）· 白 */
+.tricolor-bar{
+  height:10px;flex-shrink:0;
+  background:linear-gradient(to right,
+    var(--ink) 0 33.333%,
+    var(--crimson) 33.333% 66.666%,
+    var(--paper) 66.666% 100%);
+  border-bottom:1px solid var(--ink);
+}
+main{flex:1}
+.container{max-width:880px;margin:0 auto;padding:36px 20px 28px}
+header{text-align:center;margin-bottom:26px}
+h1{
+  font-size:2.15em;font-weight:700;letter-spacing:.06em;line-height:1.25;
+  display:flex;align-items:center;justify-content:center;gap:.42em;flex-wrap:wrap;
+}
+h1 .seal{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:1.32em;height:1.32em;font-size:.62em;
+  border:2px solid var(--crimson);border-radius:4px;
+  color:var(--crimson);letter-spacing:0;font-weight:700;
+}
+h1 .accent{color:var(--crimson)}
+.subtitle{margin-top:10px;font-size:.95em;color:var(--muted);letter-spacing:.02em}
+.subtitle b{font-weight:400;color:var(--ink)}
+.search-box{display:flex;gap:10px;justify-content:center;align-items:stretch;margin-top:26px;min-width:0}
+#charInput{
+  flex:0 1 470px;max-width:100%;min-width:0;padding:13px 18px;
+  font-family:var(--serif);font-size:1.3em;color:var(--ink);
+  background:var(--paper);border:2px solid var(--ink);border-radius:8px;outline:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+#charInput::placeholder{color:var(--faint);font-size:.86em;letter-spacing:.02em}
+#charInput:focus{border-color:var(--crimson);box-shadow:0 0 0 3px var(--wash)}
+#searchBtn{
+  padding:13px 26px;font-family:var(--serif);font-size:1.1em;letter-spacing:.08em;
+  color:var(--paper);background:var(--crimson);border:2px solid var(--crimson);
+  border-radius:8px;cursor:pointer;transition:filter .15s;white-space:nowrap;
+}
+#searchBtn:hover{filter:brightness(.88)}
+#searchBtn:active{filter:brightness(.78)}
+#searchBtn:focus-visible{outline:3px solid var(--wash);outline-offset:2px}
+.meta-row{
+  display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;align-items:center;
+  margin-top:14px;font-size:.85em;color:var(--faint);letter-spacing:.02em;
+}
+.meta-row .dot{width:3px;height:3px;border-radius:50%;background:var(--faint);display:inline-block;margin-right:18px;vertical-align:middle}
+.legend{
+  margin-top:12px;padding:10px 14px;border:1px solid var(--hair);border-left:3px solid var(--crimson);
+  border-radius:6px;background:var(--wash);font-size:.86em;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:center;
+}
+.legend b{font-weight:700;color:var(--crimson)}
+.error-msg{
+  margin:22px 0;padding:13px 16px;text-align:center;font-size:.95em;
+  color:var(--crimson);background:var(--wash);border:1px solid rgba(159,54,58,.38);border-radius:8px;
+}
+.results{margin-top:26px}
+.card{
+  background:var(--paper);border:1px solid var(--hair);border-left:3px solid var(--crimson);
+  border-radius:10px;padding:20px 22px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+.card-head{display:flex;align-items:flex-start;gap:20px}
+.glyph{flex:0 0 auto;text-align:center;min-width:96px}
+.glyph .main{font-size:3.5em;line-height:1.05;font-weight:400}
+.glyph .alt{margin-top:4px;font-size:.9em;color:var(--faint);letter-spacing:.06em}
+.glyph .tag{
+  display:inline-block;margin-top:7px;padding:1px 8px;font-size:.72em;letter-spacing:.06em;
+  color:var(--crimson);border:1px solid rgba(159,54,58,.4);border-radius:999px;background:var(--wash);
+}
+.readings{flex:1 1 auto;min-width:0;border-left:1px dashed var(--hair);padding-left:20px}
+.count{font-size:.74em;letter-spacing:.08em;color:var(--faint);margin-top:6px}
+.reading{padding:9px 0;border-bottom:1px dashed var(--hair)}
+.reading:last-child{border-bottom:0;padding-bottom:2px}
+.reading:first-child{padding-top:2px}
+.read-line{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.py{font-size:1.42em;font-weight:700;letter-spacing:.02em}
+.py .tn{color:var(--crimson)}
+.ipa{font-size:1.06em;color:rgba(0,0,0,.78)}
+.ipa .tone{font-size:.82em;vertical-align:super;color:var(--crimson);letter-spacing:0}
+.tone-tag{
+  font-size:.76em;letter-spacing:.08em;color:var(--crimson);
+  padding:1px 8px;border:1px solid rgba(159,54,58,.34);border-radius:999px;background:var(--wash);
+}
+.note{
+  margin-top:5px;padding-left:9px;font-size:.88em;line-height:1.6;color:var(--muted);
+  border-left:2px solid rgba(159,54,58,.45);
+}
+.note .lbl{color:var(--crimson);margin-right:4px}
+.missing .glyph .main{color:var(--faint)}
+.missing-tip{color:var(--muted);font-size:.95em}
+.no-result{margin-top:22px;text-align:center;color:var(--muted);font-size:.95em}
+.count-line{margin:0 0 10px;font-size:.85em;color:var(--faint);letter-spacing:.02em}
+footer{
+  flex-shrink:0;border-top:1px solid var(--hair);background:var(--paper);
+  padding:16px 20px 20px;text-align:center;font-size:.84em;color:var(--faint);line-height:1.9;
+}
+footer a{color:var(--crimson);text-decoration:none;border-bottom:1px solid rgba(159,54,58,.35)}
+footer a:hover{border-bottom-color:var(--crimson)}
+footer .sep{margin:0 8px;color:var(--hair)}
+@media (max-width:600px){
+  .container{padding:26px 14px 22px}
+  h1{font-size:1.72em}
+  .search-box{flex-direction:column}
+  #charInput{flex:1 1 auto;width:100%;min-width:0}
+  #searchBtn{width:100%}
+  .card-head{gap:12px}
+  .glyph{min-width:74px}
+  .glyph .main{font-size:2.6em}
+  .readings{padding-left:13px}
+  .py{font-size:1.24em}
+}
+</style>
+</head>
+<body>
+<div class="tricolor-bar" aria-hidden="true"></div>
+
+<main>
+  <div class="container">
+    <header>
+      <h1><span class="seal">秦</span>西安话<span class="accent">字音</span>查询</h1>
+      <p class="subtitle">输入汉字，查它在西安话（关中片）里的<b>拼音</b>与<b>国际音标</b>；有释注一并列出</p>
+    </header>
+
+    <form class="search-box" id="searchForm" autocomplete="off">
+      <input id="charInput" type="text" maxlength="60" spellcheck="false"
+             placeholder="输入汉字，如：西安话 着 鵝" aria-label="输入汉字">
+      <button id="searchBtn" type="submit">查字</button>
+    </form>
+
+    <div class="meta-row">
+      <span>简繁皆可</span><span class="dot"></span>
+      <span>一次最多 30 字</span><span class="dot"></span>
+      <span>字音 3,647 条 · 字头 3,344</span>
+    </div>
+
+    <div class="legend">
+      <span>调号 <b>1</b> 阴平 21</span>
+      <span><b>2</b> 阳平 24</span>
+      <span><b>3</b> 上声 53</span>
+      <span><b>4</b> 去声 44</span>
+      <span>例：<b>bfeng4</b> 中 · <b>jyuen1</b> 軍</span>
+    </div>
+
+    <div id="message"></div>
+    <div class="results" id="results"></div>
+  </div>
+</main>
+
+<footer>
+  <div>
+    字音取自 <a href="https://github.com/osfans/MCPDict" target="_blank" rel="noopener">MCPDict《西安》数据表</a>
+    <span class="sep">|</span>
+    拼音方案 <a href="https://github.com/SiqYin/xinganhua-fuvufa" target="_blank" rel="noopener">西安话拼音</a>
+    <span class="sep">|</span>
+    字体 <a href="https://github.com/lxgw/LxgwWenKai" target="_blank" rel="noopener">霞鹜文楷</a>（OFL）
+  </div>
+  <div style="margin-top:4px">xinganhua-ziyencaxin<span class="sep">|</span>黑为秦色，绛红为汉色</div>
+</footer>
+
+<script>
+(function () {
+  var MAX_CHARS = 30;
+  var form = document.getElementById('searchForm');
+  var input = document.getElementById('charInput');
+  var btn = document.getElementById('searchBtn');
+  var results = document.getElementById('results');
+  var message = document.getElementById('message');
+
+  var byChar = new Map();
+  var variants = { s2t: {}, t2s: {} };
+  var ready = false;
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  function loadData() {
+    return Promise.all([
+      fetch('data/xian.json').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    ]).then(function (out) {
+      out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
+      variants = out[1];
+      ready = true;
+    });
+  }
+
+  // 把输入字展开成字典里的字头：简体先换成繁体，本字若也在表里也保留
+  function expand(ch) {
+    var out = [];
+    var targets = (variants.s2t && variants.s2t[ch]) || null;
+    if (targets && targets.length) {
+      targets.forEach(function (t) { out.push({ character: t, from: ch }); });
+      if (out.every(function (o) { return o.character !== ch; }) && byChar.has(ch)) {
+        out.push({ character: ch, from: ch });
+      }
+    } else {
+      out.push({ character: ch, from: ch });
+    }
+    return out;
+  }
+
+  function altForm(ch) {
+    var s = variants.t2s && variants.t2s[ch];
+    return s && s !== ch ? s : '';
+  }
+
+  function renderReading(r) {
+    var html = '<div class="reading">';
+    html += '<div class="read-line">';
+    html += '<span class="py">' + esc(r.py.slice(0, -1)) + '<span class="tn">' + esc(r.py.slice(-1)) + '</span></span>';
+    html += '<span class="ipa">[' + esc(r.ipa) + '<span class="tone">' + esc(r.val_sup) + '</span>]</span>';
+    html += '<span class="tone-tag">' + esc(r.tone) + ' ' + esc(r.val) + '</span>';
+    html += '</div>';
+    if (r.note) {
+      var note = r.note.replace(/白讀/g, '白读').replace(/文讀/g, '文读');
+      html += '<div class="note"><span class="lbl">释</span>' + esc(note) + '</div>';
+    }
+    html += '</div>';
+    return html;
+  }
+
+  function renderCard(rec, from) {
+    var alt = altForm(rec.character);
+    var html = '<section class="card">';
+    html += '<div class="card-head">';
+    html += '<div class="glyph"><div class="main">' + esc(rec.character) + '</div>';
+    if (alt) html += '<div class="alt">简 ' + esc(alt) + '</div>';
+    html += '<div class="count">共 ' + rec.readings.length + ' 读</div>';
+    if (from && from !== rec.character && from !== alt) html += '<div class="tag">由 ' + esc(from) + ' 转查</div>';
+    html += '</div>';
+    html += '<div class="readings">';
+    rec.readings.forEach(function (r) { html += renderReading(r); });
+    html += '</div></div></section>';
+    return html;
+  }
+
+  function renderMissing(ch, from) {
+    var html = '<section class="card missing"><div class="card-head">';
+    html += '<div class="glyph"><div class="main">' + esc(ch) + '</div>';
+    if (from && from !== ch) html += '<div class="tag">由 ' + esc(from) + ' 转查</div>';
+    html += '</div><div class="readings"><div class="missing-tip">字表未收此字' +
+      (from && from !== ch ? '（该字的繁体形也未收）' : '') + '。</div></div></div></section>';
+    return html;
+  }
+
+  function setMessage(text, isError) {
+    message.innerHTML = text ? '<div class="' + (isError ? 'error-msg' : 'no-result') + '">' + esc(text) + '</div>' : '';
+  }
+
+  function doSearch(text, pushState) {
+    if (!ready) { setMessage('字表还在载入，请稍候…'); return; }
+    var raw = Array.prototype.slice.call(String(text || '').replace(/\s+/g, ''));
+    var CJK = /[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF\u{20000}-\u{2FA1F}]/u;
+    var chars = raw.filter(function (c) { return CJK.test(c); });
+    if (!raw.length) { results.innerHTML = ''; setMessage('请输入至少一个汉字。'); input.focus(); return; }
+    if (!chars.length) { results.innerHTML = ''; setMessage('请输汉字（本页暂不支持拼音反查或拉丁字母）。'); return; }
+    if (chars.length > MAX_CHARS) {
+      results.innerHTML = '';
+      setMessage('一次最多查 ' + MAX_CHARS + ' 个字，你输入了 ' + chars.length + ' 个。');
+      return;
+    }
+    var seen = new Set(), order = [], items = [];
+    chars.forEach(function (ch) {
+      if (seen.has(ch)) return;
+      seen.add(ch);
+      order.push(ch);
+      expand(ch).forEach(function (hit) {
+        var key = hit.character;
+        if (items.some(function (i) { return i.character === key; })) return;
+        items.push({ character: key, from: hit.from });
+      });
+    });
+
+    var html = '', found = 0;
+    items.forEach(function (item) {
+      var rec = byChar.get(item.character);
+      if (rec) { found++; html += renderCard(rec, item.from); }
+      else html += renderMissing(item.character, item.from);
+    });
+    results.innerHTML = html;
+    if (found === 0) {
+      setMessage('没查到：' + order.join('') + '。');
+    } else {
+      setMessage('');
+    }
+    if (pushState && window.history && history.replaceState) {
+      var url = location.pathname + (order.length ? '?q=' + encodeURIComponent(order.join('')) : '');
+      history.replaceState(null, '', url);
+    }
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    doSearch(input.value, true);
+  });
+
+  var preset = new URLSearchParams(location.search).get('q');
+  if (preset) input.value = preset;
+
+  btn.disabled = true;
+  loadData().then(function () {
+    btn.disabled = false;
+    if (preset) doSearch(preset, false);
+    else input.focus();
+  }).catch(function () {
+    btn.disabled = false;
+    setMessage('数据载入失败。若是本地打开，请通过 HTTP 访问（例如在项目目录运行 python -m http.server），不要直接双击 HTML 文件。', true);
+  });
+})();
+</script>
+</body>
+</html>
