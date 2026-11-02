@@ -10,7 +10,7 @@
 @font-face{
   font-family:"LXGW WenKai";
   font-style:normal;font-weight:400;font-display:swap;
-  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=4") format("woff2");
+  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=5") format("woff2");
 }
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -327,7 +327,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 
 <footer>
   <div id="tFooter">字音取自 <a href="https://github.com/osfans/MCPDict" target="_blank" rel="noopener">MCPDict《西安》数据表</a><span class="sep">|</span>拼音方案 <a href="https://github.com/SiqYin/xinganhua-fuvufa" target="_blank" rel="noopener">西安话拼音</a><span class="sep">|</span>字体 <a href="https://github.com/lxgw/LxgwWenKai" target="_blank" rel="noopener">霞鹜文楷</a>（OFL）</div>
-  <div class="sig" id="tSig">玄为秦，绛为汉<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.6</div>
+  <div class="sig" id="tSig">玄为秦，绛为汉<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.7</div>
 </footer>
 
 <div class="modal" id="modal" aria-hidden="true">
@@ -393,9 +393,9 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   /* ───────── 数据 ───────── */
   function loadData() {
     return Promise.all([
-      fetch('data/xian.json?v=4').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/variants.json?v=4').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/i18n.json?v=4').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      fetch('data/xian.json?v=5').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json?v=5').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/i18n.json?v=5').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     ]).then(function (out) {
       out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
       variants = out[1];
@@ -426,7 +426,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
       document.getElementById('tSchemeMore').textContent = d.schemeMore || '';
       document.getElementById('tFooter').innerHTML = d.footerLine || '';
       document.getElementById('tSig').innerHTML = esc(d.sig || '')
-        + '<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.6';
+        + '<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.7';
       modalTitle.textContent = d.modalTitle || '';
       modalClose.setAttribute('aria-label', d.modalClose || 'Close');
       if (modal.classList.contains('open')) buildModal();
@@ -439,14 +439,34 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     if (LAST.has) doSearch(LAST.text, false);
   }
 
+  // 只有中文变体才由系统语言决定；英文等其它系统语言交给 IP 判断
+  // （否则「英文系统 + 日本 IP」会被系统语言误判成英文）
   function sysLang() {
     var ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ''];
     for (var i = 0; i < ls.length; i++) {
       var l = String(ls[i] || '').toLowerCase();
       if (/^zh(-|$)/.test(l)) return /hant|tw|hk|mo/.test(l) ? 'hant' : 'hans';
-      if (/^en(-|$)/.test(l)) return 'en';
     }
     return null;
+  }
+
+  // ?lang=debug 时在页面顶部显示判定过程；平时的判定结果只写 console
+  function langDiag(info) {
+    try { if (window.console) console.info('[xianhua-lang]', info); } catch (e) {}
+    if (!/[?&]lang=debug/i.test(location.search)) return;
+    var box = document.getElementById('langDiag');
+    if (!box) {
+      box = document.createElement('div');
+      box.id = 'langDiag';
+      box.style.cssText = 'margin:10px auto 0;max-width:900px;padding:8px 12px;background:#FBF1F0;'
+        + 'border:1px solid rgba(159,54,58,.32);border-radius:8px;font-size:12px;color:#9F363A;text-align:center;line-height:1.7';
+      var host = document.querySelector('main .container');
+      if (host) host.insertBefore(box, host.firstChild);
+      else document.body.appendChild(box);
+    }
+    var parts = [];
+    for (var k in info) parts.push(k + '=' + info[k]);
+    box.textContent = '语言判定：' + parts.join(' · ');
   }
 
   function regionLang(code) {
@@ -492,22 +512,35 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
         else forced = q[1].toLowerCase();
       }
     } catch (e) {}
-    if (forced) { applyLang(forced, false); return; }
+    if (forced) { applyLang(forced, false); langDiag({ reason: 'url', lang: forced }); return; }
 
     var saved = null;
     try { saved = localStorage.getItem(KEY); } catch (e) {}
-    if (saved && LANGS.indexOf(saved) >= 0) { applyLang(saved, false); return; }
+    if (saved && LANGS.indexOf(saved) >= 0) {
+      applyLang(saved, false);
+      langDiag({ reason: 'manual', lang: saved, hint: '点右上角可改，或访问 ?lang=auto 清除手选' });
+      return;
+    }
 
     var sys = sysLang();
-    if (sys) { applyLang(sys, false); return; }
+    if (sys) {
+      applyLang(sys, false);
+      langDiag({ reason: 'system', lang: sys, languages: (navigator.languages || [navigator.language || '']).join(',') });
+      return;
+    }
 
     var host = location.hostname;
     var online = location.protocol !== 'file:' && host && host !== 'localhost' && host !== '127.0.0.1' && host !== '::1';
     var isBot = /bot|crawler|spider|slurp|yandex|baiduspider|googlebot|bingbot/i.test(navigator.userAgent || '');
     if (online && !isBot) {
-      ipLang(function (country) { applyLang(country ? regionLang(country) : 'hans', false); });
+      ipLang(function (country) {
+        var lang = country ? regionLang(country) : 'hans';
+        applyLang(lang, false);
+        langDiag({ reason: 'ip', country: country || '-', lang: lang, languages: (navigator.languages || [navigator.language || '']).join(',') });
+      });
     } else {
       applyLang('hans', false);
+      langDiag({ reason: 'offline', lang: 'hans' });
     }
   }
 
