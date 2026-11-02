@@ -10,16 +10,16 @@
 @font-face{
   font-family:"LXGW WenKai";
   font-style:normal;font-weight:400;font-display:swap;
-  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=2") format("woff2");
+  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=3") format("woff2");
 }
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --ink:#000000;
   --paper:#ffffff;
   --crimson:#9F363A;
-  --bg:#F4EEE9;          /* 纸：页面底 */
-  --bg-card:#FBF7F4;     /* 浅：卡片 */
-  --bg-deep:#F1E7E2;     /* 深：分区/标签 */
+  --bg:#F4EEE9;
+  --bg-card:#FBF7F4;
+  --bg-deep:#F1E7E2;
   --line:#E7D9D2;
   --line-soft:#F0E6E1;
   --text:#1C1512;
@@ -35,8 +35,23 @@ body{
   -webkit-tap-highlight-color:transparent;
 }
 
+/* ───────── 语言切换 ───────── */
+.lang-switcher{
+  position:absolute;top:14px;right:16px;z-index:5;
+  display:flex;gap:2px;padding:2px;
+  background:var(--paper);border:1px solid var(--line);border-radius:999px;
+  box-shadow:0 1px 3px rgba(28,21,18,.05);
+}
+.lang-switcher button{
+  font-family:var(--serif);font-size:.8em;line-height:1;
+  padding:6px 10px;border:0;border-radius:999px;background:none;color:var(--muted);
+  cursor:pointer;letter-spacing:.04em;transition:background .15s,color .15s;
+}
+.lang-switcher button:hover{color:var(--crimson)}
+.lang-switcher button[aria-pressed="true"]{background:var(--crimson);color:var(--paper)}
+
 /* ───────── 页头 ───────── */
-.site-header{padding:38px 20px 0;text-align:center}
+.site-header{position:relative;padding:38px 20px 0;text-align:center}
 .brand{display:inline-flex;align-items:center;justify-content:center;gap:13px;flex-wrap:wrap}
 .seal{
   display:inline-flex;align-items:center;justify-content:center;
@@ -80,7 +95,7 @@ h1 .accent{color:var(--crimson)}
 
 .legend{
   display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;align-items:center;
-  max-width:720px;margin:20px auto 0;padding:11px 16px;
+  max-width:760px;margin:20px auto 0;padding:11px 16px;
   background:var(--bg-card);border:1px solid var(--line);border-radius:10px;
   font-size:.85em;letter-spacing:.02em;color:var(--muted);
 }
@@ -154,6 +169,20 @@ main{flex:1 0 auto}
 .chip:active{transform:translateY(1px)}
 #results:not(:empty) ~ .empty{display:none}
 
+/* 音系入口 */
+.scheme-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin-top:26px;padding:15px 18px;text-align:left;
+  background:var(--bg-card);border:1px solid var(--line);border-left:4px solid var(--crimson);
+  border-radius:12px;cursor:pointer;box-shadow:0 2px 10px rgba(28,21,18,.04);
+  transition:background .15s,border-color .15s;
+}
+.scheme-bar:hover{background:#FDF9F6;border-color:#DFCCC3}
+.scheme-bar:focus-visible{outline:3px solid rgba(159,54,58,.28);outline-offset:2px}
+.scheme-title{font-size:1em;letter-spacing:.05em;color:var(--ink)}
+.scheme-desc{margin-top:4px;font-size:.82em;color:var(--muted);letter-spacing:.02em}
+.scheme-more{color:var(--crimson);font-size:.88em;white-space:nowrap;letter-spacing:.04em}
+
 /* ───────── 页脚（墨） ───────── */
 footer{
   flex-shrink:0;background:var(--ink);color:rgba(255,255,255,.88);
@@ -163,10 +192,60 @@ footer a{color:var(--paper);text-decoration:none;border-bottom:1px solid rgba(25
 footer a:hover{border-bottom-color:var(--paper)}
 footer .sep{margin:0 9px;color:rgba(255,255,255,.38)}
 footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
-footer .sig .seal-dot{color:var(--crimson)}
+
+/* ───────── 浮窗：音系与方案 ───────── */
+.modal{position:fixed;inset:0;z-index:60;display:none}
+.modal.open{display:block}
+.modal-backdrop{position:absolute;inset:0;background:rgba(22,14,12,.46)}
+.modal-panel{
+  position:relative;max-width:880px;margin:5vh auto 0;
+  background:var(--paper);border-radius:14px;overflow:hidden;
+  max-height:90vh;display:flex;flex-direction:column;
+  box-shadow:0 24px 70px rgba(0,0,0,.32);
+}
+.modal-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:15px 20px;border-bottom:1px solid var(--line);background:var(--bg-card);flex-shrink:0;
+}
+.modal-head h2{font-size:1.1em;letter-spacing:.06em;color:var(--ink)}
+.modal-close{
+  border:0;background:none;font-size:1.6em;line-height:1;color:var(--crimson);
+  cursor:pointer;padding:0 4px;border-radius:6px;
+}
+.modal-close:hover{background:#F7ECEA}
+.modal-body{padding:6px 22px 28px;overflow:auto;-webkit-overflow-scrolling:touch}
+.modal-body h3{
+  display:flex;align-items:center;gap:9px;
+  font-size:1.02em;letter-spacing:.06em;color:var(--crimson);
+  margin:24px 0 10px;
+}
+.modal-body h3::before{content:"";width:3px;height:1em;background:var(--crimson);border-radius:2px}
+.modal-body h4{font-size:.94em;letter-spacing:.03em;color:var(--ink);margin:18px 0 6px}
+.modal-body p{font-size:.9em;line-height:1.9;color:var(--muted);margin:6px 0}
+.modal-body code{font-family:inherit;background:var(--bg-deep);border-radius:4px;padding:0 4px;color:var(--text)}
+.phon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:7px;margin:10px 0 4px}
+.phon-cell{
+  background:var(--bg-card);border:1px solid var(--line);border-radius:8px;
+  padding:7px 8px;text-align:center;line-height:1.45;
+}
+.phon-cell .s{font-size:1.02em;font-weight:700;color:var(--ink)}
+.phon-cell .i{font-size:.72em;color:var(--muted)}
+.phon-cell .e{font-size:.76em;color:var(--faint);margin-top:1px}
+.fin-group{margin-top:12px}
+.fin-label{font-size:.8em;letter-spacing:.08em;color:var(--crimson);margin-bottom:4px}
+.modal-body table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:.86em}
+.modal-body th,.modal-body td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--line-soft)}
+.modal-body th{color:var(--muted);font-weight:400;background:var(--bg-card);border-bottom-color:var(--line)}
+.modal-body td:nth-child(2){color:var(--crimson)}
+.modal-body td:nth-child(3){color:var(--muted)}
+.phon-note{font-size:.84em !important;background:var(--bg-card);border-left:2px solid rgba(159,54,58,.4);border-radius:0 6px 6px 0;padding:7px 11px}
+.modal-link{margin-top:22px !important}
+.modal-link a{color:var(--crimson);text-decoration:none;border-bottom:1px solid rgba(159,54,58,.4)}
 
 @media (max-width:600px){
-  .site-header{padding:26px 16px 0}
+  .lang-switcher{top:10px;right:10px;padding:1px}
+  .lang-switcher button{padding:5px 8px;font-size:.74em}
+  .site-header{padding:32px 16px 0}
   .seal{width:36px;height:36px;font-size:20px}
   h1{font-size:1.58em;letter-spacing:.06em}
   .subtitle{font-size:.88em;line-height:1.7}
@@ -183,17 +262,29 @@ footer .sig .seal-dot{color:var(--crimson)}
   .reading{padding:9px 11px 10px}
   .py{font-size:1.2em}
   .ipa{font-size:.98em}
+  .scheme-bar{padding:12px 14px}
+  .scheme-desc{font-size:.76em}
+  .modal-panel{margin:3vh 10px 0;max-height:93vh;border-radius:12px}
+  .modal-head{padding:12px 14px}
+  .modal-body{padding:4px 14px 22px}
+  .phon-grid{grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:6px}
   footer{font-size:.78em}
 }
 </style>
 </head>
 <body>
 <header class="site-header">
+  <div class="lang-switcher" id="langSwitcher" aria-label="语言">
+    <button type="button" data-lang="hans">简</button>
+    <button type="button" data-lang="hant">繁</button>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+
   <div class="brand">
     <span class="seal" aria-hidden="true">秦</span>
-    <h1>西安话<span class="accent">字音</span>查询</h1>
+    <h1 id="tTitle">西安话<span class="accent">字音</span>查询</h1>
   </div>
-  <p class="subtitle">输入汉字，查它在西安话（关中片）里的<b>拼音</b>与<b>国际音标</b>；有释注一并列出</p>
+  <p class="subtitle" id="tSubtitle">输入汉字，查它在西安话（关中片）里的<b>拼音</b>与<b>国际音标</b>；有释注一并列出</p>
 
   <form class="search-box" id="searchForm" autocomplete="off">
     <input id="charInput" type="text" maxlength="60" spellcheck="false"
@@ -201,19 +292,8 @@ footer .sig .seal-dot{color:var(--crimson)}
     <button id="searchBtn" type="submit">查字</button>
   </form>
 
-  <div class="meta-row">
-    <span>简繁皆可</span><span class="dot"></span>
-    <span>一次最多 30 字</span><span class="dot"></span>
-    <span>字音 3,648 条 · 字头 3,345</span>
-  </div>
-
-  <div class="legend">
-    <span>调号 <b>1</b> 阴平 21</span>
-    <span><b>2</b> 阳平 24</span>
-    <span><b>3</b> 上声 53</span>
-    <span><b>4</b> 去声 44</span>
-    <span class="ex">例 <b>bfeng4</b> 中 · <b>jyuen1</b> 軍</span>
-  </div>
+  <div class="meta-row" id="tMeta"></div>
+  <div class="legend" id="tLegend"></div>
 </header>
 
 <main>
@@ -222,7 +302,7 @@ footer .sig .seal-dot{color:var(--crimson)}
     <div class="results" id="results"></div>
 
     <div class="empty">
-      <p class="lead">输入一个或多个汉字试试，比如 <b>西安话</b>、<b>着</b>、<b>鵝</b></p>
+      <p class="lead" id="tLead">输入一个或多个汉字试试，比如 <b>西安话</b>、<b>着</b>、<b>鵝</b></p>
       <div class="chips">
         <button type="button" class="chip" data-q="西安话">西安话</button>
         <button type="button" class="chip" data-q="着">着</button>
@@ -232,32 +312,61 @@ footer .sig .seal-dot{color:var(--crimson)}
         <button type="button" class="chip" data-q="大">大</button>
       </div>
     </div>
+
+    <div class="scheme-bar" id="schemeBar" role="button" tabindex="0">
+      <div>
+        <div class="scheme-title" id="tSchemeTitle">西安话音系与输入方案</div>
+        <div class="scheme-desc" id="tSchemeDesc">声母 26 · 韵母 40 · 四声；点开看与普通话拼音的异同</div>
+      </div>
+      <span class="scheme-more" id="tSchemeMore">查看 →</span>
+    </div>
   </div>
 </main>
 
 <footer>
-  <div>
-    字音取自 <a href="https://github.com/osfans/MCPDict" target="_blank" rel="noopener">MCPDict《西安》数据表</a>
-    <span class="sep">|</span>
-    拼音方案 <a href="https://github.com/SiqYin/xinganhua-fuvufa" target="_blank" rel="noopener">西安话拼音</a>
-    <span class="sep">|</span>
-    字体 <a href="https://github.com/lxgw/LxgwWenKai" target="_blank" rel="noopener">霞鹜文楷</a>（OFL）
-  </div>
-  <div class="sig">黑为秦色 · 绛红为汉色<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.3</div>
+  <div id="tFooter">字音取自 <a href="https://github.com/osfans/MCPDict" target="_blank" rel="noopener">MCPDict《西安》数据表</a><span class="sep">|</span>拼音方案 <a href="https://github.com/SiqYin/xinganhua-fuvufa" target="_blank" rel="noopener">西安话拼音</a><span class="sep">|</span>字体 <a href="https://github.com/lxgw/LxgwWenKai" target="_blank" rel="noopener">霞鹜文楷</a>（OFL）</div>
+  <div class="sig" id="tSig">玄为秦，绛为汉<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.4</div>
 </footer>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-backdrop" data-close="1"></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="tModalTitle">
+    <div class="modal-head">
+      <h2 id="tModalTitle">西安话音系与输入方案</h2>
+      <button type="button" class="modal-close" id="modalClose" aria-label="关闭">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
 
 <script>
 (function () {
+  'use strict';
   var MAX_CHARS = 30;
+  var LANGS = ['hans', 'hant', 'en'];
+  var KEY = 'xianhua-lang';
+  var EN_REGIONS = ['US', 'GB', 'CA', 'AU', 'NZ', 'FR', 'DE', 'KR'];
+  var HANT_REGIONS = ['HK', 'MO', 'TW'];
+
   var form = document.getElementById('searchForm');
   var input = document.getElementById('charInput');
   var btn = document.getElementById('searchBtn');
   var results = document.getElementById('results');
   var message = document.getElementById('message');
+  var modal = document.getElementById('modal');
+  var modalBody = document.getElementById('modalBody');
+  var modalTitle = document.getElementById('tModalTitle');
+  var modalClose = document.getElementById('modalClose');
 
   var byChar = new Map();
   var variants = { s2t: {}, t2s: {} };
+  var I18N = null;
+  var LANG = 'hans';
+  var LAST = { text: '', has: false };
   var ready = false;
+
+  var TONE_HANT = { '阴平': '陰平', '阳平': '陽平', '上声': '上聲', '去声': '去聲' };
+  var TONE_EN = { '阴平': 'Yinping', '阳平': 'Yangping', '上声': 'Shangsheng', '去声': 'Qusheng' };
 
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
@@ -265,23 +374,147 @@ footer .sig .seal-dot{color:var(--crimson)}
     });
   }
 
+  function pack() { return (I18N && I18N.langs[LANG]) || (I18N && I18N.langs.hans) || {}; }
+
+  function t(key, vars) {
+    var v = pack()[key];
+    if (v == null || typeof v !== 'string') return '';
+    return vars ? v.replace(/\{(\w+)\}/g, function (_, k) { return vars[k] != null ? vars[k] : ''; }) : v;
+  }
+
+  function toneName(n) {
+    if (LANG === 'en') return TONE_EN[n] || n;
+    if (LANG === 'hant') return TONE_HANT[n] || n;
+    return n;
+  }
+
+  /* ───────── 数据 ───────── */
   function loadData() {
     return Promise.all([
-      fetch('data/xian.json?v=2').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/variants.json?v=2').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      fetch('data/xian.json?v=3').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json?v=3').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/i18n.json?v=3').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     ]).then(function (out) {
       out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
       variants = out[1];
-      ready = true;
+      I18N = out[2];
     });
   }
 
-  // 把输入字展开成字典里的字头：简体先换成繁体，本字若也在表里也保留
+  /* ───────── 语言 ───────── */
+  function applyLang(lang, persist) {
+    if (LANGS.indexOf(lang) < 0) lang = 'hans';
+    LANG = lang;
+    document.documentElement.lang = lang === 'en' ? 'en' : (lang === 'hant' ? 'zh-Hant' : 'zh-Hans');
+    if (I18N) {
+      var d = pack();
+      document.title = d.docTitle || document.title;
+      var h = d.h1 || ['', '', ''];
+      var gap = LANG === 'en' ? ' ' : '';
+      document.getElementById('tTitle').innerHTML = esc(h[0]) + gap + '<span class="accent">' + esc(h[1]) + '</span>' + gap + esc(h[2]);
+      document.getElementById('tSubtitle').innerHTML = d.subtitle || '';
+      input.setAttribute('placeholder', d.placeholder || '');
+      btn.textContent = d.search || '';
+      document.getElementById('tMeta').innerHTML = (d.meta || []).map(esc).join('<span class="dot"></span>');
+      document.getElementById('tLegend').innerHTML = (d.legend || []).join('')
+        + (d.legendEx ? '<span class="ex">' + d.legendEx + '</span>' : '');
+      document.getElementById('tLead').innerHTML = d.lead || '';
+      document.getElementById('tSchemeTitle').textContent = d.schemeTitle || '';
+      document.getElementById('tSchemeDesc').textContent = d.schemeDesc || '';
+      document.getElementById('tSchemeMore').textContent = d.schemeMore || '';
+      document.getElementById('tFooter').innerHTML = d.footerLine || '';
+      document.getElementById('tSig').innerHTML = esc(d.sig || '')
+        + '<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.4';
+      modalTitle.textContent = d.modalTitle || '';
+      modalClose.setAttribute('aria-label', d.modalClose || 'Close');
+      if (modal.classList.contains('open')) buildModal();
+    }
+    var sw = document.getElementById('langSwitcher').querySelectorAll('button');
+    for (var i = 0; i < sw.length; i++) {
+      sw[i].setAttribute('aria-pressed', sw[i].getAttribute('data-lang') === lang ? 'true' : 'false');
+    }
+    if (persist) { try { localStorage.setItem(KEY, lang); } catch (e) {} }
+    if (LAST.has) doSearch(LAST.text, false);
+  }
+
+  function sysLang() {
+    var ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ''];
+    for (var i = 0; i < ls.length; i++) {
+      var l = String(ls[i] || '').toLowerCase();
+      if (/^zh(-|$)/.test(l)) return /hant|tw|hk|mo/.test(l) ? 'hant' : 'hans';
+      if (/^en(-|$)/.test(l)) return 'en';
+    }
+    return null;
+  }
+
+  function regionLang(code) {
+    var c = String(code || '').toUpperCase();
+    if (HANT_REGIONS.indexOf(c) >= 0) return 'hant';
+    if (EN_REGIONS.indexOf(c) >= 0) return 'en';
+    return 'hans';
+  }
+
+  function ipLang(cb) {
+    var done = false;
+    function fin(c) { if (done) return; done = true; cb(c); }
+    try {
+      var x = new XMLHttpRequest();
+      x.open('GET', 'https://api.country.is/', true);
+      x.timeout = 1500;
+      x.onload = function () {
+        try { var j = JSON.parse(x.responseText); fin(j && j.country); } catch (e) { fin(null); }
+      };
+      x.onerror = x.ontimeout = function () {
+        try {
+          var y = new XMLHttpRequest();
+          y.open('GET', 'https://www.cloudflare.com/cdn-cgi/trace', true);
+          y.timeout = 1500;
+          y.onload = function () {
+            var m = /(?:^|\n)loc=([A-Za-z]{2})/.exec(y.responseText || '');
+            fin(m ? m[1] : null);
+          };
+          y.onerror = y.ontimeout = function () { fin(null); };
+          y.send();
+        } catch (e2) { fin(null); }
+      };
+      x.send();
+    } catch (e) { fin(null); }
+  }
+
+  function initLang() {
+    var forced = null;
+    try {
+      var q = /[?&]lang=(hans|hant|en|auto)/i.exec(location.search);
+      if (q) {
+        if (q[1].toLowerCase() === 'auto') { try { localStorage.removeItem(KEY); } catch (e) {} }
+        else forced = q[1].toLowerCase();
+      }
+    } catch (e) {}
+    if (forced) { applyLang(forced, false); return; }
+
+    var saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) {}
+    if (saved && LANGS.indexOf(saved) >= 0) { applyLang(saved, false); return; }
+
+    var sys = sysLang();
+    if (sys) { applyLang(sys, false); return; }
+
+    var host = location.hostname;
+    var online = location.protocol !== 'file:' && host && host !== 'localhost' && host !== '127.0.0.1' && host !== '::1';
+    var isBot = /bot|crawler|spider|slurp|yandex|baiduspider|googlebot|bingbot/i.test(navigator.userAgent || '');
+    if (online && !isBot) {
+      ipLang(function (country) { applyLang(country ? regionLang(country) : 'hans', false); });
+    } else {
+      applyLang('hans', false);
+    }
+  }
+
+  /* ───────── 渲染结果 ───────── */
   function expand(ch) {
     var out = [];
     var targets = (variants.s2t && variants.s2t[ch]) || null;
     if (targets && targets.length) {
-      targets.forEach(function (t) { out.push({ character: t, from: ch }); });
+      targets.forEach(function (x) { out.push({ character: x, from: ch }); });
       if (out.every(function (o) { return o.character !== ch; }) && byChar.has(ch)) {
         out.push({ character: ch, from: ch });
       }
@@ -296,42 +529,44 @@ footer .sig .seal-dot{color:var(--crimson)}
     return s && s !== ch ? s : '';
   }
 
+  function localNote(note) {
+    if (LANG === 'hans') return note.replace(/白讀/g, '白读').replace(/文讀/g, '文读');
+    return note;
+  }
+
   function renderReading(r) {
-    var html = '<div class="reading">';
-    html += '<div class="read-line">';
+    var html = '<div class="reading"><div class="read-line">';
     html += '<span class="py">' + esc(r.py.slice(0, -1)) + '<span class="tn">' + esc(r.py.slice(-1)) + '</span></span>';
     html += '<span class="ipa">[' + esc(r.ipa) + '<span class="tone">' + esc(r.val_sup) + '</span>]</span>';
-    html += '<span class="tone-tag">' + esc(r.tone) + ' ' + esc(r.val) + '</span>';
+    html += '<span class="tone-tag">' + esc(toneName(r.tone)) + ' ' + esc(r.val) + '</span>';
     html += '</div>';
     if (r.note) {
-      var note = r.note.replace(/白讀/g, '白读').replace(/文讀/g, '文读');
-      html += '<div class="note"><span class="lbl">释</span>' + esc(note) + '</div>';
+      html += '<div class="note"><span class="lbl">' + esc(t('noteLabel')) + '</span>' + esc(localNote(r.note)) + '</div>';
     }
-    html += '</div>';
-    return html;
+    return html + '</div>';
   }
 
   function renderCard(rec, from) {
     var alt = altForm(rec.character);
-    var html = '<section class="card">';
-    html += '<div class="card-head">';
+    var html = '<section class="card"><div class="card-head">';
     html += '<div class="glyph"><div class="main">' + esc(rec.character) + '</div>';
-    if (alt) html += '<div class="alt">简 ' + esc(alt) + '</div>';
-    html += '<div class="count">共 ' + rec.readings.length + ' 读</div>';
-    if (from && from !== rec.character && from !== alt) html += '<div class="tag">由 ' + esc(from) + ' 转查</div>';
-    html += '</div>';
-    html += '<div class="readings">';
+    if (alt) html += '<div class="alt">' + esc(t('alt', { c: alt })) + '</div>';
+    html += '<div class="count">' + esc(t(rec.readings.length === 1 ? 'countOne' : 'count', { n: rec.readings.length })) + '</div>';
+    if (from && from !== rec.character && from !== alt) {
+      html += '<div class="tag">' + esc(t('from', { c: from })) + '</div>';
+    }
+    html += '</div><div class="readings">';
     rec.readings.forEach(function (r) { html += renderReading(r); });
-    html += '</div></div></section>';
-    return html;
+    return html + '</div></div></section>';
   }
 
   function renderMissing(ch, from) {
+    var via = from && from !== ch;
     var html = '<section class="card missing"><div class="card-head">';
     html += '<div class="glyph"><div class="main">' + esc(ch) + '</div>';
-    if (from && from !== ch) html += '<div class="tag">由 ' + esc(from) + ' 转查</div>';
-    html += '</div><div class="readings"><div class="missing-tip">字表未收此字' +
-      (from && from !== ch ? '（该字的繁体形也未收）' : '') + '。</div></div></div></section>';
+    if (via) html += '<div class="tag">' + esc(t('from', { c: from })) + '</div>';
+    html += '</div><div class="readings"><div class="missing-tip">'
+      + esc(via ? t('missingAlt') : t('missing')) + '</div></div></div></section>';
     return html;
   }
 
@@ -340,15 +575,16 @@ footer .sig .seal-dot{color:var(--crimson)}
   }
 
   function doSearch(text, pushState) {
-    if (!ready) { setMessage('字表还在载入，请稍候…'); return; }
+    if (!ready) { setMessage(t('msgLoading')); return; }
+    LAST.text = text; LAST.has = true;
     var raw = Array.prototype.slice.call(String(text || '').replace(/\s+/g, ''));
     var CJK = /[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF\u{20000}-\u{2FA1F}\u{30000}-\u{323AF}]/u;
     var chars = raw.filter(function (c) { return CJK.test(c); });
-    if (!raw.length) { results.innerHTML = ''; setMessage('请输入至少一个汉字。'); input.focus(); return; }
-    if (!chars.length) { results.innerHTML = ''; setMessage('请输汉字（本页暂不支持拼音反查或拉丁字母）。'); return; }
+    if (!raw.length) { results.innerHTML = ''; setMessage(t('msgEmpty')); input.focus(); return; }
+    if (!chars.length) { results.innerHTML = ''; setMessage(t('msgNotChinese')); return; }
     if (chars.length > MAX_CHARS) {
       results.innerHTML = '';
-      setMessage('一次最多查 ' + MAX_CHARS + ' 个字，你输入了 ' + chars.length + ' 个。');
+      setMessage(t('msgTooMany', { max: MAX_CHARS, n: chars.length }));
       return;
     }
     var seen = new Set(), order = [], items = [];
@@ -357,9 +593,8 @@ footer .sig .seal-dot{color:var(--crimson)}
       seen.add(ch);
       order.push(ch);
       expand(ch).forEach(function (hit) {
-        var key = hit.character;
-        if (items.some(function (i) { return i.character === key; })) return;
-        items.push({ character: key, from: hit.from });
+        if (items.some(function (i) { return i.character === hit.character; })) return;
+        items.push(hit);
       });
     });
 
@@ -370,28 +605,114 @@ footer .sig .seal-dot{color:var(--crimson)}
       else html += renderMissing(item.character, item.from);
     });
     results.innerHTML = html;
-    if (found === 0) {
-      setMessage('没查到：' + order.join('') + '。');
-    } else {
-      setMessage('');
-    }
+    setMessage(found === 0 ? t('msgNoResult', { chars: order.join('') }) : '');
     if (pushState && window.history && history.replaceState) {
       var url = location.pathname + (order.length ? '?q=' + encodeURIComponent(order.join('')) : '');
       history.replaceState(null, '', url);
     }
   }
 
+  /* ───────── 音系浮窗 ───────── */
+  function phonCell(item) {
+    return '<div class="phon-cell"><div class="s">' + esc(item[0]) + '</div>'
+      + '<div class="i">' + esc(item[1]) + '</div>'
+      + '<div class="e">' + esc(item[2] + ' ' + item[3]) + '</div></div>';
+  }
+
+  function buildModal() {
+    var d = pack(), T = I18N.tables;
+    var h = '<p>' + (d.phon.intro || '') + '</p>';
+
+    h += '<h3>' + esc(d.phon.initialsTitle) + '</h3><div class="phon-grid">'
+      + T.initials.map(phonCell).join('') + '</div>'
+      + '<p class="phon-note">' + (d.phon.initialsNote || '') + '</p>';
+
+    h += '<h3>' + esc(d.phon.finalsTitle) + '</h3>';
+    T.finals.forEach(function (group, i) {
+      h += '<div class="fin-group"><div class="fin-label">' + esc((d.phon.groupNames || [])[i] || '') + '</div>'
+        + '<div class="phon-grid">' + group.map(phonCell).join('') + '</div></div>';
+    });
+    h += '<p class="phon-note">' + (d.phon.finalsNote || '') + '</p>';
+
+    h += '<h3>' + esc(d.phon.tonesTitle) + '</h3><div class="phon-grid">'
+      + T.tones.map(function (row, i) {
+        return '<div class="phon-cell"><div class="s">' + esc(row[0]) + ' ' + esc((d.phon.toneNames || [])[i] || '')
+          + '</div><div class="i">' + esc(row[1]) + '</div><div class="e">' + esc(row[2] + ' ' + row[3]) + '</div></div>';
+      }).join('') + '</div>'
+      + '<p class="phon-note">' + (d.phon.tonesNote || '') + '</p>';
+
+    h += '<h3>' + esc(d.phon.diffTitle) + '</h3>';
+    (d.phon.diff || []).forEach(function (block) {
+      h += '<h4>' + esc(block.h) + '</h4>';
+      if (block.p) h += '<p>' + block.p + '</p>';
+      if (block.rows) {
+        h += '<table><thead><tr>' + block.head.map(function (x) { return '<th>' + esc(x) + '</th>'; }).join('')
+          + '</tr></thead><tbody>' + block.rows.map(function (r) {
+            return '<tr>' + r.map(function (x) { return '<td>' + esc(x) + '</td>'; }).join('') + '</tr>';
+          }).join('') + '</tbody></table>';
+      }
+    });
+
+    h += '<p class="modal-link"><a href="https://github.com/SiqYin/xinganhua-fuvufa" target="_blank" rel="noopener">'
+      + esc(d.phon.link) + '</a></p>';
+    modalBody.innerHTML = h;
+  }
+
+  function openModal() {
+    buildModal();
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    modalClose.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    document.getElementById('schemeBar').focus();
+  }
+
+  /* ───────── 事件 ───────── */
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     doSearch(input.value, true);
   });
 
+  document.getElementById('langSwitcher').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-lang]');
+    if (b) applyLang(b.getAttribute('data-lang'), true);
+  });
+
+  var schemeBar = document.getElementById('schemeBar');
+  schemeBar.addEventListener('click', openModal);
+  schemeBar.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(); }
+  });
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) {
+    if (e.target.getAttribute('data-close')) closeModal();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  document.querySelectorAll('.chip').forEach(function (b) {
+    b.addEventListener('click', function () {
+      input.value = b.getAttribute('data-q');
+      form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+    });
+  });
+
+  /* ───────── 启动 ───────── */
   var preset = new URLSearchParams(location.search).get('q');
   if (preset) input.value = preset;
-
   btn.disabled = true;
+
   loadData().then(function () {
+    ready = true;
     btn.disabled = false;
+    initLang();
     if (preset) doSearch(preset, false);
     else input.focus();
   }).catch(function () {
@@ -399,15 +720,6 @@ footer .sig .seal-dot{color:var(--crimson)}
     setMessage('数据载入失败。若是本地打开，请通过 HTTP 访问（例如在项目目录运行 python -m http.server），不要直接双击 HTML 文件。', true);
   });
 })();
-</script>
-<script>
-document.querySelectorAll('.chip').forEach(function (b) {
-  b.addEventListener('click', function () {
-    var i = document.getElementById('charInput');
-    i.value = b.getAttribute('data-q');
-    document.getElementById('searchForm').dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
-  });
-});
 </script>
 </body>
 </html>

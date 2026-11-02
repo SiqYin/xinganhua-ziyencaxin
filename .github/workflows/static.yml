@@ -29,7 +29,7 @@ jobs:
         run: |
           mkdir -p _site/data _site/fonts
           cp index.html _site/index.html
-          cp data/xian.json data/variants.json _site/data/
+          cp data/xian.json data/variants.json data/i18n.json _site/data/
           cp fonts/lxgw-wenkai.woff2 fonts/OFL.txt _site/fonts/
       - name: Setup Pages
         uses: actions/configure-pages@v5

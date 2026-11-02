@@ -1,0 +1,386 @@
+{
+  "hans": {
+    "langName": "简体中文",
+    "docTitle": "西安话字音查询 · xinganhua-ziyencaxin",
+    "h1": [
+      "西安话",
+      "字音",
+      "查询"
+    ],
+    "subtitle": "输入汉字，查它在西安话（关中片）里的<b>拼音</b>与<b>国际音标</b>；有释注一并列出",
+    "placeholder": "输入汉字，如：西安话 着 鵝",
+    "search": "查字",
+    "meta": [
+      "简繁皆可",
+      "一次最多 30 字",
+      "字音 3,648 条 · 字头 3,345"
+    ],
+    "legend": [
+      "调号 <b>1</b> 阴平 21",
+      "<b>2</b> 阳平 24",
+      "<b>3</b> 上声 53",
+      "<b>4</b> 去声 44"
+    ],
+    "legendEx": "例 <b>bfeng4</b> 中 · <b>jyuen1</b> 軍",
+    "lead": "输入一个或多个汉字试试，比如 <b>西安话</b>、<b>着</b>、<b>鵝</b>",
+    "schemeTitle": "西安话音系与输入方案",
+    "schemeDesc": "声母 26 · 韵母 40 · 四声；点开看与普通话拼音的异同",
+    "schemeMore": "查看 →",
+    "modalTitle": "西安话音系与输入方案",
+    "modalClose": "关闭",
+    "alt": "简 {c}",
+    "count": "共 {n} 读",
+    "from": "由 {c} 转查",
+    "noteLabel": "释",
+    "missing": "字表未收此字。",
+    "missingAlt": "字表未收此字（该字的繁体形也未收）。",
+    "msgLoading": "字表还在载入，请稍候…",
+    "msgEmpty": "请输入至少一个汉字。",
+    "msgNotChinese": "请输汉字（本页暂不支持拼音反查或拉丁字母）。",
+    "msgTooMany": "一次最多查 {max} 个字，你输入了 {n} 个。",
+    "msgNoResult": "没查到：{chars}。",
+    "msgLoadFail": "数据载入失败。若是本地打开，请通过 HTTP 访问（例如在项目目录运行 python -m http.server），不要直接双击 HTML 文件。",
+    "footerLine": "字音取自 <a href=\"https://github.com/osfans/MCPDict\" target=\"_blank\" rel=\"noopener\">MCPDict《西安》数据表</a><span class=\"sep\">|</span>拼音方案 <a href=\"https://github.com/SiqYin/xinganhua-fuvufa\" target=\"_blank\" rel=\"noopener\">西安话拼音</a><span class=\"sep\">|</span>字体 <a href=\"https://github.com/lxgw/LxgwWenKai\" target=\"_blank\" rel=\"noopener\">霞鹜文楷</a>（OFL）",
+    "sig": "玄为秦，绛为汉",
+    "langLabel": "语言",
+    "phon": {
+      "intro": "西安话（陕西方言·关中片）有<b>声母 26 个</b>（含零声母）、<b>韵母 40 个</b>、<b>四声</b>（阴平 21、阳平 24、上声 53、去声 44）。一个音节写作「声母 + 韵母 + 调号」，如 <code>bfeng4</code> 中、<code>jyuen1</code> 軍。下表例字沿用字表的繁体字形。",
+      "initialsTitle": "声母 26",
+      "initialsNote": "z c s 只接 ɿ 和洪音韵母，细音一律 j q x；bf pf 只出现在合口／洪音前；r 只配 7 个洪音韵母；ng 只配洪音。",
+      "finalsTitle": "韵母 40",
+      "finalsNote": "an en ang eng 等是鼻化元音，不像普通话那样收 -n / -ng；uong / yuong 对应普通话的 ong / iong；撮呼一律带 y，声母后也不省（jyuen 軍、nyu 女）。",
+      "tonesTitle": "声调",
+      "tonesNote": "入声已并入这四调，归派与普通话不同：立 li1、白 bei2、藥 yuo1、六 liou1。",
+      "diffTitle": "与普通话拼音的异同",
+      "diff": [
+        {
+          "h": "① 完全一样的",
+          "p": "b p m f d t n l g k h z c s zh ch sh r j q x 这些声母字母与读音跟普通话一致；a i u e er ai ei ao ou ia ie iao ian iang ua uo uai uan uang 这些韵母拼写也一致。零声母的 y / w 规则与普通话完全相同。"
+        },
+        {
+          "h": "② 字母相同、音值不同",
+          "p": "所有 -n / -ng 结尾的韵母在西安话里读鼻化元音：an = ã、en = ẽ、ang = ɑɣ̃、eng = əɣ̃。字母一样，念法不一样。"
+        },
+        {
+          "h": "③ 拼写不同",
+          "head": [
+            "普通话",
+            "西安话拼音",
+            "例"
+          ],
+          "rows": [
+            [
+              "in",
+              "ien",
+              "心 xien1"
+            ],
+            [
+              "ing",
+              "ieng",
+              "明 mieng2"
+            ],
+            [
+              "iu",
+              "iou",
+              "牛 niou2"
+            ],
+            [
+              "ui",
+              "uei",
+              "回 huei2"
+            ],
+            [
+              "un",
+              "uen",
+              "溫 wen1"
+            ],
+            [
+              "ong",
+              "uong",
+              "東 duong1"
+            ],
+            [
+              "iong",
+              "yuong",
+              "容 yuong2"
+            ],
+            [
+              "ü / üe / üan / ün",
+              "yu / yue / yuan / yuen",
+              "魚 yu2、月 yue1、元 yuan2、軍 jyuen1"
+            ]
+          ]
+        },
+        {
+          "h": "④ 西安话多出来的",
+          "p": "声母：bf pf（豬 bfu1、窗 pfang1）、v（文 ven2）、ng（安 ngan1）。韵母：uu（胳 guu1）、o（只在 vo：若 vo1）、iai（皆 jiai1）、yuo（樂 yuo1）。"
+        },
+        {
+          "h": "⑤ 声母对不上的字",
+          "head": [
+            "普通话",
+            "西安话拼音",
+            "例"
+          ],
+          "rows": [
+            [
+              "shuǐ",
+              "fei3",
+              "水"
+            ],
+            [
+              "shū",
+              "fu1",
+              "書"
+            ],
+            [
+              "shuō",
+              "she1",
+              "說"
+            ],
+            [
+              "shān / shì",
+              "san1 / si4",
+              "山 / 是"
+            ],
+            [
+              "zhū / chū",
+              "bfu1 / pfu1",
+              "豬 / 出"
+            ],
+            [
+              "zhōng / chūn",
+              "bfeng4 / pfen1",
+              "中 / 春"
+            ],
+            [
+              "wén",
+              "ven2",
+              "文"
+            ],
+            [
+              "é / ān",
+              "nge2 / ngan1",
+              "鵝 / 安"
+            ],
+            [
+              "rì",
+              "er1",
+              "日"
+            ]
+          ]
+        },
+        {
+          "h": "⑥ 调号位置一样、调值不同",
+          "p": "普通话的 ā á ǎ à 对应本方案的 1 2 3 4，但西安话的调值是 21 / 24 / 53 / 44。母语者按本地调值念即可，不必换算。"
+        }
+      ],
+      "link": "查看完整的输入法方案（GitHub）→",
+      "groupNames": [
+        "开呼",
+        "齐呼",
+        "合呼",
+        "撮呼"
+      ],
+      "toneNames": [
+        "阴平",
+        "阳平",
+        "上声",
+        "去声"
+      ]
+    },
+    "countOne": "共 1 读"
+  },
+  "en": {
+    "langName": "English",
+    "docTitle": "Xi’an Dialect Pronunciation Lookup · xinganhua-ziyencaxin",
+    "h1": [
+      "Xi’an",
+      "Pronunciation",
+      "Lookup"
+    ],
+    "subtitle": "Type Chinese characters to see every reading in the Xi’an dialect (Guanzhong): <b>romanization</b>, <b>IPA</b>, tone, and dictionary notes",
+    "placeholder": "Type characters, e.g. 西安话 着 鵝",
+    "search": "Search",
+    "meta": [
+      "Simplified & traditional",
+      "Up to 30 characters",
+      "3,648 readings · 3,345 characters"
+    ],
+    "legend": [
+      "Tone <b>1</b> Yinping 21",
+      "<b>2</b> Yangping 24",
+      "<b>3</b> Shangsheng 53",
+      "<b>4</b> Qusheng 44"
+    ],
+    "legendEx": "e.g. <b>bfeng4</b> 中 · <b>jyuen1</b> 軍",
+    "lead": "Try one or more characters, e.g. <b>西安话</b>, <b>着</b>, <b>鵝</b>",
+    "schemeTitle": "Xi’an phonology & the input scheme",
+    "schemeDesc": "26 initials · 40 finals · 4 tones; how it differs from Mandarin pinyin",
+    "schemeMore": "Open →",
+    "modalTitle": "Xi’an phonology & the input scheme",
+    "modalClose": "Close",
+    "alt": "Simp. {c}",
+    "count": "{n} readings",
+    "from": "via {c}",
+    "noteLabel": "Note",
+    "missing": "This character is not in the dictionary.",
+    "missingAlt": "This character is not in the dictionary (nor is its traditional form).",
+    "msgLoading": "Still loading the dictionary…",
+    "msgEmpty": "Please enter at least one Chinese character.",
+    "msgNotChinese": "Please enter Chinese characters (pinyin lookup is not available on this page).",
+    "msgTooMany": "Up to {max} characters at a time; you entered {n}.",
+    "msgNoResult": "Nothing found for: {chars}.",
+    "msgLoadFail": "Failed to load data. If you opened this file locally, serve it over HTTP (e.g. run python -m http.server in the project folder) instead of double-clicking the HTML file.",
+    "footerLine": "Readings from <a href=\"https://github.com/osfans/MCPDict\" target=\"_blank\" rel=\"noopener\">MCPDict · Xi’an table</a><span class=\"sep\">|</span>Scheme: <a href=\"https://github.com/SiqYin/xinganhua-fuvufa\" target=\"_blank\" rel=\"noopener\">Xi’an pinyin</a><span class=\"sep\">|</span>Font: <a href=\"https://github.com/lxgw/LxgwWenKai\" target=\"_blank\" rel=\"noopener\">LXGW WenKai</a> (OFL)",
+    "sig": "Black for Qin, crimson for Han",
+    "langLabel": "Language",
+    "phon": {
+      "intro": "The Xi’an dialect (Guanzhong, Shaanxi) has <b>26 initials</b> (including zero initial), <b>40 finals</b> and <b>4 tones</b> (Yinping 21, Yangping 24, Shangsheng 53, Qusheng 44). A syllable is written as initial + final + tone digit, e.g. <code>bfeng4</code> 中, <code>jyuen1</code> 軍. Examples below keep the dictionary’s traditional glyphs.",
+      "initialsTitle": "Initials (26)",
+      "initialsNote": "z c s occur only before ɿ and non-front finals; before i / y the series is j q x. bf pf occur only before rounded/back finals; r takes 7 back finals; ng takes back finals only.",
+      "finalsTitle": "Finals (40)",
+      "finalsNote": "an en ang eng are nasalised vowels, not -n / -ng codas as in Mandarin; uong / yuong correspond to Mandarin ong / iong; the yu-series always keeps y, even after an initial (jyuen 軍, nyu 女).",
+      "tonesTitle": "Tones",
+      "tonesNote": "The old entering tone has merged into these four, differently from Mandarin: 立 li1, 白 bei2, 藥 yuo1, 六 liou1.",
+      "diffTitle": "Differences from Mandarin pinyin",
+      "diff": [
+        {
+          "h": "① Identical",
+          "p": "The initial letters b p m f d t n l g k h z c s zh ch sh r j q x stand for the same sounds as in Mandarin; the finals a i u e er ai ei ao ou ia ie iao ian iang ua uo uai uan uang are spelled the same. The y / w rules for zero-initial syllables are exactly Mandarin’s."
+        },
+        {
+          "h": "② Same letters, different sound",
+          "p": "Every final ending in -n / -ng is a nasalised vowel in Xi’an: an = ã, en = ẽ, ang = ɑɣ̃, eng = əɣ̃. The spelling matches, the pronunciation does not."
+        },
+        {
+          "h": "③ Different spelling",
+          "head": [
+            "Mandarin",
+            "Xi’an",
+            "Example"
+          ],
+          "rows": [
+            [
+              "in",
+              "ien",
+              "心 xien1"
+            ],
+            [
+              "ing",
+              "ieng",
+              "明 mieng2"
+            ],
+            [
+              "iu",
+              "iou",
+              "牛 niou2"
+            ],
+            [
+              "ui",
+              "uei",
+              "回 huei2"
+            ],
+            [
+              "un",
+              "uen",
+              "溫 wen1"
+            ],
+            [
+              "ong",
+              "uong",
+              "東 duong1"
+            ],
+            [
+              "iong",
+              "yuong",
+              "容 yuong2"
+            ],
+            [
+              "ü / üe / üan / ün",
+              "yu / yue / yuan / yuen",
+              "魚 yu2, 月 yue1, 元 yuan2, 軍 jyuen1"
+            ]
+          ]
+        },
+        {
+          "h": "④ Extra sounds in Xi’an",
+          "p": "Initials: bf pf (豬 bfu1, 窗 pfang1), v (文 ven2), ng (安 ngan1). Finals: uu (胳 guu1), o (only in vo: 若 vo1), iai (皆 jiai1), yuo (樂 yuo1)."
+        },
+        {
+          "h": "⑤ Initials that do not match",
+          "head": [
+            "Mandarin",
+            "Xi’an",
+            "Character"
+          ],
+          "rows": [
+            [
+              "shuǐ",
+              "fei3",
+              "水"
+            ],
+            [
+              "shū",
+              "fu1",
+              "書"
+            ],
+            [
+              "shuō",
+              "she1",
+              "說"
+            ],
+            [
+              "shān / shì",
+              "san1 / si4",
+              "山 / 是"
+            ],
+            [
+              "zhū / chū",
+              "bfu1 / pfu1",
+              "豬 / 出"
+            ],
+            [
+              "zhōng / chūn",
+              "bfeng4 / pfen1",
+              "中 / 春"
+            ],
+            [
+              "wén",
+              "ven2",
+              "文"
+            ],
+            [
+              "é / ān",
+              "nge2 / ngan1",
+              "鵝 / 安"
+            ],
+            [
+              "rì",
+              "er1",
+              "日"
+            ]
+          ]
+        },
+        {
+          "h": "⑥ Same digit position, different pitch",
+          "p": "Mandarin’s ā á ǎ à map to 1 2 3 4 here, but the Xi’an values are 21 / 24 / 53 / 44. Speakers simply use their local pitch."
+        }
+      ],
+      "link": "Full input-method scheme (GitHub) →",
+      "groupNames": [
+        "No medial",
+        "Medial i",
+        "Medial u",
+        "Medial yu"
+      ],
+      "toneNames": [
+        "Yinping",
+        "Yangping",
+        "Shangsheng",
+        "Qusheng"
+      ]
+    },
+    "countOne": "1 reading"
+  }
+}

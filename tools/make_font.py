@@ -30,10 +30,8 @@ def collect_text() -> str:
     chunks = []
     html = (ROOT / "index.html").read_text(encoding="utf-8")
     chunks.append(html)
-    for name in ("xian.json", "variants.json"):
-        p = ROOT / "data" / name
-        if p.exists():
-            chunks.append(p.read_text(encoding="utf-8"))
+    for p in sorted((ROOT / "data").glob("*.json")):
+        chunks.append(p.read_text(encoding="utf-8"))
     chunks.append(EXTRA)
     return "".join(chunks)
 
