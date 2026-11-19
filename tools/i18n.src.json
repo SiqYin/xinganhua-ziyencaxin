@@ -114,63 +114,56 @@
           ]
         },
         {
-          "h": "④ 西安话多出来的",
-          "p": "声母：bf pf（豬 bfu1、窗 pfang1）、v（文 ven2）、ng（安 ngan1）。韵母：uu（胳 guu1）、o（只在 vo：若 vo1）、iai（皆 jiai1）、yuo（樂 yuo1）。"
+          "h": "④ 城区音多出来的（南郊音没有）",
+          "p": "声母：bf、pf（豬 bfu1、窗 pfang1）、v（文 ven2）、ng（安 ngan1）。韵母：uu（胳 guu1）、o（只在 vo：若 vo1）、iai（皆 jiai1）、yuo（樂 yuo1）。其中 bf、pf、uu、iai 南郊音读 z、c、e、ie：豬 zu1、窗 cuang1、胳 ge1、皆 jie1。"
         },
         {
-          "h": "⑤ 声母对不上的字",
+          "h": "⑤ 声母对不上的字（城区音／南郊音）",
           "head": [
             "普通话",
-            "西安话拼音",
-            "例"
+            "城区音",
+            "南郊音",
+            "例字"
           ],
           "rows": [
             [
               "shuǐ",
               "fei3",
+              "suei3",
               "水"
             ],
             [
               "shū",
               "fu1",
+              "su1",
               "書"
             ],
             [
               "shuō",
+              "she1",
               "she1",
               "說"
             ],
             [
               "shān / shì",
               "san1 / si4",
+              "san1 / si4",
               "山 / 是"
             ],
             [
               "zhū / chū",
               "bfu1 / pfu1",
+              "zu1 / cu1",
               "豬 / 出"
             ],
             [
               "zhōng / chūn",
               "bfeng4 / pfen1",
+              "zuong4 / cuen1",
               "中 / 春"
-            ],
-            [
-              "wén",
-              "ven2",
-              "文"
-            ],
-            [
-              "é / ān",
-              "nge2 / ngan1",
-              "鵝 / 安"
-            ],
-            [
-              "rì",
-              "er1",
-              "日"
             ]
-          ]
+          ],
+          "cmp": true
         },
         {
           "h": "⑥ 调号位置一样、调值不同",
@@ -231,7 +224,7 @@
         ]
       },
       "njNote": "除这四项外，两支的声母、韵母与声调完全相同；后三行是具体字音上的成组差异（知系合口、遇摄一等）。",
-      "legend": "虚线框：城区音特有（南郊音没有）"
+      "legend": "例字读音：前为城区音，后为南郊音（相同只写一个）；虚线框为城区音特有。"
     },
     "countOne": "共 1 读",
     "varCq": "城区音",
@@ -369,63 +362,56 @@
           ]
         },
         {
-          "h": "④ Extra sounds in Xi’an",
-          "p": "Initials: bf pf (豬 bfu1, 窗 pfang1), v (文 ven2), ng (安 ngan1). Finals: uu (胳 guu1), o (only in vo: 若 vo1), iai (皆 jiai1), yuo (樂 yuo1)."
+          "h": "④ Extras in the urban variety (absent from the southern suburb)",
+          "p": "Initials: bf, pf (豬 bfu1, 窗 pfang1), v (文 ven2), ng (安 ngan1). Finals: uu (胳 guu1), o (only in vo: 若 vo1), iai (皆 jiai1), yuo (樂 yuo1). Of these, bf, pf, uu and iai are read z, c, e and ie in the southern suburb: 豬 zu1, 窗 cuang1, 胳 ge1, 皆 jie1."
         },
         {
-          "h": "⑤ Initials that do not match",
+          "h": "⑤ Characters whose initial does not match (urban / southern suburb)",
           "head": [
             "Mandarin",
-            "Xi’an",
+            "Urban",
+            "Southern suburb",
             "Character"
           ],
           "rows": [
             [
               "shuǐ",
               "fei3",
+              "suei3",
               "水"
             ],
             [
               "shū",
               "fu1",
+              "su1",
               "書"
             ],
             [
               "shuō",
+              "she1",
               "she1",
               "說"
             ],
             [
               "shān / shì",
               "san1 / si4",
+              "san1 / si4",
               "山 / 是"
             ],
             [
               "zhū / chū",
               "bfu1 / pfu1",
+              "zu1 / cu1",
               "豬 / 出"
             ],
             [
               "zhōng / chūn",
               "bfeng4 / pfen1",
+              "zuong4 / cuen1",
               "中 / 春"
-            ],
-            [
-              "wén",
-              "ven2",
-              "文"
-            ],
-            [
-              "é / ān",
-              "nge2 / ngan1",
-              "鵝 / 安"
-            ],
-            [
-              "rì",
-              "er1",
-              "日"
             ]
-          ]
+          ],
+          "cmp": true
         },
         {
           "h": "⑥ Same digit position, different pitch",
@@ -486,7 +472,7 @@
         ]
       },
       "njNote": "Apart from these four items the two varieties share initials, finals and tones; the last three rows are regular differences in individual characters (zhī-series closed, yù rhyme grade 1).",
-      "legend": "Dashed box: urban-only (absent from the southern suburb)"
+      "legend": "Example readings: urban first, southern suburb second (written once when identical); dashed boxes are urban-only."
     },
     "countOne": "1 reading",
     "varCq": "Urban",
@@ -624,63 +610,56 @@
           ]
         },
         {
-          "h": "④ 西安方言にしかないもの",
-          "p": "声母：bf pf（豬 bfu1、窗 pfang1）、v（文 ven2）、ng（安 ngan1）。韻母：uu（胳 guu1）、o（vo のみ：若 vo1）、iai（皆 jiai1）、yuo（樂 yuo1）。"
+          "h": "④ 城区音だけにあるもの（南郊音にはない）",
+          "p": "声母：bf・pf（豬 bfu1、窗 pfang1）、v（文 ven2）、ng（安 ngan1）。韻母：uu（胳 guu1）、o（vo のみ：若 vo1）、iai（皆 jiai1）、yuo（樂 yuo1）。このうち bf・pf・uu・iai は南郊音で z・c・e・ie となります：豬 zu1、窗 cuang1、胳 ge1、皆 jie1。"
         },
         {
-          "h": "⑤ 声母が対応しない字",
+          "h": "⑤ 声母が対応しない字（城区音／南郊音）",
           "head": [
             "普通話",
-            "西安方言ピンイン",
-            "字"
+            "城区音",
+            "南郊音",
+            "例字"
           ],
           "rows": [
             [
               "shuǐ",
               "fei3",
+              "suei3",
               "水"
             ],
             [
               "shū",
               "fu1",
+              "su1",
               "書"
             ],
             [
               "shuō",
+              "she1",
               "she1",
               "說"
             ],
             [
               "shān / shì",
               "san1 / si4",
+              "san1 / si4",
               "山 / 是"
             ],
             [
               "zhū / chū",
               "bfu1 / pfu1",
+              "zu1 / cu1",
               "豬 / 出"
             ],
             [
               "zhōng / chūn",
               "bfeng4 / pfen1",
+              "zuong4 / cuen1",
               "中 / 春"
-            ],
-            [
-              "wén",
-              "ven2",
-              "文"
-            ],
-            [
-              "é / ān",
-              "nge2 / ngan1",
-              "鵝 / 安"
-            ],
-            [
-              "rì",
-              "er1",
-              "日"
             ]
-          ]
+          ],
+          "cmp": true
         },
         {
           "h": "⑥ 声調番号の位置は同じで調値が異なる",
@@ -741,7 +720,7 @@
         ]
       },
       "njNote": "この四点のほか、声母・韻母・声調は両系統で共通です。下三段は字音における規則的な違い（知系合口・遇摂一等）です。",
-      "legend": "破線枠：城区音特有（南郊音にはない）"
+      "legend": "例字の読み：前が城区音、後ろが南郊音（同じ場合は一つだけ）。破線枠は城区音特有。"
     },
     "countOne": "読み 1 種",
     "varCq": "城区音",

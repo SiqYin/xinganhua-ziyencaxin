@@ -48,6 +48,33 @@ FINALS = [
 TONES = [["1", "21", "天", "tian1"], ["2", "24", "年", "nian2"], ["3", "53", "小", "xiao3"], ["4", "44", "去", "qi4"]]
 
 
+
+# 南郊读音（data/nanjiao.json 由 tools/build_nanjiao_json.py 生成）
+NJ_READ = {}
+_nj = ROOT / "data" / "nanjiao.json"
+if _nj.exists():
+    for _rec in json.loads(_nj.read_text(encoding="utf-8")):
+        NJ_READ[_rec["character"]] = [x["py"] for x in _rec["readings"]]
+
+
+def nj_of(char, reading):
+    """例字在南郊音里的读法；与城区音相同则返回空串。"""
+    rs = NJ_READ.get(char)
+    if not rs or reading in rs:
+        return ""
+    same_tone = [x for x in rs if x[-1] == reading[-1]]
+    return (same_tone or rs)[0]
+
+
+def with_nj(rows):
+    out = []
+    for item in rows:
+        it = list(item)
+        it = it[:4] + [it[4] if len(it) > 4 else 0, nj_of(it[2], it[3])]
+        out.append(it)
+    return out
+
+
 def convert(obj, cc):
     if isinstance(obj, str):
         return cc.convert(obj)
@@ -69,8 +96,8 @@ def main() -> None:
             "ja": src["ja"],
         },
         "tables": {
-            "initials": INITIALS,
-            "finals": FINALS,
+            "initials": with_nj(INITIALS),
+            "finals": [with_nj(g) for g in FINALS],
             "tones": TONES,
         },
     }

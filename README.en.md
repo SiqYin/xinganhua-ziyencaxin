@@ -36,19 +36,19 @@
 
 ## 1. The Xi'an pinyin scheme
 
-Every reading on this site is written in **Xi'an pinyin**. A syllable is initial + final + tone digit, e.g. `ba1` 巴, `bfeng4` 中, `jyuen1` 軍:
+Every reading on this site is written in **Xi'an pinyin**, one set each for the urban and the southern-suburb accent. A syllable is initial + final + tone digit, e.g. `ba1` 巴, `jyuen1` 軍; `bfeng4` 中 is the urban reading, the southern one is `zuong4`:
 
-- **26 initials** (including the zero initial): `b p m f v bf pf d t n l z c s j q x zh ch sh r g k h ng`
-- **40 finals**: 15 open / 10 i-medial / 9 u-medial / 6 ü-medial
+- **Initials**: 24 shared (including the zero initial), plus `bf`, `pf` in the urban variety — 26 in all: `b p m f v bf pf d t n l z c s j q x zh ch sh r g k h ng`
+- **Finals**: 38 shared, plus `uu`, `iai` in the urban variety — 40 in all: 15 open / 10 i-medial / 9 u-medial / 6 ü-medial
 - **Four tones**: Yinping 21, Yangping 24, Shangsheng 53, Qusheng 44; the entering tone has merged into these four
 - **The tone digit follows the syllable** with no space: `bfeng4` 中, `jyuen1` 軍
 - **Syllable boundaries use an apostrophe**: `xi'ngan1` 西安 (otherwise it would split into xin 心 + gan 干)
 
 The four figures below cover the whole scheme. They are the same figures used in the input-method repository [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa), one set per language, identical in content:
 
-![Xi'an initials: 26](figures/onsets.en.svg)
+![Xi'an initials (urban 26; no bf, pf in the southern suburb)](figures/onsets.en.svg)
 
-![Xi'an finals: 40](figures/rhymes.en.svg)
+![Xi'an finals (urban 40; no uu, iai in the southern suburb)](figures/rhymes.en.svg)
 
 ![The four Xi'an tones](figures/tones.en.svg)
 
@@ -110,7 +110,7 @@ One card per character: the large glyph and its simplified form on the left, and
 
 | Position | Content | Example |
 |---|---|---|
-| Pinyin | full spelling + tone digit (digit in crimson) | `bfeng4` |
+| Pinyin | full spelling + tone digit (urban crimson, southern blue) | `bfeng4` ／ `zuong4` |
 | IPA | IPA with the tone value as a superscript | `[pfã⁴⁴]` |
 | Tone | tone name + value (English UI: Yinping / Yangping / Shangsheng / Qusheng; Japanese UI: 陰平 / 陽平 / 上声 / 去声) | 去声 44 |
 | Note | the `{}` gloss carried by the source table; `白讀／文讀` marked separately | 释 白读, 西~, 北~ |

@@ -36,19 +36,19 @@
 
 ## 一、西安話拼音方案
 
-本站的每一個讀音都用**西安話拼音**標註。一個音節寫成「聲母 + 韻母 + 調號」，例如 `ba1` 巴、`bfeng4` 中、`jyuen1` 軍：
+本站的每一個讀音都用**西安話拼音**標註，城區音、南郊音各一套。一個音節寫成「聲母 + 韻母 + 調號」，例如 `ba1` 巴、`jyuen1` 軍；`bfeng4` 中是城區音，南郊音作 `zuong4`：
 
-- **聲母 26 個**（含零聲母）：`b p m f v bf pf d t n l z c s j q x zh ch sh r g k h ng`
-- **韻母 40 個**：開 15 ／ 齊 10 ／ 合 9 ／ 撮 6
+- **聲母**：兩套共用 24 個（含零聲母），城區音另有 `bf`、`pf`，共 26 個：`b p m f v bf pf d t n l z c s j q x zh ch sh r g k h ng`
+- **韻母**：兩套共用 38 個，城區音另有 `uu`、`iai`，共 40 個：開 15 ／ 齊 10 ／ 合 9 ／ 撮 6
 - **四聲**：陰平 21、陽平 24、上聲 53、去聲 44；入聲已併入四調
 - **調號緊貼音節**，不空格：`bfeng4` 中、`jyuen1` 軍
 - **音節邊界用撇號**：`xi'ngan1` 西安（否則會被切成 xin 心 + gan 幹）
 
 下面四張圖把方案講全（與輸入法倉庫 [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa) 用的是同一套圖，各語言版本內容一致）：
 
-![西安話聲母 26 個](figures/onsets.hant.svg)
+![西安話聲母（城區音 26；南郊音無 bf、pf）](figures/onsets.hant.svg)
 
-![西安話韻母 40 個](figures/rhymes.hant.svg)
+![西安話韻母（城區音 40；南郊音無 uu、iai）](figures/rhymes.hant.svg)
 
 ![西安話四聲](figures/tones.hant.svg)
 
@@ -110,7 +110,7 @@
 
 | 位置 | 內容 | 例 |
 |---|---|---|
-| 拼音 | 全拼 + 調號（調號用絳紅） | `bfeng4` |
+| 拼音 | 全拼 + 調號（調號用絳紅；城區音紅、南郊音藍） | `bfeng4` ／ `zuong4` |
 | 音標 | 國際音標 + 調值上標 | `[pfã⁴⁴]` |
 | 聲調 | 調名 + 調值（英文界面顯示 Yinping / Yangping / Shangsheng / Qusheng，日文界面顯示 陰平 / 陽平 / 上聲 / 去聲） | 去聲 44 |
 | 釋注 | 字表原帶的 `{}` 註釋；`白讀／文讀` 單獨標出 | 釋 白讀, 西~, 北~ |
