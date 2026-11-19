@@ -81,6 +81,7 @@ For the full description — distribution rules for initials and finals, orthogr
 ## 2. What this site is
 
 A self-contained static page: no backend, no database, no requests beyond its own JSON and fonts. It lays out **all** the readings a character has in the Xi'an dialect.
+Below the search area there is a short section, “Accents of Xi'an”, with a schematic map: the walled city sits at the centre, with the eastern, western, southern and northern suburbs around it. The city, the northern and the western suburbs belong to the Xi'an type; the southern and eastern suburbs to the Weinan type. The boundary runs north from the eastern edge of the city wall and, on the south-west, follows a diagonal from the wall's south-west corner. The map is a schematic of direction only, not an administrative boundary.
 
 The layout has five layers, all built from black, white and crimson: warm paper background → pale card → white reading block → crimson accents (seal, buttons, tone digits, notes) → ink-black footer.
 

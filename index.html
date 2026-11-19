@@ -10,7 +10,7 @@
 @font-face{
   font-family:"LXGW WenKai";
   font-style:normal;font-weight:400;font-display:swap;
-  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=6") format("woff2");
+  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=8") format("woff2");
 }
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -253,6 +253,40 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 .modal-link{margin-top:22px !important}
 .modal-link a{color:var(--crimson);text-decoration:none;border-bottom:1px solid rgba(159,54,58,.4)}
 
+/* 简介与分区图 */
+.about{
+  margin-top:24px;padding:20px 22px 22px;
+  background:var(--bg-card);border:1px solid var(--line);border-radius:12px;
+  box-shadow:0 2px 10px rgba(28,21,18,.04);
+}
+.about h2{
+  display:flex;align-items:center;gap:9px;
+  font-size:1.08em;letter-spacing:.08em;color:var(--ink);
+}
+.about h2::before{content:"";width:3px;height:1em;background:var(--crimson);border-radius:2px}
+.about-grid{display:grid;grid-template-columns:1fr 380px;gap:24px;margin-top:14px;align-items:start}
+.about-text p{font-size:.9em;line-height:1.95;color:var(--muted);margin:0 0 11px}
+.about-text p:last-child{margin-bottom:0}
+.about-text b{font-weight:400;color:var(--ink);border-bottom:1px solid rgba(159,54,58,.38);padding-bottom:1px}
+.about-fig svg{display:block;width:100%;height:auto}
+.about-cap{margin-top:7px;font-size:.76em;line-height:1.6;color:var(--faint);text-align:center}
+.about-note{
+  margin-top:14px;padding:9px 12px;font-size:.82em;line-height:1.8;color:var(--muted);
+  background:#F8F0ED;border-left:2px solid rgba(159,54,58,.42);border-radius:0 6px 6px 0;
+}
+.map-svg .zone-xa{fill:#FAF1EE}
+.map-svg .zone-wn{fill:#EBF2EF}
+.map-svg .divider{stroke:#8C7A70;stroke-width:1.5;stroke-dasharray:7 6;fill:none}
+.map-svg .city{fill:#FFFFFF;stroke:#9F363A;stroke-width:2}
+.map-svg .lbl{font-family:var(--serif);fill:#1C1512}
+.map-svg .lbl-sub{font-family:var(--serif);fill:rgba(28,21,18,.72);font-size:22px}
+.map-svg .lbl-tiny{font-family:var(--serif);fill:rgba(28,21,18,.55);font-size:17px}
+.map-svg .lbl-xa{font-family:var(--serif);fill:#9F363A;font-size:26px;font-weight:700;letter-spacing:.08em}
+.map-svg .lbl-wn{font-family:var(--serif);fill:#3F6B62;font-size:24px;font-weight:700;letter-spacing:.08em}
+.map-svg .lbl-city{font-family:var(--serif);fill:#9F363A;font-size:24px;font-weight:700;letter-spacing:.08em}
+.map-svg .arrow{stroke:rgba(63,107,98,.55);stroke-width:1.4;fill:none}
+@media (max-width:820px){.about-grid{grid-template-columns:1fr;gap:18px}.about-fig{max-width:520px;margin:0 auto}}
+
 @media (max-width:600px){
   .lang-switcher{top:10px;right:10px;padding:1px}
   .lang-switcher button{padding:5px 8px;font-size:.74em}
@@ -332,12 +366,24 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
       </div>
       <span class="scheme-more" id="tSchemeMore">查看 →</span>
     </div>
+
+    <section class="about" id="about">
+      <h2 id="tAboutTitle">西安市的口音分区</h2>
+      <div class="about-grid">
+        <div class="about-text" id="tAboutText"></div>
+        <div class="about-fig">
+          <div id="aboutMap"></div>
+          <p class="about-cap" id="tAboutCap"></p>
+        </div>
+      </div>
+      <p class="about-note" id="tAboutNote"></p>
+    </section>
   </div>
 </main>
 
 <footer>
   <div id="tFooter">字音取自 <a href="https://github.com/osfans/MCPDict" target="_blank" rel="noopener">MCPDict《西安》数据表</a><span class="sep">|</span>拼音方案 <a href="https://github.com/SiqYin/xinganhua-fuvufa" target="_blank" rel="noopener">西安话拼音</a><span class="sep">|</span>字体 <a href="https://github.com/lxgw/LxgwWenKai" target="_blank" rel="noopener">霞鹜文楷</a>（OFL）</div>
-  <div class="sig" id="tSig">玄为秦，绛为汉<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.9</div>
+  <div class="sig" id="tSig">玄为秦，绛为汉<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.9.1</div>
 </footer>
 
 <div class="modal" id="modal" aria-hidden="true">
@@ -407,10 +453,10 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   /* ───────── 数据 ───────── */
   function loadData() {
     return Promise.all([
-      fetch('data/xian.json?v=7').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/nanjiao.json?v=7').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/variants.json?v=7').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/i18n.json?v=7').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      fetch('data/xian.json?v=8').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/nanjiao.json?v=8').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json?v=8').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/i18n.json?v=8').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     ]).then(function (out) {
       out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
       out[1].forEach(function (rec) { byCharNj.set(rec.character, rec); });
@@ -443,9 +489,10 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
       document.getElementById('tSchemeMore').textContent = d.schemeMore || '';
       document.getElementById('tFooter').innerHTML = d.footerLine || '';
       document.getElementById('tSig').innerHTML = esc(d.sig || '')
-        + '<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.9';
+        + '<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.9.1';
       modalTitle.textContent = d.modalTitle || '';
       modalClose.setAttribute('aria-label', d.modalClose || 'Close');
+      renderAbout();
       if (modal.classList.contains('open')) buildModal();
     }
     var sw = document.getElementById('langSwitcher').querySelectorAll('button');
@@ -677,6 +724,47 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
       var url = location.pathname + (order.length ? '?q=' + encodeURIComponent(order.join('')) : '');
       history.replaceState(null, '', url);
     }
+  }
+
+  /* ───────── 简介与分区图 ───────── */
+  function mapLabel(x, y, text, cls) {
+    var lines = String(text == null ? '' : text).split(' ');
+    var lh = 21;
+    var top = y - (lines.length - 1) * lh / 2;
+    var out = '';
+    for (var i = 0; i < lines.length; i++) {
+      out += '<text x="' + x + '" y="' + (top + i * lh + 7) + '" text-anchor="middle" class="' + cls + '">'
+        + esc(lines[i]) + '</text>';
+    }
+    return out;
+  }
+
+  function buildMap() {
+    var m = pack().map || {};
+    var s = '<svg class="map-svg" viewBox="0 0 640 460" role="img" aria-label="' + esc(t('aboutTitle')) + '">';
+    s += '<rect x="0" y="0" width="640" height="460" rx="12" class="zone-xa"/>';
+    s += '<path class="zone-wn" d="M438,0 L640,0 L640,460 L70,460 L202,290 L438,290 Z"/>';
+    s += '<path class="divider" d="M438,0 L438,140 M202,290 L70,460"/>';
+    s += '<rect class="city" x="202" y="140" width="236" height="150" rx="4"/>';
+    s += mapLabel(320, 215, m.city, 'lbl-city');
+    s += mapLabel(330, 106, m.north, 'lbl-sub');
+    s += mapLabel(348, 358, m.south, 'lbl-sub');
+    s += mapLabel(136, 215, m.west, 'lbl-sub');
+    s += mapLabel(528, 206, m.east, 'lbl-sub');
+    s += mapLabel(104, 56, m.typeXA, 'lbl-xa');
+    s += mapLabel(512, 408, m.typeWN, 'lbl-wn');
+    return s + '</svg>';
+  }
+
+  function renderAbout() {
+    if (!I18N) return;
+    var d = pack();
+    document.getElementById('tAboutTitle').textContent = d.aboutTitle || '';
+    document.getElementById('tAboutText').innerHTML =
+      (d.aboutParas || []).map(function (p) { return '<p>' + p + '</p>'; }).join('');
+    document.getElementById('tAboutCap').textContent = d.aboutCap || '';
+    document.getElementById('tAboutNote').textContent = d.aboutNote || '';
+    document.getElementById('aboutMap').innerHTML = buildMap();
   }
 
   /* ───────── 音系浮窗 ───────── */
