@@ -1,18 +1,61 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""生成 data/i18n.json：简体（源）→ 繁体（OpenCC 转换）+ 英文 + 日文，附音系表数据。
+"""生成 data/i18n.json：简体（源）→ 繁体（本地 OpenCC 字表转换）+ 英文 + 日文，附音系表数据。
 
 用法：python tools/build_i18n.py
-源：tools/i18n.src.json（hans / en / ja 三套文案；繁体由 OpenCC 从简体转出）
+源：tools/i18n.src.json（hans / en / ja 三套文案；繁体由 tools/opencc/TSCharacters.txt 从简体转出）
+
+繁体不引外挂 opencc 库：词表就用仓库里带的那份 OpenCC TSCharacters（Apache-2.0），
+逐字查表即可——与输入法侧 Rime 内置的 opencc 数据同源，不额外装东西。
 """
 import json
 from pathlib import Path
 
-import opencc
-
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "tools" / "i18n.src.json"
 OUT = ROOT / "data" / "i18n.json"
+TS_CHARS = ROOT / "tools" / "opencc" / "STCharacters.txt"
+
+
+class S2T:
+    """逐字繁化：读 OpenCC 的 STCharacters 表（简→繁），取每条的第一个候选（与 OpenCC s2t 一致）。
+
+    注意别用 TSCharacters.txt：那是繁→简，方向相反。
+    另外逐字转换会在少数词上出错（如「若干」被转成「若幹」），这类例外在 EXCEPTIONS 里回改。
+    """
+
+    # 逐字转换与 OpenCC 的差异只在少数词上，按词回改（左为逐字结果，右为 OpenCC s2t 结果）
+    EXCEPTIONS = {
+        "若干": "若干",     # 不取「若幹」
+        "並入": "併入",     # 併入（合併），非「並」
+        "分布": "分佈",     # 分佈
+    }
+
+
+    def __init__(self, path):
+        self.table = {}
+        for line in Path(path).read_text(encoding="utf-8").splitlines():
+            if not line or line.startswith("#"):
+                continue
+            parts = line.split("\t")
+            if len(parts) < 2:
+                continue
+            src, dst = parts[0], parts[1].split()
+            if src and dst:
+                self.table[src] = dst[0]
+
+    def convert(self, text):
+        out = "".join(self.table.get(ch, ch) for ch in text)
+        for a, b in self.EXCEPTIONS.items():
+            out = out.replace(self.conv_word(a), b)
+        return out
+
+    def conv_word(self, word):
+        return "".join(self.table.get(ch, ch) for ch in word)
+
+    def conv_word_rev(self, word):
+        return "".join(self.table.get(ch, ch) for ch in word)
+
 
 # 声母：写法 / IPA / 例字 / 例字读音（例字取字表的繁体字形）
 INITIALS = [
@@ -87,7 +130,7 @@ def convert(obj, cc):
 
 def main() -> None:
     src = json.loads(SRC.read_text(encoding="utf-8"))
-    cc = opencc.OpenCC("s2t")
+    cc = S2T(TS_CHARS)
     out = {
         "langs": {
             "hans": src["hans"],
