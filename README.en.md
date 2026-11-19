@@ -58,7 +58,7 @@ The four figures below cover the whole scheme. They are the same figures used in
 
 Xi'an speech is not uniform, and the site carries two sets of readings:
 
-- **Urban (城区音)**: the variety of the city centre. The input scheme `xinganhua`, the earlier character tables and all figures follow it.
+- **Urban (城区音)**: the variety of the city centre.
 - **Southern suburb (南郊音)**: the variety of the southern suburbs (Gaoxin, Xiaozhai, Qujiang). Its initials and finals follow the **Weinan** pattern: 24 initials (no `bf`, `pf`) and 38 finals (no `uu`, `iai`); the tones are the same four.
 
 | Item | Urban | Southern suburb |
@@ -159,10 +159,10 @@ Implementation notes:
 
 The "Xi'an phonology & the input scheme" strip below the search area opens a pop-up (close with Esc or a click on the backdrop). Its content comes from the input-method repository's README:
 
-- the 26 initials (spelling / IPA / example)
-- the 40 finals, grouped by the four classes (open, i-medial, u-medial, ü-medial)
-- the four tones and their values
-- **the southern-suburb system**: 24 initials, 38 finals, and a table of differences from the urban variety
+- the 26 initials (spelling / IPA / example), with `bf` and `pf` boxed in dashes as **urban-only**
+- the 40 finals, grouped by the four classes (open, i-medial, u-medial, ü-medial), with `uu` and `iai` likewise marked urban-only
+- the four tones and their values (the same in both varieties)
+- **urban vs southern suburb**: the number of initials and finals, the `bf`/`pf` and `uu`/`iai` correspondences, and the other regular differences
 - **differences from Mandarin pinyin**: identical items, nasalised finals with the same letters, a spelling-difference table (`in→ien`, `ong→uong`, `ü→yu`…), the initials and finals Xi'an has extra, characters whose initial does not match, and same digit position with different pitch
 - the pop-up text follows the UI language (Simplified / Traditional / English / Japanese)
 
