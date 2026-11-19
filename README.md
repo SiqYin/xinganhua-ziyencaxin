@@ -1,12 +1,14 @@
+**简体中文** ｜ [繁體中文](README.zh-Hant.md) ｜ [English](README.en.md) ｜ [日本語](README.ja.md)
+
 # 西安话字音查询 · xinganhua-ziyencaxin
 
-> 输入汉字（简繁皆可，一次最多 30 字），查它在西安话（关中片）里的全部字音：**西安话拼音**、**国际音标**、**声调**，以及词典原有的释注。界面有简、繁、英三种语言，并按系统语言与接入地区自动判定。
+> 输入汉字（简繁皆可，一次最多 30 字），查它在西安话（关中片）里的全部字音：**西安话拼音**、**国际音标**、**声调**，以及词典原有的释注。界面有简、繁、英、日四种语言，并按系统语言与接入地区自动判定。
 
 ![西安话字音查询界面](screenshot.png)
 
 - **线上地址**：<https://siqyin.github.io/xinganhua-ziyencaxin/>
 - **字表**：字头 3,345 ／ 字音 3,648 ／ 多音字 275 ／ 带释注 102
-- **语言**：简体中文 · 繁體中文 · English（自动判定 + 手选）
+- **语言**：简体中文 · 繁體中文 · English · 日本語（自动判定 + 手选）
 - **配色**：黑 `#000000`（秦）· 白 `#FFFFFF` · 绛红 `#9F363A`（汉）
 - **字体**：霞鹜文楷子集，自托管，不依赖 CDN
 
@@ -14,30 +16,63 @@
 
 ## 目录
 
-1. [这个网站是什么](#一这个网站是什么)
-2. [查询规则](#二查询规则)
-3. [结果怎么读](#三结果怎么读)
-4. [语言与自动判定](#四语言与自动判定)
-5. [音系与输入方案浮窗](#五音系与输入方案浮窗)
-6. [数据从哪来](#六数据从哪来)
-7. [配色与字体](#七配色与字体)
-8. [目录结构](#八目录结构)
-9. [本地预览](#九本地预览)
-10. [重新构建](#十重新构建)
-11. [部署](#十一部署)
-12. [数据说明与待办](#十二数据说明与待办)
-13. [数据与致谢](#十三数据与致谢)
-14. [授权](#十四授权)
+1. [西安话拼音方案](#s1)
+2. [这个网站是什么](#s2)
+3. [查询规则](#s3)
+4. [结果怎么读](#s4)
+5. [语言与自动判定](#s5)
+6. [音系与输入方案浮窗](#s6)
+7. [数据从哪来](#s7)
+8. [配色与字体](#s8)
+9. [目录结构](#s9)
+10. [本地预览](#s10)
+11. [重新构建](#s11)
+12. [部署](#s12)
+13. [数据说明与待办](#s13)
+14. [数据与致谢](#s14)
+15. [授权](#s15)
 
 ---
 
-## 一、这个网站是什么
+<a id="s1"></a>
+
+## 一、西安话拼音方案
+
+本站的每一个读音都用**西安话拼音**标注。一个音节写成「声母 + 韵母 + 调号」，例如 `ba1` 巴、`bfeng4` 中、`jyuen1` 軍：
+
+- **声母 26 个**（含零声母）：`b p m f v bf pf d t n l z c s j q x zh ch sh r g k h ng`
+- **韵母 40 个**：开 15 ／ 齐 10 ／ 合 9 ／ 撮 6
+- **四声**：阴平 21、阳平 24、上声 53、去声 44；入声已并入四调
+- **调号紧贴音节**，不空格：`bfeng4` 中、`jyuen1` 軍
+- **音节边界用撇号**：`xi'ngan1` 西安（否则会被切成 xin 心 + gan 干）
+
+下面四张图把方案讲全（与输入法仓库 [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa) 用的是同一套图，各语言版本内容一致）：
+
+![西安话声母 26 个](figures/onsets.hans.svg)
+
+![西安话韵母 40 个](figures/rhymes.hans.svg)
+
+![西安话四声](figures/tones.hans.svg)
+
+![音节结构：声母 + 韵母 + 调号](figures/syllable.hans.svg)
+
+方案的完整说明——声母韵母的分布规则、正字法细则、与普通话拼音的逐条对照、可用的简拼——见输入法仓库的 [README](https://github.com/SiqYin/xinganhua-fuvufa)（[简体](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.md) ／ [繁體](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.zh-Hant.md) ／ [English](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.en.md) ／ [日本語](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.ja.md)）。
+
+---
+
+<a id="s2"></a>
+
+## 二、这个网站是什么
 
 一个离线的静态网页：没有后端、没有数据库，除页面自身的 JSON 与字体外不发任何请求，把一个字在西安话里的**所有**读音摊开给你看。
 
 版面分五层，全是黑白绛红三色的不同层次：暖纸页底 → 浅色卡片 → 白色读音块 → 绛红强调（印章、按钮、调号、释注）→ 墨黑页脚。
 
-## 二、查询规则
+---
+
+<a id="s3"></a>
+
+## 三、查询规则
 
 | 规则 | 行为 |
 |---|---|
@@ -48,7 +83,11 @@
 | 未收录 | 字表里没有的字会显示一张「未收录」卡片，不会静默消失 |
 | 分享 | 查询写入地址栏 `?q=…`，复制链接可复原结果 |
 
-## 三、结果怎么读
+---
+
+<a id="s4"></a>
+
+## 四、结果怎么读
 
 每个字一张卡片：左边是大字与简体形，右边逐条列读音。
 
@@ -56,7 +95,7 @@
 |---|---|---|
 | 拼音 | 全拼 + 调号（调号用绛红） | `bfeng4` |
 | 音标 | 国际音标 + 调值上标 | `[pfã⁴⁴]` |
-| 声调 | 调名 + 调值（英文界面显示 Yinping / Yangping / Shangsheng / Qusheng） | 去声 44 |
+| 声调 | 调名 + 调值（英文界面显示 Yinping / Yangping / Shangsheng / Qusheng，日文界面显示 陰平 / 陽平 / 上声 / 去声） | 去声 44 |
 | 释注 | 字表原带的 `{}` 注释；`白讀／文讀` 单独标出 | 释 白读, 西~, 北~ |
 
 调号对照：
@@ -69,18 +108,22 @@
 
 多音字按阴平 → 阳平 → 上声 → 去声排序，例如 `着` 有五读：`zhao1` / `zhe1` / `bfuo2` / `pfuo2` / `zhao2`。
 
-## 四、语言与自动判定
+---
 
-界面右上角可以手选 **简 / 繁 / EN**，选择会记在本地（`localStorage`）。首次访问时按下面的优先级判定：
+<a id="s5"></a>
+
+## 五、语言与自动判定
+
+界面右上角可以手选 **简 / 繁 / 日 / EN**，选择会记在本地（`localStorage`）。首次访问时按下面的优先级判定：
 
 | 优先级 | 依据 | 结果 |
 |---|---|---|
-| 1 | 手动选择（含网址 `?lang=hans｜hant｜en`） | 直接使用 |
-| 2 | 系统／浏览器语言（**只认中文变体**） | `zh-Hant`、`zh-TW/HK/MO` → 繁体；其他 `zh-*` → 简体；非中文系统语言（`en-*`、`ja-*` 等）不参与判定，交给下一行 |
-| 3 | 访问 IP 归属地 | 美国、英国、加拿大、澳大利亚、新西兰、法国、德国、韩国 → 英文；香港、澳门、台湾 → 繁体；其余全部 → 简体 |
+| 1 | 手动选择（含网址 `?lang=hans｜hant｜ja｜en`） | 直接使用 |
+| 2 | 系统／浏览器语言（**只认中文变体与日文**） | `zh-Hant`、`zh-TW/HK/MO` → 繁体；其他 `zh-*` → 简体；`ja-*` → 日文；非中文、非日文的系统语言（`en-*`、`ko-*` 等）不参与判定，交给下一行 |
+| 3 | 访问 IP 归属地 | 日本 → 日文；美国、英国、加拿大、澳大利亚、新西兰、法国、德国、韩国 → 英文；香港、澳门、台湾 → 繁体；其余全部 → 简体 |
 | 4 | 兜底 | 简体 |
 
-也就是说**中文系统语言优先于 IP**：系统是繁体中文，即使 IP 在中国大陆也显示繁体；系统是简体中文，即使 IP 在美国也显示简体。非中文系统语言（英文、日文……）不决定界面语言，交给 IP 判断——所以「英文系统 + 日本 IP」显示简体，而不是英文。
+也就是说**中文系统语言与日文系统语言优先于 IP**：系统是繁体中文，即使 IP 在中国大陆也显示繁体；系统是日文，即使 IP 在美国也显示日文。除此之外的系统语言（英文、韩文……）不决定界面语言，交给 IP 判断——所以「英文系统 + 日本 IP」显示日文，而不是英文。
 
 > 手选与网址 `?lang=` 的优先级最高，且手选会记在 `localStorage`。若之前点过 EN、地址栏还留着 `?lang=en`，页面就会一直是英文；打开一次 `?lang=auto` 即可清掉手选重新判定。
 
@@ -89,19 +132,27 @@
 - 地理判定用 `https://api.country.is/`，失败时回退 Cloudflare 的 `/cdn-cgi/trace`，都超时（1.5 秒）就按简体
 - 本地预览（`localhost` / `127.0.0.1` / `file:`）与搜索引擎爬虫不做自动判定，保持简体，避免开发时被网络环境带着跑、也避免收录到英文版
 - 调试：`?lang=auto` 清掉手选后重新判定；`?lang=debug` 在页头显示判定结果与原因（`url` / `manual` / `system` / `ip` / `offline`）
-- 三套文案在 `data/i18n.json`；繁体由 OpenCC 从简体转换，不手写
+- 四套文案在 `data/i18n.json`；繁体由 OpenCC 从简体转换，不手写
 
-## 五、音系与输入方案浮窗
+---
 
-页面下方的「西安话音系与输入方案」是一整块可点的入口，点开是浮窗（Esc 或点遮罩关闭），内容取自输入法仓库 [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa) 的 README：
+<a id="s6"></a>
+
+## 六、音系与输入方案浮窗
+
+页面下方的「西安话音系与输入方案」是一整块可点的入口，点开是浮窗（Esc 或点遮罩关闭），内容取自输入法仓库的 README：
 
 - 声母 26 个（写法 / 国际音标 / 例字）
 - 韵母 40 个，按开齐合撮四呼分组
 - 四声与调值
 - **与普通话拼音的异同**：完全一样的、字母相同音值不同的鼻化韵、拼写差异表（`in→ien`、`ong→uong`、`ü→yu`…）、西安多出来的声母韵母、声母对不上的字、调号同位不同调值
-- 浮窗内的文案随界面语言切换（简 / 繁 / 英）
+- 浮窗内的文案随界面语言切换（简 / 繁 / 英 / 日）
 
-## 六、数据从哪来
+---
+
+<a id="s7"></a>
+
+## 七、数据从哪来
 
 ```
 MCPDict《西安》数据表（国际音标）
@@ -124,7 +175,11 @@ MCPDict《西安》数据表（国际音标）
 
 简繁映射用 OpenCC 的 `STCharacters.txt` / `TSCharacters.txt`，构建时按需下载，不随仓库分发。
 
-## 七、配色与字体
+---
+
+<a id="s8"></a>
+
+## 八、配色与字体
 
 | 颜色 | 值 | 用途 |
 |---|---|---|
@@ -134,27 +189,38 @@ MCPDict《西安》数据表（国际音标）
 
 底色还有两层中性层次（暖纸 `#F4EEE9` 页底、浅卡 `#FBF7F4`），是黑白之间的过渡，不另立色相。
 
-字体是 [霞鹜文楷](https://github.com/lxgw/LxgwWenKai)（LXGW WenKai Regular，OFL 授权）的子集：`fonts/lxgw-wenkai.woff2`，只含页面实际用到的字形（字头、释注、拼音、音标与界面文案，约 4,800 字形 / 1.2 MB）。字体授权见 `fonts/OFL.txt`。
+字体是 [霞鹜文楷](https://github.com/lxgw/LxgwWenKai)（LXGW WenKai Regular，OFL 授权）的子集：`fonts/lxgw-wenkai.woff2`，只含页面实际用到的字形（字头、释注、拼音、音标与四语界面文案，约 4,900 字形 / 1.2 MB）。字体授权见 `fonts/OFL.txt`。
 
-## 八、目录结构
+---
+
+<a id="s9"></a>
+
+## 九、目录结构
 
 ```
 index.html                    单页：样式、查询逻辑、i18n 与浮窗都在这一个文件里
 screenshot.png                本说明用的界面截图
+README.zh-Hant.md             繁体说明（OpenCC 转出）
+README.en.md / README.ja.md   英文、日文说明
 data/source.tsv               字音源表：字 / 拼音 / IPA[调名] / 释注
 data/xian.json                前端数据：字头 → 读音数组
 data/variants.json            简繁映射：s2t（简→繁）、t2s（繁→简，用于并列显示）
-data/i18n.json                三语文案 + 音系表数据（简 / 繁 / 英）
+data/i18n.json                四语文案 + 音系表数据（简 / 繁 / 英 / 日）
+figures/                      西安话拼音方案配图：四张图 × 四种语言（与输入法仓库同一套）
 fonts/lxgw-wenkai.woff2       霞鹜文楷子集
 fonts/OFL.txt                 字体授权
 tools/build_data.py           源表 → JSON（OpenCC 表缺失时自动下载）
-tools/build_i18n.py           简体文案 → 繁体（OpenCC）+ 英文，输出 i18n.json
-tools/i18n.src.json           三语文案的源文件（简 / 英，繁体由脚本生成）
+tools/build_i18n.py           简体文案 → 繁体（OpenCC）+ 英、日，输出 i18n.json
+tools/i18n.src.json           四语文案的源文件（简 / 英 / 日，繁体由脚本生成）
 tools/make_font.py            字体子集化（WOFF2）
 .github/workflows/static.yml  推到 main 时自动发布 GitHub Pages
 ```
 
-## 九、本地预览
+---
+
+<a id="s10"></a>
+
+## 十、本地预览
 
 页面用 `fetch` 读 JSON，直接双击 HTML 会失败，起个静态服务器即可：
 
@@ -163,7 +229,11 @@ python -m http.server 8765
 # 打开 http://127.0.0.1:8765/
 ```
 
-## 十、重新构建
+---
+
+<a id="s11"></a>
+
+## 十一、重新构建
 
 ```sh
 python tools/build_data.py          # 生成 data/xian.json、data/variants.json
@@ -177,28 +247,44 @@ python tools/make_font.py           # 重新生成字体子集
 python tools/make_font.py /path/to/LXGWWenKai-Regular.ttf
 ```
 
-改了 `index.html` 里的文案、`data/*.json` 或数据后都要重跑 `make_font.py`，否则新字会落回系统字体。
+改了 `index.html` 里的文案、`data/*.json` 或数据后都要重跑 `make_font.py`，否则新字（尤其是日文假名与新字体汉字）会落回系统字体。
 
-## 十一、部署
+---
+
+<a id="s12"></a>
+
+## 十二、部署
 
 推到 `main` 后由 GitHub Actions 发布（仓库 Settings → Pages → Source 选 GitHub Actions）。工作流把 `index.html`、`data/xian.json`、`data/variants.json`、`data/i18n.json`、`fonts/*.woff2` 与 OFL 拷进 `_site`，源表与构建脚本不随站点发布。
 
-## 十二、数据说明与待办
+---
+
+<a id="s13"></a>
+
+## 十三、数据说明与待办
 
 - 用字是繁体（MCPDict 原表如此），卡片上并列显示简体形，便于对照
 - 原表有 3 个只有音、没有字的音节（`zou2`、`tai3`、`sao2`），不进查询
 - 拼音与音标若与你的方言有出入，以 `data/source.tsv` 为准，改完重跑构建脚本即可
 - 待办：拼音／音标反查、按声调查询、字表分页浏览
 
-## 十三、数据与致谢
+---
+
+<a id="s14"></a>
+
+## 十四、数据与致谢
 
 - [osfans/MCPDict](https://github.com/osfans/MCPDict)（`tools/tables/data/西安.tsv`）—— 字音数据源
-- [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa) —— 西安话拼音方案、转写脚本与音系说明
+- [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa) —— 西安话拼音方案、转写脚本、音系说明与四语配图
 - [OpenCC](https://github.com/BYVoid/OpenCC) —— 简繁对照表
 - [霞鹜文楷](https://github.com/lxgw/LxgwWenKai) —— 中文字体（OFL）
 - [wugniu_zyinzozin](https://github.com/SiqYin/wugniu_zyinzozin) —— 站点做法、语言判定与浮窗版面的参照
 
-## 十四、授权
+---
+
+<a id="s15"></a>
+
+## 十五、授权
 
 网页与构建脚本可自由使用、修改、再分发。字音数据来自 MCPDict，字体来自霞鹜文楷，版权与授权请遵循各自项目说明。
 
@@ -206,4 +292,4 @@ python tools/make_font.py /path/to/LXGWWenKai-Regular.ttf
 
 ## 声明
 
-本 README 的全部内容由 Qoder 平台下的 Qwen 模型撰写输出。
+简体版为源文；繁体版由 OpenCC 从简体转出，英文与日文版为对应译本。四版内容一致，如有出入以简体版为准。本文由 AI 辅助撰写与翻译。
