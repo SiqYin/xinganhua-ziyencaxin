@@ -2,10 +2,10 @@
 
 # 西安方言 字音検索 · xinganhua-ziyencaxin
 
-> 漢字（簡体字・繁体字のどちらでも、一度に最大 30 字）を入力すると、西安方言（関中片）でのすべての読み方が出ます：**西安方言ピンイン**、**国際音声記号（IPA）**、**声調**、そして原表の注記。UI は簡体中文・繁體中文・English・日本語の四言語で、システム言語と接続地域から自動判定します。
+> 漢字（簡体字・繁体字のどちらでも、一度に最大 30 字）を入力すると、西安方言の**城区音**と**南郊音**、二系統の読み方が出ます：**西安方言ピンイン**、**国際音声記号（IPA）**、**声調**、そして原表の注記。UI は簡体中文・繁體中文・English・日本語の四言語で、システム言語と接続地域から自動判定します。
 
 - **公開サイト**：<https://siqyin.github.io/xinganhua-ziyencaxin/>
-- **字表**：字頭 3,345 ／ 字音 3,648 ／ 多音字 275 ／ 注記つき 102
+- **字表**：字頭 3,345 ／ 城区音 3,648 件・南郊音 3,578 件 ／ 多音字 275 ／ 注記つき 102
 - **言語**：簡体中文 · 繁體中文 · English · 日本語（自動判定＋手動選択）
 - **配色**：黒 `#000000`（秦）· 白 `#FFFFFF` · 緋 `#9F363A`（漢）
 - **フォント**：霞鹜文楷のサブセットを自前配信（CDN 不使用）
@@ -54,6 +54,24 @@
 
 ![音節の構造：声母＋韻母＋声調番号](figures/syllable.ja.svg)
 
+### 城区音と南郊音
+
+西安方言は一様ではなく、当サイトは二系統の読みを収録しています：
+
+- **城区音**：西安城内地の話しことば。入力方案 `xinganhua`、これまでの字表と図はすべてこちらに拠っています。
+- **南郊音**：西安南部（高新・小寨・曲江一帯）の話しことば。声母・韻母の体系は**渭南型**で、声母 24 個（`bf`・`pf` なし）、韻母 38 個（`uu`・`iai` なし）、声調は同じ四声です。
+
+| 項目 | 城区音 | 南郊音 |
+|---|---|---|
+| 声母 | 26（`bf`・`pf` を含む） | 24（`bf`・`pf` なし） |
+| 韻母 | 40（`uu`・`iai` を含む） | 38（`uu`・`iai` なし） |
+| 知系合口 | 豬 `bfu1`、春 `pfen1` | `zu1`、`cuen1` |
+| 書母合口 | 書 `fu1`、水 `fei3` | `su1`、`suei3` |
+| 遇摂一等 | 都 `du1`、粗 `cu1` | `dou1`、`cou1` |
+| 声調 | 陰平 21・陽平 24・上声 53・去声 44 | 城区音と同じ |
+
+3,345 字のうち、両系統で読みが完全に同じなのは 2,979 字、異なるのは 366 字。検索結果では 1 字ごとに二系統の読みを並べて表示します。
+
 声母・韻母の分布規則、正書法の細則、普通話ピンインとの項目別の対照、使える簡拼まで含む完全な説明は、入力法リポジトリの [README](https://github.com/SiqYin/xinganhua-fuvufa)（[简体](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.md) ／ [繁體](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.zh-Hant.md) ／ [English](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.en.md) ／ [日本語](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.ja.md)）を参照してください。
 
 ---
@@ -87,7 +105,7 @@
 
 ## 4. 結果の読み方
 
-1 字につき 1 枚のカード。左に大きな字と簡体形、右に読みを列挙します。
+1 字につき 1 枚のカード。左に大きな字と簡体形、右に**城区音**と**南郊音**の二列を並べ、それぞれの読みを列挙します。南郊音は又読を統合することが多いため、二列の件数は一致しないことがあります。
 
 | 位置 | 内容 | 例 |
 |---|---|---|
@@ -143,6 +161,7 @@
 - 声母 26 個（綴り／国際音声記号／例字）
 - 韻母 40 個、開斉合撮の四呼で分類
 - 四声と調値
+- **南郊音の音韻**：声母 24 個・韻母 38 個、および城区音との違いの表
 - **普通話ピンインとの異同**：まったく同じもの、字は同じで音価が異なる鼻母音、綴りの違いの表（`in→ien`、`ong→uong`、`ü→yu`…）、西安方言にしかない声母・韻母、声母が対応しない字、番号の位置は同じで調値が違うこと
 - ポップアップ内のテキストも UI の言語に追随（簡 / 繁 / 英 / 日）
 
@@ -166,10 +185,12 @@ MCPDict「西安」データ表（国際音声記号）
 | 項目 | 数 |
 |---|---|
 | 字頭 | 3,345 |
-| 字音項目 | 3,648（一字一音一行） |
+| 字音項目 | 城区音 3,648 ／ 南郊音 3,578（一字一音一行） |
 | 多音字 | 275 |
 | 注記つき | 102 |
 | 声調なし音節 | 392 |
+
+南郊音は別の経路で作ります。アーカイブの `南郊音字表.tsv`（『西安南郊音.xlsx』の逐字注記から折り出したもの）→ `tools/build_nanjiao_json.py` → `data/nanjiao.json`。構造は `xian.json` と同じです。折り方の規則（`bf`・`pf` なし、`uu`・`iai` なし）は第 13 節に書きました。
 
 簡繁の対応には OpenCC の `STCharacters.txt` / `TSCharacters.txt` を使い、ビルド時に必要に応じて取得します（リポジトリには同梱しません）。
 
@@ -200,13 +221,15 @@ index.html                    単一ページ：スタイル、検索ロジッ�
 README.zh-Hant.md             繁体の説明（OpenCC 変換）
 README.en.md / README.ja.md   英語・日本語の説明
 data/source.tsv               字音の原表：字 / ピンイン / IPA[調名] / 注記
-data/xian.json                フロント用データ：字頭 → 読みの配列
+data/xian.json                フロント用データ：字頭 → 城区音の読みの配列
+data/nanjiao.json             フロント用データ：字頭 → 南郊音の読みの配列
 data/variants.json            簡繁の対応：s2t（簡→繁）、t2s（繁→簡、併記用）
 data/i18n.json                四言語のテキスト＋音韻表データ（簡 / 繁 / 英 / 日）
 figures/                      方案の図：四枚 × 四言語（入力法リポジトリと同じセット）
 fonts/lxgw-wenkai.woff2       霞鹜文楷のサブセット
 fonts/OFL.txt                 フォントのライセンス
 tools/build_data.py           原表 → JSON（OpenCC の表がなければ自動取得）
+tools/build_nanjiao_json.py   南郊音の字表 → data/nanjiao.json
 tools/build_i18n.py           簡体のテキスト → 繁体（OpenCC）＋英・日
 tools/i18n.src.json           四言語テキストの原本（簡 / 英 / 日。繁体はスクリプト生成）
 tools/make_font.py            フォントのサブセット化（WOFF2）
@@ -234,6 +257,7 @@ python -m http.server 8765
 
 ```sh
 python tools/build_data.py          # data/xian.json、data/variants.json
+python tools/build_nanjiao_json.py  # data/nanjiao.json（南郊音）
 python tools/build_i18n.py          # data/i18n.json（繁体は OpenCC）
 python tools/make_font.py           # フォントのサブセット
 ```
@@ -252,7 +276,7 @@ python tools/make_font.py /path/to/LXGWWenKai-Regular.ttf
 
 ## 12. デプロイ
 
-`main` に push すると GitHub Actions が公開します（Settings → Pages → Source で GitHub Actions を選択）。ワークフローは `index.html`、`data/xian.json`、`data/variants.json`、`data/i18n.json`、`fonts/*.woff2`、OFL を `_site` にコピーし、原表とビルドスクリプトは公開しません。
+`main` に push すると GitHub Actions が公開します（Settings → Pages → Source で GitHub Actions を選択）。ワークフローは `index.html`、`data/xian.json`、`data/nanjiao.json`、`data/variants.json`、`data/i18n.json`、`fonts/*.woff2`、OFL を `_site` にコピーし、原表とビルドスクリプトは公開しません。
 
 ---
 
@@ -261,6 +285,7 @@ python tools/make_font.py /path/to/LXGWWenKai-Regular.ttf
 ## 13. データの注意と今後
 
 - 用字は繁体（MCPDict の原表がそうであるため）。カードには簡体形も併記して対照できるようにしています
+- 南郊音は『西安南郊音.xlsx』の逐字注記から折り出したもの。拘束条件は「`bf`・`pf` なし、`uu`・`iai` なし」で、`bf→z`、`pf→c`（韻母に u 介音が加わる）、`uu→e`、`iai→ie`。一部の字は校訂により上書き：癌は `ngai2` のみ、涯 `ya2`、後は `hou4` のみ、芍 `shuo2`
 - 原表には音だけで字がない音節が 3 つ（`zou2`、`tai3`、`sao2`）あり、検索には出しません
 - ピンインや音声記号が自分の方言と違う場合は `data/source.tsv` が正です。直してビルドし直してください
 - 今後：ピンイン／音声記号からの逆引き、声調による検索、字表のページ送り

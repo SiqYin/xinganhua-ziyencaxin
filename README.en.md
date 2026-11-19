@@ -2,10 +2,10 @@
 
 # Xi'an Dialect Pronunciation Lookup · xinganhua-ziyencaxin
 
-> Type Chinese characters (simplified or traditional, up to 30 at a time) and see every reading they have in the Xi'an dialect (Guanzhong group): **Xi'an pinyin**, **IPA**, **tone**, and the dictionary's own notes. The interface comes in Simplified Chinese, Traditional Chinese, English and Japanese, chosen automatically from your system language and region.
+> Type Chinese characters (simplified or traditional, up to 30 at a time) and see both readings the Xi'an dialect has for them — **urban** and **southern suburb**: **Xi'an pinyin**, **IPA**, **tone**, and the dictionary's own notes. The interface comes in Simplified Chinese, Traditional Chinese, English and Japanese, chosen automatically from your system language and region.
 
 - **Live site**: <https://siqyin.github.io/xinganhua-ziyencaxin/>
-- **Character table**: 3,345 characters / 3,648 readings / 275 polyphonic / 102 with notes
+- **Character table**: 3,345 characters / 3,648 urban · 3,578 southern readings / 275 polyphonic / 102 with notes
 - **Languages**: 简体中文 · 繁體中文 · English · 日本語 (automatic + manual)
 - **Colours**: black `#000000` (Qin) · white `#FFFFFF` · crimson `#9F363A` (Han)
 - **Font**: a subset of LXGW WenKai, self-hosted, no CDN
@@ -54,6 +54,24 @@ The four figures below cover the whole scheme. They are the same figures used in
 
 ![Syllable structure: initial + final + tone](figures/syllable.en.svg)
 
+### Urban and southern-suburb varieties
+
+Xi'an speech is not uniform, and the site carries two sets of readings:
+
+- **Urban (城区音)**: the variety of the city centre. The input scheme `xinganhua`, the earlier character tables and all figures follow it.
+- **Southern suburb (南郊音)**: the variety of the southern suburbs (Gaoxin, Xiaozhai, Qujiang). Its initials and finals follow the **Weinan** pattern: 24 initials (no `bf`, `pf`) and 38 finals (no `uu`, `iai`); the tones are the same four.
+
+| Item | Urban | Southern suburb |
+|---|---|---|
+| Initials | 26 (incl. `bf`, `pf`) | 24 (no `bf`, `pf`) |
+| Finals | 40 (incl. `uu`, `iai`) | 38 (no `uu`, `iai`) |
+| Zhī-series closed | 豬 `bfu1`, 春 `pfen1` | `zu1`, `cuen1` |
+| Shū-series closed | 書 `fu1`, 水 `fei3` | `su1`, `suei3` |
+| Yù rhyme, grade 1 | 都 `du1`, 粗 `cu1` | `dou1`, `cou1` |
+| Tones | 21 / 24 / 53 / 44 | same as urban |
+
+Of 3,345 characters, 2,979 read identically in both varieties and 366 differ; every result card lists the two sets side by side.
+
 For the full description — distribution rules for initials and finals, orthographic details, a point-by-point comparison with Mandarin pinyin, and the allowed short spellings — see the input-method repository's [README](https://github.com/SiqYin/xinganhua-fuvufa) ([简体](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.md) / [繁體](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.zh-Hant.md) / [English](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.en.md) / [日本語](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.ja.md)).
 
 ---
@@ -87,7 +105,7 @@ The layout has five layers, all built from black, white and crimson: warm paper 
 
 ## 4. How to read a result
 
-One card per character: the large glyph and its simplified form on the left, the readings listed on the right.
+One card per character: the large glyph and its simplified form on the left, and two columns on the right — **urban** and **southern suburb** — each listing its own readings. The columns may differ in length, since the southern variety often merges readings.
 
 | Position | Content | Example |
 |---|---|---|
@@ -143,6 +161,7 @@ The "Xi'an phonology & the input scheme" strip below the search area opens a pop
 - the 26 initials (spelling / IPA / example)
 - the 40 finals, grouped by the four classes (open, i-medial, u-medial, ü-medial)
 - the four tones and their values
+- **the southern-suburb system**: 24 initials, 38 finals, and a table of differences from the urban variety
 - **differences from Mandarin pinyin**: identical items, nasalised finals with the same letters, a spelling-difference table (`in→ien`, `ong→uong`, `ü→yu`…), the initials and finals Xi'an has extra, characters whose initial does not match, and same digit position with different pitch
 - the pop-up text follows the UI language (Simplified / Traditional / English / Japanese)
 
@@ -166,10 +185,12 @@ MCPDict Xi'an table (IPA)
 | Item | Count |
 |---|---|
 | Characters | 3,345 |
-| Readings | 3,648 (one reading per line) |
+| Readings | 3,648 urban / 3,578 southern (one reading per line) |
 | Polyphonic characters | 275 |
 | With notes | 102 |
 | Toneless syllables | 392 |
+
+The southern data has its own pipeline: `南郊音字表.tsv` (folded from the per-character annotations in `西安南郊音.xlsx`) → `tools/build_nanjiao_json.py` → `data/nanjiao.json`, same shape as `xian.json`. The folding rules (no `bf`/`pf`, no `uu`/`iai`) are described in section 13.
 
 The simplified/traditional mapping uses OpenCC's `STCharacters.txt` / `TSCharacters.txt`, downloaded on demand at build time and not distributed with the repository.
 
@@ -200,13 +221,15 @@ index.html                    single page: styles, lookup logic, i18n and the po
 README.zh-Hant.md             Traditional Chinese README (OpenCC output)
 README.en.md / README.ja.md   English and Japanese READMEs
 data/source.tsv               source table: character / pinyin / IPA[tone] / notes
-data/xian.json                front-end data: character → readings
+data/xian.json                front-end data: character → urban readings
+data/nanjiao.json             front-end data: character → southern-suburb readings
 data/variants.json            simplified↔traditional maps: s2t, t2s (for the secondary glyph)
 data/i18n.json                four text packs + phonology tables (hans / hant / en / ja)
 figures/                      scheme figures: four diagrams × four languages (same set as the input repo)
 fonts/lxgw-wenkai.woff2       LXGW WenKai subset
 fonts/OFL.txt                 font licence
 tools/build_data.py           source table → JSON (downloads OpenCC tables if missing)
+tools/build_nanjiao_json.py   southern-suburb table → data/nanjiao.json
 tools/build_i18n.py           Simplified text → Traditional (OpenCC) + English + Japanese
 tools/i18n.src.json           source text packs (hans / en / ja; Traditional is generated)
 tools/make_font.py            font subsetting (WOFF2)
@@ -234,6 +257,7 @@ python -m http.server 8765
 
 ```sh
 python tools/build_data.py          # data/xian.json, data/variants.json
+python tools/build_nanjiao_json.py  # data/nanjiao.json (southern suburb)
 python tools/build_i18n.py          # data/i18n.json (Traditional via OpenCC)
 python tools/make_font.py           # font subset
 ```
@@ -252,7 +276,7 @@ After changing text in `index.html`, anything in `data/*.json`, or the data itse
 
 ## 12. Deployment
 
-Pushing to `main` triggers GitHub Actions (Settings → Pages → Source: GitHub Actions). The workflow copies `index.html`, `data/xian.json`, `data/variants.json`, `data/i18n.json`, `fonts/*.woff2` and the OFL into `_site`; the source table and build scripts are not published.
+Pushing to `main` triggers GitHub Actions (Settings → Pages → Source: GitHub Actions). The workflow copies `index.html`, `data/xian.json`, `data/nanjiao.json`, `data/variants.json`, `data/i18n.json`, `fonts/*.woff2` and the OFL into `_site`; the source table and build scripts are not published.
 
 ---
 
@@ -261,6 +285,7 @@ Pushing to `main` triggers GitHub Actions (Settings → Pages → Source: GitHub
 ## 13. Data notes and TODO
 
 - Glyphs are traditional (as in the MCPDict source), with the simplified form shown alongside on each card for comparison
+- The southern readings are folded from the per-character annotations in `西安南郊音.xlsx` under two hard constraints — no `bf`/`pf`, no `uu`/`iai`: `bf→z`, `pf→c` (the final gains a u medial), `uu→e`, `iai→ie`. A few characters are overridden by review: 癌 `ngai2` only, 涯 `ya2`, 後 `hou4` only, 芍 `shuo2`
 - Three syllables in the source have a sound but no character (`zou2`, `tai3`, `sao2`) and are not searchable
 - If a reading disagrees with your own dialect, `data/source.tsv` is the authority; edit it and rerun the build
 - TODO: reverse lookup by pinyin/IPA, query by tone, paginated browsing of the character table

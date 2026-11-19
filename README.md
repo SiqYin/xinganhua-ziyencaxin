@@ -2,10 +2,10 @@
 
 # 西安话字音查询 · xinganhua-ziyencaxin
 
-> 输入汉字（简繁皆可，一次最多 30 字），查它在西安话（关中片）里的全部字音：**西安话拼音**、**国际音标**、**声调**，以及词典原有的释注。界面有简、繁、英、日四种语言，并按系统语言与接入地区自动判定。
+> 输入汉字（简繁皆可，一次最多 30 字），查它在西安话里的两套读法——**城区音**与**南郊音**：**西安话拼音**、**国际音标**、**声调**，以及词典原有的释注。界面有简、繁、英、日四种语言，并按系统语言与接入地区自动判定。
 
 - **线上地址**：<https://siqyin.github.io/xinganhua-ziyencaxin/>
-- **字表**：字头 3,345 ／ 字音 3,648 ／ 多音字 275 ／ 带释注 102
+- **字表**：字头 3,345 ／ 城区音 3,648 条 · 南郊音 3,578 条 ／ 多音字 275 ／ 带释注 102
 - **语言**：简体中文 · 繁體中文 · English · 日本語（自动判定 + 手选）
 - **配色**：黑 `#000000`（秦）· 白 `#FFFFFF` · 绛红 `#9F363A`（汉）
 - **字体**：霞鹜文楷子集，自托管，不依赖 CDN
@@ -54,6 +54,24 @@
 
 ![音节结构：声母 + 韵母 + 调号](figures/syllable.hans.svg)
 
+### 城区音与南郊音
+
+西安话内部不止一种口音，本站同时收两套：
+
+- **城区音**：西安城区（城内）的口音。输入法方案 `xinganhua`、以往的字表与配图都按这一套。
+- **南郊音**：西安南郊（高新、小寨、曲江一带）的口音。声韵母格局属**渭南型**：声母 24 个（没有 `bf`、`pf`），韵母 38 个（没有 `uu`、`iai`），声调仍是四声。
+
+| 项 | 城区音 | 南郊音 |
+|---|---|---|
+| 声母 | 26（含 `bf`、`pf`） | 24（无 `bf`、`pf`） |
+| 韵母 | 40（含 `uu`、`iai`） | 38（无 `uu`、`iai`） |
+| 知系合口 | 豬 `bfu1`、春 `pfen1` | `zu1`、`cuen1` |
+| 书母合口 | 書 `fu1`、水 `fei3` | `su1`、`suei3` |
+| 遇摄一等 | 都 `du1`、粗 `cu1` | `dou1`、`cou1` |
+| 声调 | 阴平 21、阳平 24、上声 53、去声 44 | 同城区音 |
+
+3,345 个字里，两套读法完全相同的 2,979 字，有差异的 366 字；查询结果里每个字把两套读音并排列出。
+
 方案的完整说明——声母韵母的分布规则、正字法细则、与普通话拼音的逐条对照、可用的简拼——见输入法仓库的 [README](https://github.com/SiqYin/xinganhua-fuvufa)（[简体](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.md) ／ [繁體](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.zh-Hant.md) ／ [English](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.en.md) ／ [日本語](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.ja.md)）。
 
 ---
@@ -87,7 +105,7 @@
 
 ## 四、结果怎么读
 
-每个字一张卡片：左边是大字与简体形，右边逐条列读音。
+每个字一张卡片：左边是大字与简体形，右边并排两栏——**城区音**与**南郊音**，各自逐条列读音。两栏的条数可能不同（南郊音常把一些又读并掉）。
 
 | 位置 | 内容 | 例 |
 |---|---|---|
@@ -143,6 +161,7 @@
 - 声母 26 个（写法 / 国际音标 / 例字）
 - 韵母 40 个，按开齐合撮四呼分组
 - 四声与调值
+- **南郊音音系**：声母 24 个、韵母 38 个，以及城区音与南郊音的差异表
 - **与普通话拼音的异同**：完全一样的、字母相同音值不同的鼻化韵、拼写差异表（`in→ien`、`ong→uong`、`ü→yu`…）、西安多出来的声母韵母、声母对不上的字、调号同位不同调值
 - 浮窗内的文案随界面语言切换（简 / 繁 / 英 / 日）
 
@@ -166,10 +185,12 @@ MCPDict《西安》数据表（国际音标）
 | 项 | 数 |
 |---|---|
 | 字头 | 3,345 |
-| 字音条目 | 3,648（一字一音一行） |
+| 字音条目 | 城区音 3,648 ／ 南郊音 3,578（一字一音一行） |
 | 多音字 | 275 |
 | 带释注 | 102 |
 | 不计调音节 | 392 |
+
+南郊音另有一条链路：归档里的 `南郊音字表.tsv`（由《西安南郊音.xlsx》的逐字标注折出）→ `tools/build_nanjiao_json.py` → `data/nanjiao.json`，结构与 `xian.json` 相同。折算口径（无 `bf`／`pf`、无 `uu`／`iai`）见第十三节。
 
 简繁映射用 OpenCC 的 `STCharacters.txt` / `TSCharacters.txt`，构建时按需下载，不随仓库分发。
 
@@ -200,13 +221,15 @@ index.html                    单页：样式、查询逻辑、i18n 与浮窗都
 README.zh-Hant.md             繁体说明（OpenCC 转出）
 README.en.md / README.ja.md   英文、日文说明
 data/source.tsv               字音源表：字 / 拼音 / IPA[调名] / 释注
-data/xian.json                前端数据：字头 → 读音数组
+data/xian.json                前端数据：字头 → 城区音读音数组
+data/nanjiao.json             前端数据：字头 → 南郊音读音数组
 data/variants.json            简繁映射：s2t（简→繁）、t2s（繁→简，用于并列显示）
 data/i18n.json                四语文案 + 音系表数据（简 / 繁 / 英 / 日）
 figures/                      西安话拼音方案配图：四张图 × 四种语言（与输入法仓库同一套）
 fonts/lxgw-wenkai.woff2       霞鹜文楷子集
 fonts/OFL.txt                 字体授权
 tools/build_data.py           源表 → JSON（OpenCC 表缺失时自动下载）
+tools/build_nanjiao_json.py   南郊音字表 → data/nanjiao.json
 tools/build_i18n.py           简体文案 → 繁体（OpenCC）+ 英、日，输出 i18n.json
 tools/i18n.src.json           四语文案的源文件（简 / 英 / 日，繁体由脚本生成）
 tools/make_font.py            字体子集化（WOFF2）
@@ -234,6 +257,7 @@ python -m http.server 8765
 
 ```sh
 python tools/build_data.py          # 生成 data/xian.json、data/variants.json
+python tools/build_nanjiao_json.py  # 生成 data/nanjiao.json（南郊音）
 python tools/build_i18n.py          # 生成 data/i18n.json（繁体由 OpenCC 转出）
 python tools/make_font.py           # 重新生成字体子集
 ```
@@ -252,7 +276,7 @@ python tools/make_font.py /path/to/LXGWWenKai-Regular.ttf
 
 ## 十二、部署
 
-推到 `main` 后由 GitHub Actions 发布（仓库 Settings → Pages → Source 选 GitHub Actions）。工作流把 `index.html`、`data/xian.json`、`data/variants.json`、`data/i18n.json`、`fonts/*.woff2` 与 OFL 拷进 `_site`，源表与构建脚本不随站点发布。
+推到 `main` 后由 GitHub Actions 发布（仓库 Settings → Pages → Source 选 GitHub Actions）。工作流把 `index.html`、`data/xian.json`、`data/nanjiao.json`、`data/variants.json`、`data/i18n.json`、`fonts/*.woff2` 与 OFL 拷进 `_site`，源表与构建脚本不随站点发布。
 
 ---
 
@@ -261,6 +285,7 @@ python tools/make_font.py /path/to/LXGWWenKai-Regular.ttf
 ## 十三、数据说明与待办
 
 - 用字是繁体（MCPDict 原表如此），卡片上并列显示简体形，便于对照
+- 南郊音按《西安南郊音.xlsx》的逐字标注折出，硬约束是「没有 `bf`／`pf`、没有 `uu`／`iai`」；`bf→z`、`pf→c`（韵母增生 u 介音），`uu→e`，`iai→ie`。个别字按核定覆盖：癌只读 `ngai2`、涯读 `ya2`、後只读 `hou4`、芍读 `shuo2`
 - 原表有 3 个只有音、没有字的音节（`zou2`、`tai3`、`sao2`），不进查询
 - 拼音与音标若与你的方言有出入，以 `data/source.tsv` 为准，改完重跑构建脚本即可
 - 待办：拼音／音标反查、按声调查询、字表分页浏览

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>西安话字音查询 · xinganhua-ziyencaxin</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%279%27 fill=%27%239F363A%27/%3E%3Ctext x=%2732%27 y=%2747%27 font-size=%2742%27 text-anchor=%27middle%27 fill=%27%23fff%27 font-family=%27serif%27%3E%E7%A7%A6%3C/text%3E%3C/svg%3E">
-<meta name="description" content="输入汉字，查西安话（关中片）的字音：西安话拼音、国际音标、声调与词典释注。支持简体、繁体，一次最多 30 字。">
+<meta name="description" content="输入汉字，查西安话（关中片）的城区音与南郊音：拼音、国际音标、声调与词典释注。支持简体、繁体，一次最多 30 字。">
 <style>
 @font-face{
   font-family:"LXGW WenKai";
@@ -132,6 +132,15 @@ main{flex:1 0 auto}
   color:var(--crimson);border:1px solid rgba(159,54,58,.34);border-radius:999px;background:#F7ECEA;
 }
 .readings{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:8px;border-left:1px solid var(--line-soft);padding-left:18px}
+.variants{flex:1 1 auto;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 18px}
+.variant{min-width:0}
+.v-head{display:flex;align-items:baseline;gap:8px;margin-bottom:6px;padding-bottom:4px;border-bottom:1px dashed var(--line)}
+.v-name{font-size:.8em;letter-spacing:.1em;color:var(--crimson)}
+.variant.nj .v-name{color:#3F6B62}
+.v-count{font-size:.7em;letter-spacing:.03em;color:var(--faint)}
+.variant .readings{border-left:0;padding-left:0}
+.variant.nj .reading{border-left:2px solid rgba(63,107,98,.32)}
+@media (max-width:720px){.variants{grid-template-columns:1fr;gap:16px}}
 .reading{
   background:var(--paper);border:1px solid var(--line-soft);border-radius:9px;
   padding:10px 14px 11px;
@@ -328,7 +337,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 
 <footer>
   <div id="tFooter">字音取自 <a href="https://github.com/osfans/MCPDict" target="_blank" rel="noopener">MCPDict《西安》数据表</a><span class="sep">|</span>拼音方案 <a href="https://github.com/SiqYin/xinganhua-fuvufa" target="_blank" rel="noopener">西安话拼音</a><span class="sep">|</span>字体 <a href="https://github.com/lxgw/LxgwWenKai" target="_blank" rel="noopener">霞鹜文楷</a>（OFL）</div>
-  <div class="sig" id="tSig">玄为秦，绛为汉<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.8</div>
+  <div class="sig" id="tSig">玄为秦，绛为汉<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.9</div>
 </footer>
 
 <div class="modal" id="modal" aria-hidden="true">
@@ -363,6 +372,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   var modalClose = document.getElementById('modalClose');
 
   var byChar = new Map();
+  var byCharNj = new Map();
   var variants = { s2t: {}, t2s: {} };
   var I18N = null;
   var LANG = 'hans';
@@ -397,13 +407,15 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   /* ───────── 数据 ───────── */
   function loadData() {
     return Promise.all([
-      fetch('data/xian.json?v=6').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/variants.json?v=6').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/i18n.json?v=6').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      fetch('data/xian.json?v=7').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/nanjiao.json?v=7').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json?v=7').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/i18n.json?v=7').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     ]).then(function (out) {
       out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
-      variants = out[1];
-      I18N = out[2];
+      out[1].forEach(function (rec) { byCharNj.set(rec.character, rec); });
+      variants = out[2];
+      I18N = out[3];
     });
   }
 
@@ -431,7 +443,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
       document.getElementById('tSchemeMore').textContent = d.schemeMore || '';
       document.getElementById('tFooter').innerHTML = d.footerLine || '';
       document.getElementById('tSig').innerHTML = esc(d.sig || '')
-        + '<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.8';
+        + '<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.9';
       modalTitle.textContent = d.modalTitle || '';
       modalClose.setAttribute('aria-label', d.modalClose || 'Close');
       if (modal.classList.contains('open')) buildModal();
@@ -588,17 +600,30 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     return html + '</div>';
   }
 
+  function renderVariant(nameKey, readings, cls) {
+    var h = '<div class="variant ' + cls + '"><div class="v-head"><span class="v-name">'
+      + esc(t(nameKey)) + '</span>';
+    if (readings && readings.length) {
+      h += '<span class="v-count">' + esc(t(readings.length === 1 ? 'countOne' : 'count', { n: readings.length })) + '</span>';
+    }
+    h += '</div><div class="readings">';
+    if (readings && readings.length) readings.forEach(function (r) { h += renderReading(r); });
+    else h += '<div class="missing-tip">' + esc(t('njMissing')) + '</div>';
+    return h + '</div></div>';
+  }
+
   function renderCard(rec, from) {
     var alt = altForm(rec.character);
+    var nj = byCharNj.get(rec.character);
     var html = '<section class="card"><div class="card-head">';
     html += '<div class="glyph"><div class="main">' + esc(rec.character) + '</div>';
     if (alt) html += '<div class="alt">' + esc(t('alt', { c: alt })) + '</div>';
-    html += '<div class="count">' + esc(t(rec.readings.length === 1 ? 'countOne' : 'count', { n: rec.readings.length })) + '</div>';
     if (from && from !== rec.character && from !== alt) {
       html += '<div class="tag">' + esc(t('from', { c: from })) + '</div>';
     }
-    html += '</div><div class="readings">';
-    rec.readings.forEach(function (r) { html += renderReading(r); });
+    html += '</div><div class="variants">';
+    html += renderVariant('varCq', rec.readings, 'cq');
+    html += renderVariant('varNj', nj ? nj.readings : null, 'nj');
     return html + '</div></div></section>';
   }
 
@@ -682,6 +707,32 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
           + '</div><div class="i">' + esc(row[1]) + '</div><div class="e">' + esc(row[2] + ' ' + row[3]) + '</div></div>';
       }).join('') + '</div>'
       + '<p class="phon-note">' + (d.phon.tonesNote || '') + '</p>';
+
+    // 南郊音
+    var NJ = T.nanjiao;
+    if (NJ) {
+      h += '<h3>' + esc(d.phon.njTitle) + '</h3><p>' + (d.phon.njIntro || '') + '</p>';
+      h += '<h4>' + esc(d.phon.njInitialsTitle) + '</h4><div class="phon-grid">'
+        + NJ.initials.map(phonCell).join('') + '</div>'
+        + '<p class="phon-note">' + (d.phon.njInitialsNote || '') + '</p>';
+      h += '<h4>' + esc(d.phon.njFinalsTitle) + '</h4>';
+      NJ.finals.forEach(function (group, i) {
+        h += '<div class="fin-group"><div class="fin-label">' + esc((d.phon.njGroupNames || [])[i] || '') + '</div>'
+          + '<div class="phon-grid">' + group.map(phonCell).join('') + '</div></div>';
+      });
+      h += '<p class="phon-note">' + (d.phon.njFinalsNote || '') + '</p>';
+      h += '<p class="phon-note">' + (d.phon.njTonesNote || '') + '</p>';
+
+      h += '<h3>' + esc(d.phon.njDiffTitle) + '</h3>';
+      var nd = d.phon.njDiff;
+      if (nd) {
+        h += '<table><thead><tr>' + nd.head.map(function (x) { return '<th>' + esc(x) + '</th>'; }).join('')
+          + '</tr></thead><tbody>' + nd.rows.map(function (r) {
+            return '<tr>' + r.map(function (x) { return '<td>' + esc(x) + '</td>'; }).join('') + '</tr>';
+          }).join('') + '</tbody></table>';
+      }
+      if (d.phon.njNote) h += '<p class="phon-note">' + d.phon.njNote + '</p>';
+    }
 
     h += '<h3>' + esc(d.phon.diffTitle) + '</h3>';
     (d.phon.diff || []).forEach(function (block) {

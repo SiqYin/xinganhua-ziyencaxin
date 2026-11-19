@@ -7,24 +7,26 @@
       "字音",
       "查询"
     ],
-    "subtitle": "输入汉字，查它在西安话（关中片）里的<b>拼音</b>与<b>国际音标</b>；有释注一并列出",
+    "subtitle": "输入汉字，查它在西安话（关中片）里的<b>城区音</b>与<b>南郊音</b>：拼音、国际音标、声调与释注",
     "placeholder": "输入汉字，如：西安话 着 鵝",
     "search": "查字",
     "meta": [
       "简繁皆可",
       "一次最多 30 字",
-      "字音 3,648 条 · 字头 3,345"
+      "字头 3,345 · 城区 3,648 条 / 南郊 3,578 条"
     ],
     "legend": [
       "调号 <b>1</b> 阴平 21",
       "<b>2</b> 阳平 24",
       "<b>3</b> 上声 53",
-      "<b>4</b> 去声 44"
+      "<b>4</b> 去声 44",
+      "<b>城区音</b> 城内口音",
+      "<b>南郊音</b> 高新·小寨·曲江"
     ],
     "legendEx": "例 <b>bfeng4</b> 中 · <b>jyuen1</b> 軍",
     "lead": "输入一个或多个汉字试试，比如 <b>西安话</b>、<b>着</b>、<b>鵝</b>",
     "schemeTitle": "西安话音系与输入方案",
-    "schemeDesc": "声母 26 · 韵母 40 · 四声；点开看与普通话拼音的异同",
+    "schemeDesc": "城区音 26 声母 / 40 韵母；南郊音 24 / 38；四声",
     "schemeMore": "查看 →",
     "modalTitle": "西安话音系与输入方案",
     "modalClose": "关闭",
@@ -187,9 +189,66 @@
         "阳平",
         "上声",
         "去声"
-      ]
+      ],
+      "njTitle": "南郊音音系",
+      "njIntro": "南郊音指西安南郊（高新、小寨、曲江一带）的口音。声母、韵母的格局属<b>渭南型</b>：<b>声母 24 个</b>（没有 bf、pf），<b>韵母 38 个</b>（没有 uu、iai）；声调与城区音相同，仍是四声。",
+      "njInitialsTitle": "南郊音声母 24",
+      "njInitialsNote": "比城区音少 bf、pf 两组：bf 改读 z（豬 bfu1→zu1），pf 改读 c（春 pfen1→cuen1），韵母同时增生 u 介音。",
+      "njFinalsTitle": "南郊音韵母 38",
+      "njFinalsNote": "比城区音少 uu、iai 两类：uu 并入 e（圪 guu1→ge1），iai 并入 ie（階 jiai1→jie1）。",
+      "njTonesNote": "声调与城区音一致：阴平 21、阳平 24、上声 53、去声 44，入声同样已派入四声。",
+      "njGroupNames": [
+        "开口呼 14",
+        "齐齿呼 9",
+        "合口呼 9",
+        "撮口呼 6"
+      ],
+      "njDiffTitle": "城区音与南郊音的区别",
+      "njDiff": {
+        "head": [
+          "",
+          "城区音",
+          "南郊音"
+        ],
+        "rows": [
+          [
+            "声母",
+            "26（含 bf、pf）",
+            "24（无 bf、pf）"
+          ],
+          [
+            "韵母",
+            "40（含 uu、iai）",
+            "38（无 uu、iai）"
+          ],
+          [
+            "知系合口",
+            "豬 bfu1、春 pfen1",
+            "zu1、cuen1"
+          ],
+          [
+            "书母合口",
+            "書 fu1、水 fei3",
+            "su1、suei3"
+          ],
+          [
+            "遇摄一等",
+            "都 du1、粗 cu1",
+            "dou1、cou1"
+          ],
+          [
+            "声调",
+            "阴平 21、阳平 24、上声 53、去声 44",
+            "同城区音"
+          ]
+        ]
+      },
+      "njNote": "全表 3,578 条南郊读音：与城区音相同的 2,979 字，有差异的 366 字。"
     },
-    "countOne": "共 1 读"
+    "countOne": "共 1 读",
+    "varCq": "城区音",
+    "varNj": "南郊音",
+    "njMissing": "南郊音暂缺"
   },
   "en": {
     "langName": "English",
@@ -199,24 +258,26 @@
       "Pronunciation",
       "Lookup"
     ],
-    "subtitle": "Type Chinese characters to see every reading in the Xi’an dialect (Guanzhong): <b>romanization</b>, <b>IPA</b>, tone, and dictionary notes",
+    "subtitle": "Type Chinese characters to see both the <b>urban</b> and <b>southern-suburb</b> readings of the Xi’an dialect: romanization, IPA, tone, and dictionary notes",
     "placeholder": "Type characters, e.g. 西安话 着 鵝",
     "search": "Search",
     "meta": [
       "Simplified & traditional",
       "Up to 30 characters",
-      "3,648 readings · 3,345 characters"
+      "3,345 characters · 3,648 urban / 3,578 southern readings"
     ],
     "legend": [
       "Tone <b>1</b> Yinping 21",
       "<b>2</b> Yangping 24",
       "<b>3</b> Shangsheng 53",
-      "<b>4</b> Qusheng 44"
+      "<b>4</b> Qusheng 44",
+      "<b>Urban</b> city centre",
+      "<b>Southern</b> Gaoxin · Xiaozhai · Qujiang"
     ],
     "legendEx": "e.g. <b>bfeng4</b> 中 · <b>jyuen1</b> 軍",
     "lead": "Try one or more characters, e.g. <b>西安话</b>, <b>着</b>, <b>鵝</b>",
     "schemeTitle": "Xi’an phonology & the input scheme",
-    "schemeDesc": "26 initials · 40 finals · 4 tones; how it differs from Mandarin pinyin",
+    "schemeDesc": "Urban 26 initials / 40 finals · Southern 24 / 38 · 4 tones",
     "schemeMore": "Open →",
     "modalTitle": "Xi’an phonology & the input scheme",
     "modalClose": "Close",
@@ -379,9 +440,66 @@
         "Yangping",
         "Shangsheng",
         "Qusheng"
-      ]
+      ],
+      "njTitle": "The southern-suburb variety",
+      "njIntro": "The southern-suburb variety (Gaoxin, Xiaozhai, Qujiang) follows the Weinan pattern in its initials and finals: <b>24 initials</b> (no bf, pf) and <b>38 finals</b> (no uu, iai). Its tones are the same four as the urban variety.",
+      "njInitialsTitle": "24 initials",
+      "njInitialsNote": "Two groups fewer than the urban variety: bf becomes z (豬 bfu1→zu1), pf becomes c (春 pfen1→cuen1), and the final gains a u medial.",
+      "njFinalsTitle": "38 finals",
+      "njFinalsNote": "Two classes fewer than the urban variety: uu merges into e (圪 guu1→ge1), iai into ie (階 jiai1→jie1).",
+      "njTonesNote": "Same tones as the urban variety: Yinping 21, Yangping 24, Shangsheng 53, Qusheng 44; the entering tone has likewise split into these four.",
+      "njGroupNames": [
+        "Open 14",
+        "Front 9",
+        "Closed 9",
+        "Rounded 6"
+      ],
+      "njDiffTitle": "Urban vs southern suburb",
+      "njDiff": {
+        "head": [
+          "",
+          "Urban",
+          "Southern suburb"
+        ],
+        "rows": [
+          [
+            "Initials",
+            "26 (incl. bf, pf)",
+            "24 (no bf, pf)"
+          ],
+          [
+            "Finals",
+            "40 (incl. uu, iai)",
+            "38 (no uu, iai)"
+          ],
+          [
+            "Zhī-series closed",
+            "豬 bfu1, 春 pfen1",
+            "zu1, cuen1"
+          ],
+          [
+            "Shū-series closed",
+            "書 fu1, 水 fei3",
+            "su1, suei3"
+          ],
+          [
+            "Yù rhyme, grade 1",
+            "都 du1, 粗 cu1",
+            "dou1, cou1"
+          ],
+          [
+            "Tones",
+            "21 / 24 / 53 / 44",
+            "same"
+          ]
+        ]
+      },
+      "njNote": "3,578 southern readings in all: 2,979 characters identical to the urban variety, 366 different."
     },
-    "countOne": "1 reading"
+    "countOne": "1 reading",
+    "varCq": "Urban",
+    "varNj": "Southern suburb",
+    "njMissing": "No southern reading."
   },
   "ja": {
     "langName": "日本語",
@@ -391,24 +509,26 @@
       "字音",
       "検索"
     ],
-    "subtitle": "漢字を入力すると、西安方言（関中片）での読み方を<b>ピンイン表記</b>と<b>国際音声記号（IPA）</b>で表示します。原表の注記もあわせて掲載",
+    "subtitle": "漢字を入力すると、西安方言（関中片）の<b>城区音</b>と<b>南郊音</b>の両方を表示します。ピンイン表記・国際音声記号（IPA）・声調・原表の注記つき",
     "placeholder": "漢字を入力（例：西安话 着 鵝）",
     "search": "検索",
     "meta": [
       "簡体字・繁体字に対応",
       "一度に最大 30 字",
-      "字音 3,648 件 · 見出し字 3,345 字"
+      "見出し字 3,345 字 · 城区 3,648 件／南郊 3,578 件"
     ],
     "legend": [
       "声調番号 <b>1</b> 陰平 21",
       "<b>2</b> 陽平 24",
       "<b>3</b> 上声 53",
-      "<b>4</b> 去声 44"
+      "<b>4</b> 去声 44",
+      "<b>城区音</b> 城内のことば",
+      "<b>南郊音</b> 高新・小寨・曲江"
     ],
     "legendEx": "例：<b>bfeng4</b> 中 · <b>jyuen1</b> 軍",
     "lead": "漢字をひとつ、または複数入力してみてください（例：<b>西安话</b>、<b>着</b>、<b>鵝</b>）",
     "schemeTitle": "西安方言の音韻と入力方案",
-    "schemeDesc": "声母 26 · 韻母 40 · 四声。普通話ピンインとの違いも見られます",
+    "schemeDesc": "城区音 声母 26・韻母 40、南郊音 24・38、四声",
     "schemeMore": "開く →",
     "modalTitle": "西安方言の音韻と入力方案",
     "modalClose": "閉じる",
@@ -571,8 +691,65 @@
         "陽平",
         "上声",
         "去声"
-      ]
+      ],
+      "njTitle": "南郊音の音韻",
+      "njIntro": "南郊音は西安南部（高新・小寨・曲江一帯）のことば。声母・韻母の体系は<b>渭南型</b>で、<b>声母 24</b>（bf・pf なし）、<b>韻母 38</b>（uu・iai なし）、声調は城区音と同じ四声。",
+      "njInitialsTitle": "南郊音の声母 24",
+      "njInitialsNote": "城区音より bf・pf の二組が少ない。bf は z（豬 bfu1→zu1）、pf は c（春 pfen1→cuen1）となり、韻母に u 介音が加わる。",
+      "njFinalsTitle": "南郊音の韻母 38",
+      "njFinalsNote": "城区音より uu・iai の二類が少ない。uu は e（圪 guu1→ge1）、iai は ie（階 jiai1→jie1）に統合。",
+      "njTonesNote": "声調は城区音と同じ、陰平 21・陽平 24・上声 53・去声 44。入声もすでにこの四声に分かれている。",
+      "njGroupNames": [
+        "開口呼 14",
+        "斉歯呼 9",
+        "合口呼 9",
+        "撮口呼 6"
+      ],
+      "njDiffTitle": "城区音と南郊音の違い",
+      "njDiff": {
+        "head": [
+          "",
+          "城区音",
+          "南郊音"
+        ],
+        "rows": [
+          [
+            "声母",
+            "26（bf・pf を含む）",
+            "24（bf・pf なし）"
+          ],
+          [
+            "韻母",
+            "40（uu・iai を含む）",
+            "38（uu・iai なし）"
+          ],
+          [
+            "知系合口",
+            "豬 bfu1、春 pfen1",
+            "zu1、cuen1"
+          ],
+          [
+            "書母合口",
+            "書 fu1、水 fei3",
+            "su1、suei3"
+          ],
+          [
+            "遇摂一等",
+            "都 du1、粗 cu1",
+            "dou1、cou1"
+          ],
+          [
+            "声調",
+            "陰平 21・陽平 24・上声 53・去声 44",
+            "城区音と同じ"
+          ]
+        ]
+      },
+      "njNote": "南郊音は全 3,578 件。城区音と完全に同じ字が 2,979 字、異なる字が 366 字。"
     },
-    "countOne": "読み 1 種"
+    "countOne": "読み 1 種",
+    "varCq": "城区音",
+    "varNj": "南郊音",
+    "njMissing": "南郊音なし"
   }
 }
