@@ -4,8 +4,6 @@
 
 > 輸入漢字（簡繁皆可，一次最多 30 字），查它在西安話（關中片）裏的全部字音：**西安話拼音**、**國際音標**、**聲調**，以及詞典原有的釋注。界面有簡、繁、英、日四種語言，並按系統語言與接入地區自動判定。
 
-![西安話字音查詢界面](screenshot.png)
-
 - **線上地址**：<https://siqyin.github.io/xinganhua-ziyencaxin/>
 - **字表**：字頭 3,345 ／ 字音 3,648 ／ 多音字 275 ／ 帶釋注 102
 - **語言**：簡體中文 · 繁體中文 · English · 日本語（自動判定 + 手選）
@@ -199,7 +197,6 @@ MCPDict《西安》數據表（國際音標）
 
 ```
 index.html                    單頁：樣式、查詢邏輯、i18n 與浮窗都在這一個文件裏
-screenshot.png                本說明用的界面截圖
 README.zh-Hant.md             繁體說明（OpenCC 轉出）
 README.en.md / README.ja.md   英文、日文說明
 data/source.tsv               字音源表：字 / 拼音 / IPA[調名] / 釋注

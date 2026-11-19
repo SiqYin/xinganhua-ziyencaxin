@@ -4,8 +4,6 @@
 
 > Type Chinese characters (simplified or traditional, up to 30 at a time) and see every reading they have in the Xi'an dialect (Guanzhong group): **Xi'an pinyin**, **IPA**, **tone**, and the dictionary's own notes. The interface comes in Simplified Chinese, Traditional Chinese, English and Japanese, chosen automatically from your system language and region.
 
-![Xi'an pronunciation lookup interface](screenshot.png)
-
 - **Live site**: <https://siqyin.github.io/xinganhua-ziyencaxin/>
 - **Character table**: 3,345 characters / 3,648 readings / 275 polyphonic / 102 with notes
 - **Languages**: 简体中文 · 繁體中文 · English · 日本語 (automatic + manual)
@@ -199,7 +197,6 @@ The font is a subset of [LXGW WenKai](https://github.com/lxgw/LxgwWenKai) (LXGW 
 
 ```
 index.html                    single page: styles, lookup logic, i18n and the pop-up
-screenshot.png                interface screenshot used above
 README.zh-Hant.md             Traditional Chinese README (OpenCC output)
 README.en.md / README.ja.md   English and Japanese READMEs
 data/source.tsv               source table: character / pinyin / IPA[tone] / notes
