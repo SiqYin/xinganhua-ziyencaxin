@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""生成 data/i18n.json：简体（源）→ 繁体（OpenCC 转换）+ 英文，附音系表数据。
+"""生成 data/i18n.json：简体（源）→ 繁体（OpenCC 转换）+ 英文 + 日文，附音系表数据。
 
 用法：python tools/build_i18n.py
-源：tools/i18n.src.json（hans / en 两套文案）
+源：tools/i18n.src.json（hans / en / ja 三套文案；繁体由 OpenCC 从简体转出）
 """
 import json
 from pathlib import Path
@@ -65,6 +65,7 @@ def main() -> None:
             "hans": src["hans"],
             "hant": convert(src["hans"], cc),
             "en": src["en"],
+            "ja": src["ja"],
         },
         "tables": {
             "initials": INITIALS,
@@ -74,9 +75,10 @@ def main() -> None:
     }
     OUT.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     hant = out["langs"]["hant"]
-    print("i18n.json 已生成：3 种语言；声母 %d、韵母 %d、声调 %d" % (
+    print("i18n.json 已生成：4 种语言；声母 %d、韵母 %d、声调 %d" % (
         len(INITIALS), sum(len(g) for g in FINALS), len(TONES)))
     print("繁体样例：", hant["h1"], "|", hant["search"], "|", hant["phon"]["initialsTitle"])
+    print("日文样例：", out["langs"]["ja"]["h1"], "|", out["langs"]["ja"]["search"])
 
 
 if __name__ == "__main__":

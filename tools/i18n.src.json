@@ -382,5 +382,197 @@
       ]
     },
     "countOne": "1 reading"
+  },
+  "ja": {
+    "langName": "日本語",
+    "docTitle": "西安方言 字音検索 · xinganhua-ziyencaxin",
+    "h1": [
+      "西安方言",
+      "字音",
+      "検索"
+    ],
+    "subtitle": "漢字を入力すると、西安方言（関中片）での読み方を<b>ピンイン表記</b>と<b>国際音声記号（IPA）</b>で表示します。原表の注記もあわせて掲載",
+    "placeholder": "漢字を入力（例：西安话 着 鵝）",
+    "search": "検索",
+    "meta": [
+      "簡体字・繁体字に対応",
+      "一度に最大 30 字",
+      "字音 3,648 件 · 見出し字 3,345 字"
+    ],
+    "legend": [
+      "声調番号 <b>1</b> 陰平 21",
+      "<b>2</b> 陽平 24",
+      "<b>3</b> 上声 53",
+      "<b>4</b> 去声 44"
+    ],
+    "legendEx": "例：<b>bfeng4</b> 中 · <b>jyuen1</b> 軍",
+    "lead": "漢字をひとつ、または複数入力してみてください（例：<b>西安话</b>、<b>着</b>、<b>鵝</b>）",
+    "schemeTitle": "西安方言の音韻と入力方案",
+    "schemeDesc": "声母 26 · 韻母 40 · 四声。普通話ピンインとの違いも見られます",
+    "schemeMore": "開く →",
+    "modalTitle": "西安方言の音韻と入力方案",
+    "modalClose": "閉じる",
+    "alt": "簡 {c}",
+    "count": "読み {n} 種",
+    "from": "{c} から検索",
+    "noteLabel": "注",
+    "missing": "この字は字表に収録されていません。",
+    "missingAlt": "この字は字表に収録されていません（繁体字字形も未収録）。",
+    "msgLoading": "字表を読み込んでいます。しばらくお待ちください…",
+    "msgEmpty": "漢字を 1 字以上入力してください。",
+    "msgNotChinese": "漢字を入力してください（このページではピンインやラテン文字からの逆引きはできません）。",
+    "msgTooMany": "一度に検索できるのは {max} 字までです。{n} 字入力されています。",
+    "msgNoResult": "見つかりません：{chars}。",
+    "msgLoadFail": "データの読み込みに失敗しました。ローカルで開いている場合は、HTML ファイルを直接開かず、HTTP 経由でアクセスしてください（例：プロジェクトのフォルダで python -m http.server を実行）。",
+    "footerLine": "字音 <a href=\"https://github.com/osfans/MCPDict\" target=\"_blank\" rel=\"noopener\">MCPDict「西安」データ表</a><span class=\"sep\">|</span>ピンイン方案 <a href=\"https://github.com/SiqYin/xinganhua-fuvufa\" target=\"_blank\" rel=\"noopener\">西安方言ピンイン</a><span class=\"sep\">|</span>フォント <a href=\"https://github.com/lxgw/LxgwWenKai\" target=\"_blank\" rel=\"noopener\">霞鹜文楷</a>（OFL）",
+    "sig": "黒は秦、紅は漢",
+    "langLabel": "言語",
+    "phon": {
+      "intro": "西安方言（陝西省・関中片）には<b>声母 26 個</b>（ゼロ声母を含む）、<b>韻母 40 個</b>、<b>四声</b>（陰平 21、陽平 24、上声 53、去声 44）があります。1 音節は「声母＋韻母＋声調番号」の順に書き、たとえば <code>bfeng4</code> 中、<code>jyuen1</code> 軍。以下の例字は字表の繁体字字形のままです。",
+      "initialsTitle": "声母 26",
+      "initialsNote": "z c s は ɿ および洪音の韻母にのみ付き、細音には必ず j q x を用います。bf pf は合口・洪音の前にのみ現れ、r は 7 つの洪音韻母と、ng は洪音とのみ結びつきます。",
+      "finalsTitle": "韻母 40",
+      "finalsNote": "an・en・ang・eng などは鼻母音で、普通話のように -n / -ng で閉じません。uong / yuong は普通話の ong / iong に対応します。撮口呼はつねに y を伴い、声母の後でも省略しません（jyuen 軍、nyu 女）。",
+      "tonesTitle": "声調",
+      "tonesNote": "入声はすでにこの四声に統合され、その配分は普通話とは異なります：立 li1、白 bei2、藥 yuo1、六 liou1。",
+      "diffTitle": "普通話ピンインとの異同",
+      "diff": [
+        {
+          "h": "① まったく同じもの",
+          "p": "b p m f d t n l g k h z c s zh ch sh r j q x の声母は、字も音も普通話と一致します。韻母 a i u e er ai ei ao ou ia ie iao ian iang ua uo uai uan uang の綴りも同じです。ゼロ声母の y / w の規則も普通話とまったく同じです。"
+        },
+        {
+          "h": "② 綴りは同じで音価が異なる",
+          "p": "-n / -ng で終わる韻母は、西安方言ではすべて鼻母音で読まれます：an = ã、en = ẽ、ang = ɑɣ̃、eng = əɣ̃。綴りは同じでも、発音は異なります。"
+        },
+        {
+          "h": "③ 綴りが異なる",
+          "head": [
+            "普通話",
+            "西安方言ピンイン",
+            "例"
+          ],
+          "rows": [
+            [
+              "in",
+              "ien",
+              "心 xien1"
+            ],
+            [
+              "ing",
+              "ieng",
+              "明 mieng2"
+            ],
+            [
+              "iu",
+              "iou",
+              "牛 niou2"
+            ],
+            [
+              "ui",
+              "uei",
+              "回 huei2"
+            ],
+            [
+              "un",
+              "uen",
+              "溫 wen1"
+            ],
+            [
+              "ong",
+              "uong",
+              "東 duong1"
+            ],
+            [
+              "iong",
+              "yuong",
+              "容 yuong2"
+            ],
+            [
+              "ü / üe / üan / ün",
+              "yu / yue / yuan / yuen",
+              "魚 yu2、月 yue1、元 yuan2、軍 jyuen1"
+            ]
+          ]
+        },
+        {
+          "h": "④ 西安方言にしかないもの",
+          "p": "声母：bf pf（豬 bfu1、窗 pfang1）、v（文 ven2）、ng（安 ngan1）。韻母：uu（胳 guu1）、o（vo のみ：若 vo1）、iai（皆 jiai1）、yuo（樂 yuo1）。"
+        },
+        {
+          "h": "⑤ 声母が対応しない字",
+          "head": [
+            "普通話",
+            "西安方言ピンイン",
+            "字"
+          ],
+          "rows": [
+            [
+              "shuǐ",
+              "fei3",
+              "水"
+            ],
+            [
+              "shū",
+              "fu1",
+              "書"
+            ],
+            [
+              "shuō",
+              "she1",
+              "說"
+            ],
+            [
+              "shān / shì",
+              "san1 / si4",
+              "山 / 是"
+            ],
+            [
+              "zhū / chū",
+              "bfu1 / pfu1",
+              "豬 / 出"
+            ],
+            [
+              "zhōng / chūn",
+              "bfeng4 / pfen1",
+              "中 / 春"
+            ],
+            [
+              "wén",
+              "ven2",
+              "文"
+            ],
+            [
+              "é / ān",
+              "nge2 / ngan1",
+              "鵝 / 安"
+            ],
+            [
+              "rì",
+              "er1",
+              "日"
+            ]
+          ]
+        },
+        {
+          "h": "⑥ 声調番号の位置は同じで調値が異なる",
+          "p": "普通話の ā á ǎ à は本方案の 1 2 3 4 に対応しますが、西安方言の調値は 21 / 24 / 53 / 44 です。話者は地元の調値でそのまま読めばよく、換算は不要です。"
+        }
+      ],
+      "link": "入力方案の全文を見る（GitHub）→",
+      "groupNames": [
+        "開口呼",
+        "斉歯呼",
+        "合口呼",
+        "撮口呼"
+      ],
+      "toneNames": [
+        "陰平",
+        "陽平",
+        "上声",
+        "去声"
+      ]
+    },
+    "countOne": "読み 1 種"
   }
 }

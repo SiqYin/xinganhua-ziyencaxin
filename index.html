@@ -10,7 +10,7 @@
 @font-face{
   font-family:"LXGW WenKai";
   font-style:normal;font-weight:400;font-display:swap;
-  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=5") format("woff2");
+  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=6") format("woff2");
 }
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -279,6 +279,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   <div class="lang-switcher" id="langSwitcher" aria-label="语言">
     <button type="button" data-lang="hans">简</button>
     <button type="button" data-lang="hant">繁</button>
+    <button type="button" data-lang="ja">日</button>
     <button type="button" data-lang="en">EN</button>
   </div>
 
@@ -327,7 +328,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 
 <footer>
   <div id="tFooter">字音取自 <a href="https://github.com/osfans/MCPDict" target="_blank" rel="noopener">MCPDict《西安》数据表</a><span class="sep">|</span>拼音方案 <a href="https://github.com/SiqYin/xinganhua-fuvufa" target="_blank" rel="noopener">西安话拼音</a><span class="sep">|</span>字体 <a href="https://github.com/lxgw/LxgwWenKai" target="_blank" rel="noopener">霞鹜文楷</a>（OFL）</div>
-  <div class="sig" id="tSig">玄为秦，绛为汉<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.7</div>
+  <div class="sig" id="tSig">玄为秦，绛为汉<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.8</div>
 </footer>
 
 <div class="modal" id="modal" aria-hidden="true">
@@ -345,10 +346,11 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 (function () {
   'use strict';
   var MAX_CHARS = 30;
-  var LANGS = ['hans', 'hant', 'en'];
+  var LANGS = ['hans', 'hant', 'ja', 'en'];
   var KEY = 'xianhua-lang';
   var EN_REGIONS = ['US', 'GB', 'CA', 'AU', 'NZ', 'FR', 'DE', 'KR'];
   var HANT_REGIONS = ['HK', 'MO', 'TW'];
+  var JA_REGIONS = ['JP'];
 
   var form = document.getElementById('searchForm');
   var input = document.getElementById('charInput');
@@ -369,6 +371,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 
   var TONE_HANT = { '阴平': '陰平', '阳平': '陽平', '上声': '上聲', '去声': '去聲' };
   var TONE_EN = { '阴平': 'Yinping', '阳平': 'Yangping', '上声': 'Shangsheng', '去声': 'Qusheng' };
+  var TONE_JA = { '阴平': '陰平', '阳平': '陽平', '上声': '上声', '去声': '去声' };
 
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
@@ -386,6 +389,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 
   function toneName(n) {
     if (LANG === 'en') return TONE_EN[n] || n;
+    if (LANG === 'ja') return TONE_JA[n] || n;
     if (LANG === 'hant') return TONE_HANT[n] || n;
     return n;
   }
@@ -393,9 +397,9 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   /* ───────── 数据 ───────── */
   function loadData() {
     return Promise.all([
-      fetch('data/xian.json?v=5').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/variants.json?v=5').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/i18n.json?v=5').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      fetch('data/xian.json?v=6').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json?v=6').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/i18n.json?v=6').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     ]).then(function (out) {
       out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
       variants = out[1];
@@ -407,12 +411,13 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   function applyLang(lang, persist) {
     if (LANGS.indexOf(lang) < 0) lang = 'hans';
     LANG = lang;
-    document.documentElement.lang = lang === 'en' ? 'en' : (lang === 'hant' ? 'zh-Hant' : 'zh-Hans');
+    document.documentElement.lang = lang === 'en' ? 'en'
+      : (lang === 'ja' ? 'ja' : (lang === 'hant' ? 'zh-Hant' : 'zh-Hans'));
     if (I18N) {
       var d = pack();
       document.title = d.docTitle || document.title;
       var h = d.h1 || ['', '', ''];
-      var gap = LANG === 'en' ? ' ' : '';
+      var gap = (LANG === 'en' || LANG === 'ja') ? ' ' : '';
       document.getElementById('tTitle').innerHTML = esc(h[0]) + gap + '<span class="accent">' + esc(h[1]) + '</span>' + gap + esc(h[2]);
       document.getElementById('tSubtitle').innerHTML = d.subtitle || '';
       input.setAttribute('placeholder', d.placeholder || '');
@@ -426,7 +431,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
       document.getElementById('tSchemeMore').textContent = d.schemeMore || '';
       document.getElementById('tFooter').innerHTML = d.footerLine || '';
       document.getElementById('tSig').innerHTML = esc(d.sig || '')
-        + '<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.7';
+        + '<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.8';
       modalTitle.textContent = d.modalTitle || '';
       modalClose.setAttribute('aria-label', d.modalClose || 'Close');
       if (modal.classList.contains('open')) buildModal();
@@ -439,13 +444,14 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     if (LAST.has) doSearch(LAST.text, false);
   }
 
-  // 只有中文变体才由系统语言决定；英文等其它系统语言交给 IP 判断
-  // （否则「英文系统 + 日本 IP」会被系统语言误判成英文）
+  // 只有中文变体与日文由系统语言决定；英文、韩文等其它系统语言交给 IP 判断
+  // （否则「英文系统 + 中国 IP」会被系统语言误判成英文）
   function sysLang() {
     var ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ''];
     for (var i = 0; i < ls.length; i++) {
       var l = String(ls[i] || '').toLowerCase();
       if (/^zh(-|$)/.test(l)) return /hant|tw|hk|mo/.test(l) ? 'hant' : 'hans';
+      if (/^ja(-|$)/.test(l)) return 'ja';
     }
     return null;
   }
@@ -472,6 +478,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   function regionLang(code) {
     var c = String(code || '').toUpperCase();
     if (HANT_REGIONS.indexOf(c) >= 0) return 'hant';
+    if (JA_REGIONS.indexOf(c) >= 0) return 'ja';
     if (EN_REGIONS.indexOf(c) >= 0) return 'en';
     return 'hans';
   }
@@ -506,7 +513,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   function initLang() {
     var forced = null;
     try {
-      var q = /[?&]lang=(hans|hant|en|auto)/i.exec(location.search);
+      var q = /[?&]lang=(hans|hant|ja|en|auto)/i.exec(location.search);
       if (q) {
         if (q[1].toLowerCase() === 'auto') { try { localStorage.removeItem(KEY); } catch (e) {} }
         else forced = q[1].toLowerCase();
@@ -752,7 +759,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     else input.focus();
   }).catch(function () {
     btn.disabled = false;
-    setMessage('数据载入失败。若是本地打开，请通过 HTTP 访问（例如在项目目录运行 python -m http.server），不要直接双击 HTML 文件。', true);
+    setMessage(t('msgLoadFail') || '数据载入失败。若是本地打开，请通过 HTTP 访问（例如在项目目录运行 python -m http.server），不要直接双击 HTML 文件。', true);
   });
 })();
 </script>
