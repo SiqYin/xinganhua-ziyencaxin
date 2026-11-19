@@ -428,7 +428,7 @@
     "sig": "黒は秦、紅は漢",
     "langLabel": "言語",
     "phon": {
-      "intro": "西安方言（陝西省・関中片）には<b>声母 26 個</b>（ゼロ声母を含む）、<b>韻母 40 個</b>、<b>四声</b>（陰平 21、陽平 24、上声 53、去声 44）があります。1 音節は「声母＋韻母＋声調番号」の順に書き、たとえば <code>bfeng4</code> 中、<code>jyuen1</code> 軍。以下の例字は字表の繁体字字形のままです。",
+      "intro": "西安方言（陝西省・関中片）には<b>声母 26 個</b>（零声母を含む）、<b>韻母 40 個</b>、<b>四声</b>（陰平 21、陽平 24、上声 53、去声 44）があります。1 音節は「声母＋韻母＋声調番号」の順に書き、たとえば <code>bfeng4</code> 中、<code>jyuen1</code> 軍。以下の例字は字表の繁体字字形のままです。",
       "initialsTitle": "声母 26",
       "initialsNote": "z c s は ɿ および洪音の韻母にのみ付き、細音には必ず j q x を用います。bf pf は合口・洪音の前にのみ現れ、r は 7 つの洪音韻母と、ng は洪音とのみ結びつきます。",
       "finalsTitle": "韻母 40",
@@ -439,7 +439,7 @@
       "diff": [
         {
           "h": "① まったく同じもの",
-          "p": "b p m f d t n l g k h z c s zh ch sh r j q x の声母は、字も音も普通話と一致します。韻母 a i u e er ai ei ao ou ia ie iao ian iang ua uo uai uan uang の綴りも同じです。ゼロ声母の y / w の規則も普通話とまったく同じです。"
+          "p": "b p m f d t n l g k h z c s zh ch sh r j q x の声母は、字も音も普通話と一致します。韻母 a i u e er ai ei ao ou ia ie iao ian iang ua uo uai uan uang の綴りも同じです。零声母の y / w の規則も普通話とまったく同じです。"
         },
         {
           "h": "② 綴りは同じで音価が異なる",
