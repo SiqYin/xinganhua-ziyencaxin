@@ -39,7 +39,7 @@
 Every reading on this site is written in **Xi'an pinyin**, one set each for the urban and the southern-suburb accent. A syllable is initial + final + tone digit, e.g. `ba1` 巴, `jyuen1` 軍; `bfeng4` 中 is the urban reading, the southern one is `zuong4`:
 
 - **Initials**: 24 shared (including the zero initial), plus `bf`, `pf` in the urban variety — 26 in all: `b p m f v bf pf d t n l z c s j q x zh ch sh r g k h ng`
-- **Finals**: 38 shared (15 open / 8 i-medial / 9 u-medial / 6 ü-medial), plus `uu`, `iai` in the urban variety — 40 in all (16 / 9 / 9 / 6)
+- **Finals**: 38 shared (14 open / 9 i-medial / 9 u-medial / 6 ü-medial), plus `uu`, `iai` in the urban variety — 40 in all (15 / 10 / 9 / 6)
 - **Four tones**: Yinping 21, Yangping 24, Shangsheng 53, Qusheng 44; the entering tone has merged into these four
 - **The tone digit follows the syllable** with no space: `bfeng4` 中, `jyuen1` 軍
 - **Syllable boundaries use an apostrophe**: `xi'ngan1` 西安 (otherwise it would split into xin 心 + gan 干)
