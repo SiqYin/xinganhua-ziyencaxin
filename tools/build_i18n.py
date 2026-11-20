@@ -82,7 +82,7 @@ FINALS = [
     [["u", "u", "烏", "wu1"], ["ua", "ua", "花", "hua1"], ["uo", "uɤ", "窩", "wo1"], ["uai", "uai", "快", "kuai4"],
      ["uan", "uã", "彎", "wan1"], ["uei", "uei", "回", "huei2"], ["uen", "uẽ", "溫", "wen1"],
      ["uong", "uoɣ̃", "翁", "wong1"], ["uang", "uɑɣ̃", "汪", "wang1"]],
-    [["yu", "y", "魚", "yu2"], ["yue", "yɛ", "月", "yue1"], ["yuo", "yɤ", "樂", "yuo1"], ["yua", "ya", "髽", "zyua4", 2],
+    [["yu", "y", "魚", "yu2"], ["yue", "yɛ", "月", "yue1"], ["yuo", "yɤ", "樂", "yuo1"],
      ["yuan", "yã", "元", "yuan2"], ["yuen", "yẽ", "勻", "yuen2"], ["yuong", "yoɣ̃", "容", "yuong2"]],
 ]
 

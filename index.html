@@ -10,7 +10,7 @@
 @font-face{
   font-family:"LXGW WenKai";
   font-style:normal;font-weight:400;font-display:swap;
-  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=12") format("woff2");
+  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=13") format("woff2");
 }
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -239,12 +239,12 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   background:var(--bg-card);border:1px solid var(--line);border-radius:8px;
   padding:7px 8px;text-align:center;line-height:1.45;min-width:0;
 }
-.phon-cell .s{font-size:1.02em;font-weight:700;color:var(--ink);overflow-wrap:anywhere}
-.phon-cell .i{font-size:.72em;color:var(--muted);overflow-wrap:anywhere}
-.phon-cell .e{font-size:.76em;color:var(--faint);margin-top:1px;overflow-wrap:anywhere;line-height:1.5}
+.phon-cell .s{font-size:1.02em;font-weight:700;color:var(--ink)}
+.phon-cell .i{font-size:.72em;color:var(--muted)}
+.phon-cell .e{font-size:.76em;color:var(--faint);margin-top:1px;line-height:1.5}
+.phon-cell .e + .e{margin-top:0}
 .phon-cell .e .r-cq{color:var(--crimson)}
 .phon-cell .e .r-nj{color:#2F5D8C}
-.phon-cell .e .rd{color:rgba(28,21,18,.35);margin:0 1px}
 .phon-cell.only{background:#F7ECEA;border:1px dashed rgba(159,54,58,.62)}
 .phon-cell.only .s{color:var(--crimson)}
 .phon-cell.only-nj{background:#F1ECF9;border:1px dashed rgba(123,95,192,.62)}
@@ -261,6 +261,10 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 .modal-body td:nth-child(3){color:var(--muted)}
 .modal-body table.cmp td:nth-child(3){color:#2F5D8C}
 .phon-note{font-size:.84em !important;background:var(--bg-card);border-left:2px solid rgba(159,54,58,.4);border-radius:0 6px 6px 0;padding:7px 11px}
+.py-switch{display:flex;justify-content:center;margin:10px auto 0;width:max-content;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg-card)}
+.py-switch button{border:0;background:transparent;padding:6px 16px;font-size:.82em;color:var(--muted);cursor:pointer;font-family:inherit}
+.py-switch button + button{border-left:1px solid var(--line)}
+.py-switch button[aria-pressed="true"]{background:#F7ECEA;color:var(--crimson);font-weight:700}
 .modal-link{margin-top:22px !important}
 .modal-link a{color:var(--crimson);text-decoration:none;border-bottom:1px solid rgba(159,54,58,.4)}
 
@@ -351,6 +355,10 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 
   <div class="meta-row" id="tMeta"></div>
   <div class="legend" id="tLegend"></div>
+  <div class="py-switch" id="pySwitch" role="group" aria-label="全拼 / 简拼">
+    <button type="button" data-mode="full">全拼</button>
+    <button type="button" data-mode="short">简拼</button>
+  </div>
 </header>
 
 <main>
@@ -435,6 +443,11 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   var LANG = 'hans';
   var LAST = { text: '', has: false };
   var ready = false;
+  var PY_KEY = 'xianhua-pymode';
+  var PYMODE = 'full';
+  var SHORT_PAIRS = [['in', 'ien'], ['ing', 'ieng'], ['iu', 'iou'], ['ui', 'uei'], ['un', 'uen'], ['ung', 'uong']];
+  var SHORT_ZERO = [['yun', 'yuen'], ['yung', 'yuong']];
+  var pyCq = {}, pyNj = {};
 
   var TONE_HANT = { '阴平': '陰平', '阳平': '陽平', '上声': '上聲', '去声': '去聲' };
   var TONE_EN = { '阴平': 'Yinping', '阳平': 'Yangping', '上声': 'Shangsheng', '去声': 'Qusheng' };
@@ -454,6 +467,29 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     return vars ? v.replace(/\{(\w+)\}/g, function (_, k) { return vars[k] != null ? vars[k] : ''; }) : v;
   }
 
+  function shortBody(body) {
+    for (var i = 0; i < SHORT_PAIRS.length; i++) {
+      var s = SHORT_PAIRS[i][0], f = SHORT_PAIRS[i][1];
+      if (body.length > s.length && body.slice(-s.length) === s) return body.slice(0, body.length - s.length) + f;
+    }
+    for (var j = 0; j < SHORT_ZERO.length; j++) {
+      if (body === SHORT_ZERO[j][0]) return SHORT_ZERO[j][1];
+    }
+    return body;
+  }
+
+  function expandBody(body) {
+    var out = [body];
+    for (var i = 0; i < SHORT_PAIRS.length; i++) {
+      var s = SHORT_PAIRS[i][0], f = SHORT_PAIRS[i][1];
+      if (body.length > s.length && body.slice(-s.length) === s) out.push(body.slice(0, body.length - s.length) + f);
+    }
+    for (var j = 0; j < SHORT_ZERO.length; j++) {
+      if (body === SHORT_ZERO[j][0]) out.push(SHORT_ZERO[j][1]);
+    }
+    return out;
+  }
+
   function toneName(n) {
     if (LANG === 'en') return TONE_EN[n] || n;
     if (LANG === 'ja') return TONE_JA[n] || n;
@@ -464,15 +500,27 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   /* ───────── 数据 ───────── */
   function loadData() {
     return Promise.all([
-      fetch('data/xian.json?v=12').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/nanjiao.json?v=12').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/variants.json?v=12').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/i18n.json?v=12').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      fetch('data/xian.json?v=13').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/nanjiao.json?v=13').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json?v=13').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/i18n.json?v=13').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     ]).then(function (out) {
       out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
       out[1].forEach(function (rec) { byCharNj.set(rec.character, rec); });
       variants = out[2];
       I18N = out[3];
+      indexPy();
+    });
+  }
+
+  /* ───────── 拼音反查索引 ───────── */
+  function indexPy() {
+    function add(map, k, ch) { if (map[k]) map[k].push(ch); else map[k] = [ch]; }
+    byChar.forEach(function (rec, ch) {
+      rec.readings.forEach(function (r) { add(pyCq, r.py, ch); add(pyCq, r.py.slice(0, -1), ch); });
+    });
+    byCharNj.forEach(function (rec, ch) {
+      rec.readings.forEach(function (r) { add(pyNj, r.py, ch); add(pyNj, r.py.slice(0, -1), ch); });
     });
   }
 
@@ -503,6 +551,11 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
         + '<span class="sep">|</span>xinganhua-ziyencaxin<span class="sep">|</span>v0.9.3';
       modalTitle.textContent = d.modalTitle || '';
       modalClose.setAttribute('aria-label', d.modalClose || 'Close');
+      var pb = document.getElementById('pySwitch').querySelectorAll('button');
+      for (var i = 0; i < pb.length; i++) {
+        var md = pb[i].getAttribute('data-mode');
+        pb[i].textContent = t(md === 'full' ? 'pyFull' : 'pyShort') || md;
+      }
       renderAbout();
       if (modal.classList.contains('open')) buildModal();
     }
@@ -648,7 +701,8 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 
   function renderReading(r) {
     var html = '<div class="reading"><div class="read-line">';
-    html += '<span class="py">' + esc(r.py.slice(0, -1)) + '<span class="tn">' + esc(r.py.slice(-1)) + '</span></span>';
+    var pyShown = PYMODE === 'short' ? shortBody(r.py.slice(0, -1)) + r.py.slice(-1) : r.py;
+    html += '<span class="py">' + esc(pyShown.slice(0, -1)) + '<span class="tn">' + esc(pyShown.slice(-1)) + '</span></span>';
     html += '<span class="ipa">[' + esc(r.ipa) + '<span class="tone">' + esc(r.val_sup) + '</span>]</span>';
     html += '<span class="tone-tag">' + esc(toneName(r.tone)) + ' ' + esc(r.val) + '</span>';
     html += '</div>';
@@ -666,13 +720,13 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     }
     h += '</div><div class="readings">';
     if (readings && readings.length) readings.forEach(function (r) { h += renderReading(r); });
-    else h += '<div class="missing-tip">' + esc(t('njMissing')) + '</div>';
+    else h += '<div class="missing-tip">' + esc(t(nameKey === 'varCq' ? 'cqMissing' : 'njMissing')) + '</div>';
     return h + '</div></div>';
   }
 
-  function renderCard(rec, from) {
+  function renderCard(rec, from, njRec) {
     var alt = altForm(rec.character);
-    var nj = byCharNj.get(rec.character);
+    var nj = njRec || byCharNj.get(rec.character);
     var html = '<section class="card"><div class="card-head">';
     html += '<div class="glyph"><div class="main">' + esc(rec.character) + '</div>';
     if (alt) html += '<div class="alt">' + esc(t('alt', { c: alt })) + '</div>';
@@ -706,7 +760,8 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     var CJK = /[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF\u{20000}-\u{2FA1F}\u{30000}-\u{323AF}]/u;
     var chars = raw.filter(function (c) { return CJK.test(c); });
     if (!raw.length) { results.innerHTML = ''; setMessage(t('msgEmpty')); input.focus(); return; }
-    if (!chars.length) { results.innerHTML = ''; setMessage(t('msgNotChinese')); return; }
+    if (!chars.length) { doPySearch(String(text).toLowerCase().replace(/\s+/g, '')); return; }
+    if (chars.length !== raw.length) { results.innerHTML = ''; setMessage(t('msgMixed'), true); return; }
     if (chars.length > MAX_CHARS) {
       results.innerHTML = '';
       setMessage(t('msgTooMany', { max: MAX_CHARS, n: chars.length }));
@@ -734,6 +789,49 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     if (pushState && window.history && history.replaceState) {
       var url = location.pathname + (order.length ? '?q=' + encodeURIComponent(order.join('')) : '');
       history.replaceState(null, '', url);
+    }
+  }
+
+  /* ───────── 拼音反查 ───────── */
+  function doPySearch(q) {
+    var m = /^([a-z]+)([0-4])?$/.exec(q);
+    if (!m) { results.innerHTML = ''; setMessage(t('msgNotPinyin'), true); return; }
+    var body = m[1], tone = m[2] || '';
+    var forms = expandBody(body);
+    var seen = new Set(), items = [];
+    function collect(map) {
+      if (tone) {
+        forms.forEach(function (f) {
+          (map[f + tone] || []).forEach(function (ch) {
+            if (!seen.has(ch)) { seen.add(ch); items.push(ch); }
+          });
+        });
+      } else {
+        Object.keys(map).forEach(function (k) {
+          if (forms.indexOf(k.slice(0, -1)) >= 0) {
+            map[k].forEach(function (ch) {
+              if (!seen.has(ch)) { seen.add(ch); items.push(ch); }
+            });
+          }
+        });
+      }
+    }
+    collect(pyCq);
+    collect(pyNj);
+    var html = '', found = 0;
+    items.forEach(function (ch) {
+      var cq = byChar.get(ch);
+      var nj = byCharNj.get(ch);
+      if (cq || nj) {
+        found++;
+        html += renderCard(cq || { character: ch, readings: [] }, '', nj);
+      } else html += renderMissing(ch, '');
+    });
+    results.innerHTML = html;
+    setMessage(items.length ? t('pyMatch', { q: q, n: items.length })
+                            : t('msgPyNoResult', { q: q }));
+    if (window.history && history.replaceState) {
+      history.replaceState(null, '', location.pathname + (q ? '?q=' + encodeURIComponent(q) : ''));
     }
   }
 
@@ -780,16 +878,15 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 
   /* ───────── 音系浮窗 ───────── */
   function phonCell(item) {
-    var ex = esc(item[2]) + ' ';
+    var e;
     if (item[5]) {
-      ex += '<span class="r-cq">' + esc(item[3]) + '</span><span class="rd">/</span>'
-        + '<span class="r-nj">' + esc(item[5]) + '</span>';
+      e = '<div class="e">' + esc(item[2]) + ' <span class="r-cq">' + esc(item[3]) + '</span></div>'
+        + '<div class="e r-nj">' + esc(item[5]) + '</div>';
     } else {
-      ex += esc(item[3]);
+      e = '<div class="e">' + esc(item[2]) + ' ' + esc(item[3]) + '</div>';
     }
     return '<div class="phon-cell' + (item[4] === 2 ? ' only-nj' : item[4] ? ' only' : '') + '"><div class="s">' + esc(item[0]) + '</div>'
-      + '<div class="i">' + esc(item[1]) + '</div>'
-      + '<div class="e">' + ex + '</div></div>';
+      + '<div class="i">' + esc(item[1]) + '</div>' + e + '</div>';
   }
 
   function buildModal() {
@@ -838,6 +935,9 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
       }
     });
 
+    if (d.phon.abbrevTitle) {
+      h += '<h3>' + esc(d.phon.abbrevTitle) + '</h3><p>' + esc(d.phon.abbrevNote || '') + '</p>';
+    }
     h += '<p class="modal-link"><a href="https://github.com/SiqYin/xinganhua-fuvufa" target="_blank" rel="noopener">'
       + esc(d.phon.link) + '</a></p>';
     modalBody.innerHTML = h;
@@ -869,6 +969,22 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     if (b) applyLang(b.getAttribute('data-lang'), true);
   });
 
+  function applyPy(mode, persist) {
+    if (mode !== 'short' && mode !== 'full') mode = 'full';
+    PYMODE = mode;
+    var pb = document.getElementById('pySwitch').querySelectorAll('button');
+    for (var i = 0; i < pb.length; i++) {
+      pb[i].setAttribute('aria-pressed', pb[i].getAttribute('data-mode') === mode ? 'true' : 'false');
+    }
+    if (persist) { try { localStorage.setItem(PY_KEY, mode); } catch (e) {} }
+    if (LAST.has) doSearch(LAST.text, false);
+  }
+
+  document.getElementById('pySwitch').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-mode]');
+    if (b) applyPy(b.getAttribute('data-mode'), true);
+  });
+
   var schemeBar = document.getElementById('schemeBar');
   schemeBar.addEventListener('click', openModal);
   schemeBar.addEventListener('keydown', function (e) {
@@ -898,6 +1014,9 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     ready = true;
     btn.disabled = false;
     initLang();
+    var saved = null;
+    try { saved = localStorage.getItem(PY_KEY); } catch (e) {}
+    applyPy(saved, false);
     if (preset) doSearch(preset, false);
     else input.focus();
   }).catch(function () {
