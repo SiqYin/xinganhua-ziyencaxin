@@ -5,7 +5,7 @@
 > Type Chinese characters (simplified or traditional, up to 30 at a time) and see both readings the Xi'an dialect has for them — **urban** and **southern suburb**: **Xi'an pinyin**, **IPA**, **tone**, and the dictionary's own notes. The interface comes in Simplified Chinese, Traditional Chinese, English and Japanese, chosen automatically from your system language and region.
 
 - **Live site**: <https://siqyin.github.io/xinganhua-ziyencaxin/>
-- **Character table**: 3,345 characters / 3,648 urban · 3,578 southern readings / 275 polyphonic / 102 with notes
+- **Character table**: urban 3,345 characters / 3,648 urban readings · 4,176 southern readings (3,932 southern characters, incl. 587 southern-only)
 - **Languages**: 简体中文 · 繁體中文 · English · 日本語 (automatic + manual)
 - **Colours**: black `#000000` (Qin) · white `#FFFFFF` · crimson `#9F363A` (Han)
 - **Font**: a subset of LXGW WenKai, self-hosted, no CDN
@@ -38,17 +38,17 @@
 
 Every reading on this site is written in **Xi'an pinyin**, one set each for the urban and the southern-suburb accent. A syllable is initial + final + tone digit, e.g. `ba1` 巴, `jyuen1` 軍; `bfeng4` 中 is the urban reading, the southern one is `zuong4`:
 
-- **Initials**: 24 shared (including the zero initial), plus `bf`, `pf` in the urban variety — 26 in all: `b p m f v bf pf d t n l z c s j q x zh ch sh r g k h ng`
-- **Finals**: 38 shared (15 open / 8 i-medial / 9 u-medial / 6 ü-medial), plus `uu`, `iai` in the urban variety — 40 in all (16 / 9 / 9 / 6)
+- **Initials**: 24 shared (including the zero initial), plus `bf`, `pf` in the urban variety (26 in all) and `rh` in the southern variety (25 in all): `b p m f v bf pf d t n l z c s rh j q x zh ch sh r g k h ng`
+- **Finals**: 38 shared (15 open / 8 i-medial / 9 u-medial / 6 ü-medial), plus `uu`, `iai` in the urban variety — 40 in all (16 / 9 / 9 / 6); plus `yua` in the southern variety — 39 in all (15 / 8 / 9 / 7)
 - **Four tones**: Yinping 21, Yangping 24, Shangsheng 53, Qusheng 44; the entering tone has merged into these four
 - **The tone digit follows the syllable** with no space: `bfeng4` 中, `jyuen1` 軍
 - **Syllable boundaries use an apostrophe**: `xi'ngan1` 西安 (otherwise it would split into xin 心 + gan 干)
 
 The four figures below cover the whole scheme. They are the same figures used in the input-method repository [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa), one set per language, identical in content:
 
-![Xi'an initials (urban 26; no bf, pf in the southern suburb)](figures/onsets.en.svg)
+![Xi'an initials (urban 26; southern 25 — adds rh, no bf, pf)](figures/onsets.en.svg)
 
-![Xi'an finals (urban 40; no uu, iai in the southern suburb)](figures/rhymes.en.svg)
+![Xi'an finals (urban 40; southern 39 — adds yua, no uu, iai)](figures/rhymes.en.svg)
 
 ![The four Xi'an tones](figures/tones.en.svg)
 
@@ -59,12 +59,14 @@ The four figures below cover the whole scheme. They are the same figures used in
 Xi'an speech is not uniform, and the site carries two sets of readings:
 
 - **Urban (城区音)**: the variety of the city centre.
-- **Southern suburb (南郊音)**: the variety of the southern suburbs (Gaoxin, Xiaozhai, Qujiang). Its initials and finals follow the **Weinan** pattern: 24 initials (no `bf`, `pf`) and 38 finals (no `uu`, `iai`); the tones are the same four.
+- **Southern suburb (南郊音)**: the variety of the southern suburbs (Gaoxin, Xiaozhai, Qujiang). Its initials and finals follow the **Weinan** pattern: 25 initials (`rh`, no `bf`, `pf`) and 39 finals (`yua`, no `uu`, `iai`); the tones are the same four.
 
 | Item | Urban | Southern suburb |
 |---|---|---|
-| Initials | 26 (incl. `bf`, `pf`) | 24 (no `bf`, `pf`) |
-| Finals | 40 (incl. `uu`, `iai`) | 38 (no `uu`, `iai`) |
+| Initials | 26 (incl. `bf`, `pf`) | 25 (incl. `rh`, no `bf`, `pf`) |
+| Finals | 40 (incl. `uu`, `iai`) | 39 (incl. `yua`, no `uu`, `iai`) |
+| rh | 入 `vu1`, 若 `vo1` | `rhu1`, `rhuo1` |
+| yua | — | 髽 `zyua4` |
 | Zhī-series closed | 豬 `bfu1`, 春 `pfen1` | `zu1`, `cuen1` |
 | Shū-series closed | 書 `fu1`, 水 `fei3` | `su1`, `suei3` |
 | Yù rhyme, grade 1 | 都 `du1`, 粗 `cu1` | `dou1`, `cou1` |
@@ -159,10 +161,10 @@ Implementation notes:
 
 The "Xi'an phonology & the input scheme" strip below the search area opens a pop-up (close with Esc or a click on the backdrop). Its content comes from the input-method repository's README:
 
-- the 26 initials (spelling / IPA / example), with `bf` and `pf` boxed in dashes as **urban-only**
-- the 40 finals, grouped by the four classes (open, i-medial, u-medial, ü-medial), with `uu` and `iai` likewise marked urban-only
+- the 27 initial cells (24 shared + urban-only `bf`, `pf` + southern-only `rh`, dashed boxes)
+- the 41 final cells (40 + southern-only `yua`), grouped by the four classes (open, i-medial, u-medial, ü-medial), with `uu` and `iai` marked urban-only and `yua` southern-only
 - the four tones and their values (the same in both varieties)
-- **urban vs southern suburb**: the number of initials and finals, the `bf`/`pf` and `uu`/`iai` correspondences, and the other regular differences
+- **urban vs southern suburb**: the number of initials and finals, `rh` and `yua`, the `bf`/`pf` and `uu`/`iai` correspondences, and the other regular differences
 - **differences from Mandarin pinyin**: identical items, nasalised finals with the same letters, a spelling-difference table (`in→ien`, `ong→uong`, `ü→yu`…), the initials and finals Xi'an has extra, characters whose initial does not match, and same digit position with different pitch
 - the pop-up text follows the UI language (Simplified / Traditional / English / Japanese)
 
@@ -185,13 +187,13 @@ MCPDict Xi'an table (IPA)
 
 | Item | Count |
 |---|---|
-| Characters | 3,345 |
-| Readings | 3,648 urban / 3,578 southern (one reading per line) |
-| Polyphonic characters | 275 |
+| Characters | urban 3,345 / southern 3,932 |
+| Readings | 3,648 urban / 4,176 southern (one reading per line) |
+| Polyphonic characters | urban 275 / southern 223 |
 | With notes | 102 |
 | Toneless syllables | 392 |
 
-The southern data has its own pipeline: `南郊音字表.tsv` (folded from the per-character annotations in `西安南郊音.xlsx`) → `tools/build_nanjiao_json.py` → `data/nanjiao.json`, same shape as `xian.json`. The folding rules (no `bf`/`pf`, no `uu`/`iai`) are described in section 13.
+The southern data has its own pipeline: `南郊音字表.tsv` (rebuilt 2026-11-20 from the 1,883-character adjudication sheet plus the shared readings) → `tools/build_nanjiao_json.py` → `data/nanjiao.json`, same shape as `xian.json`. The folding rules (no `bf`/`pf`, plus `rh`; no `uu`/`iai`, plus `yua`) are described in section 13.
 
 The simplified/traditional mapping uses OpenCC's `STCharacters.txt` / `TSCharacters.txt`, downloaded on demand at build time and not distributed with the repository.
 
@@ -286,7 +288,7 @@ Pushing to `main` triggers GitHub Actions (Settings → Pages → Source: GitHub
 ## 13. Data notes and TODO
 
 - Glyphs are traditional (as in the MCPDict source), with the simplified form shown alongside on each card for comparison
-- The southern readings are folded from the per-character annotations in `西安南郊音.xlsx` under two hard constraints — no `bf`/`pf`, no `uu`/`iai`: `bf→z`, `pf→c` (the final gains a u medial), `uu→e`, `iai→ie`. A few characters are overridden by review: 癌 `ngai2` only, 涯 `ya2`, 後 `hou4` only, 芍 `shuo2`
+- The southern readings are folded from the southern-suburb adjudication sheet (2026-11-20) plus the shared readings, under the same constraints — no `bf`/`pf` (urban-only), no `uu`/`iai` (urban-only), plus `rh` (urban v) and `yua`: `bf→z`, `pf→c` (the final gains a u medial), `uu→e`, `iai→ie`. A few characters are overridden by review: 癌 `ngai2` only, 涯 `ya2`, 後 `hou4` only, 芍 `shuo2`
 - Three syllables in the source have a sound but no character (`zou2`, `tai3`, `sao2`) and are not searchable
 - If a reading disagrees with your own dialect, `data/source.tsv` is the authority; edit it and rerun the build
 - TODO: reverse lookup by pinyin/IPA, query by tone, paginated browsing of the character table

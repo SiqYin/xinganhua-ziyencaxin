@@ -63,7 +63,7 @@ INITIALS = [
     ["f", "f", "夫", "fu1"], ["v", "v", "文", "ven2"],
     ["bf", "pf", "中", "bfeng4", 1], ["pf", "pfʰ", "窗", "pfang1", 1],
     ["d", "t", "的", "di1"], ["t", "tʰ", "他", "ta1"], ["n", "n", "你", "ni3"], ["l", "l", "立", "li1"],
-    ["z", "ʦ", "字", "zi4"], ["c", "ʦʰ", "茶", "ca2"], ["s", "s", "山", "san1"],
+    ["z", "ʦ", "字", "zi4"], ["c", "ʦʰ", "茶", "ca2"], ["s", "s", "山", "san1"], ["rh", "z", "入", "vu1", 2],
     ["j", "ʨ", "家", "jia1"], ["q", "ʨʰ", "妻", "qi1"], ["x", "ɕ", "西", "xi1"],
     ["zh", "tʂ", "站", "zan4"], ["ch", "tʂʰ", "吃", "chi1"], ["sh", "ʂ", "上", "shang4"], ["r", "ʐ", "人", "ren2"],
     ["g", "k", "狗", "gou3"], ["k", "kʰ", "口", "kou3"], ["h", "x", "花", "hua1"],
@@ -82,7 +82,7 @@ FINALS = [
     [["u", "u", "烏", "wu1"], ["ua", "ua", "花", "hua1"], ["uo", "uɤ", "窩", "wo1"], ["uai", "uai", "快", "kuai4"],
      ["uan", "uã", "彎", "wan1"], ["uei", "uei", "回", "huei2"], ["uen", "uẽ", "溫", "wen1"],
      ["uong", "uoɣ̃", "翁", "wong1"], ["uang", "uɑɣ̃", "汪", "wang1"]],
-    [["yu", "y", "魚", "yu2"], ["yue", "yɛ", "月", "yue1"], ["yuo", "yɤ", "樂", "yuo1"],
+    [["yu", "y", "魚", "yu2"], ["yue", "yɛ", "月", "yue1"], ["yuo", "yɤ", "樂", "yuo1"], ["yua", "ya", "髽", "zyua4", 2],
      ["yuan", "yã", "元", "yuan2"], ["yuen", "yẽ", "勻", "yuen2"], ["yuong", "yoɣ̃", "容", "yuong2"]],
 ]
 
@@ -146,7 +146,7 @@ def main() -> None:
     }
     OUT.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     hant = out["langs"]["hant"]
-    print("i18n.json 已生成：4 种语言；声母 %d（含城区音特有 2）、韵母 %d（含城区音特有 2）、声调 %d" % (
+    print("i18n.json 已生成：4 种语言；声母 %d（城区特有 bf、pf ＋ 南郊特有 rh）、韵母 %d（城区特有 uu、iai ＋ 南郊特有 yua）、声调 %d" % (
         len(INITIALS), sum(len(g) for g in FINALS), len(TONES)))
     print("繁体样例：", hant["h1"], "|", hant["search"], "|", hant["phon"]["initialsTitle"])
     print("日文样例：", out["langs"]["ja"]["h1"], "|", out["langs"]["ja"]["search"])

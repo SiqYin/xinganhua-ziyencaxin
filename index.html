@@ -10,7 +10,7 @@
 @font-face{
   font-family:"LXGW WenKai";
   font-style:normal;font-weight:400;font-display:swap;
-  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=11") format("woff2");
+  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=12") format("woff2");
 }
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -237,16 +237,18 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 .phon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:7px;margin:10px 0 4px}
 .phon-cell{
   background:var(--bg-card);border:1px solid var(--line);border-radius:8px;
-  padding:7px 8px;text-align:center;line-height:1.45;
+  padding:7px 8px;text-align:center;line-height:1.45;min-width:0;
 }
-.phon-cell .s{font-size:1.02em;font-weight:700;color:var(--ink)}
-.phon-cell .i{font-size:.72em;color:var(--muted)}
-.phon-cell .e{font-size:.76em;color:var(--faint);margin-top:1px}
+.phon-cell .s{font-size:1.02em;font-weight:700;color:var(--ink);overflow-wrap:anywhere}
+.phon-cell .i{font-size:.72em;color:var(--muted);overflow-wrap:anywhere}
+.phon-cell .e{font-size:.76em;color:var(--faint);margin-top:1px;overflow-wrap:anywhere;line-height:1.5}
 .phon-cell .e .r-cq{color:var(--crimson)}
 .phon-cell .e .r-nj{color:#2F5D8C}
 .phon-cell .e .rd{color:rgba(28,21,18,.35);margin:0 1px}
 .phon-cell.only{background:#F7ECEA;border:1px dashed rgba(159,54,58,.62)}
 .phon-cell.only .s{color:var(--crimson)}
+.phon-cell.only-nj{background:#EEF4FB;border:1px dashed rgba(47,93,140,.62)}
+.phon-cell.only-nj .s{color:#2F5D8C}
 .phon-legend{display:flex;align-items:center;gap:8px;margin:2px 0 0;font-size:.8em;color:var(--muted)}
 .phon-legend i{display:inline-block;width:16px;height:13px;background:#F7ECEA;border:1px dashed rgba(159,54,58,.62);border-radius:3px}
 .fin-group{margin-top:12px}
@@ -461,10 +463,10 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   /* ───────── 数据 ───────── */
   function loadData() {
     return Promise.all([
-      fetch('data/xian.json?v=11').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/nanjiao.json?v=11').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/variants.json?v=11').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/i18n.json?v=11').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      fetch('data/xian.json?v=12').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/nanjiao.json?v=12').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json?v=12').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/i18n.json?v=12').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     ]).then(function (out) {
       out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
       out[1].forEach(function (rec) { byCharNj.set(rec.character, rec); });
@@ -784,7 +786,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     } else {
       ex += esc(item[3]);
     }
-    return '<div class="phon-cell' + (item[4] ? ' only' : '') + '"><div class="s">' + esc(item[0]) + '</div>'
+    return '<div class="phon-cell' + (item[4] === 2 ? ' only-nj' : item[4] ? ' only' : '') + '"><div class="s">' + esc(item[0]) + '</div>'
       + '<div class="i">' + esc(item[1]) + '</div>'
       + '<div class="e">' + ex + '</div></div>';
   }
