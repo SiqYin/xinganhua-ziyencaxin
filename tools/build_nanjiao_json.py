@@ -29,13 +29,16 @@ def main() -> None:
         if not m:
             continue
         body, tone = m.group(1), m.group(2)
-        # 变体读音：来源列为「变体」，卡片上要标出来
+        # 变体读音：来源列为「变体」，卡片上要标出来；调整列带「·少」的再标「少」
         note = "变体" if src == "变体" else ""
-        rows.setdefault(ch, []).append({
+        entry = {
             "py": py, "ipa": ipa, "tone": tone_name,
             "val": VAL[tone], "val_sup": VAL[tone].translate(SUP),
             "note": note, "first": False,
-        })
+        }
+        if "·少" in adj:
+            entry["rare"] = True
+        rows.setdefault(ch, []).append(entry)
 
     order = []
     xian = ROOT / "data" / "xian.json"

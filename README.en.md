@@ -5,7 +5,7 @@
 > Type Chinese characters (simplified or traditional, up to 30 at a time) and see both readings the Xi'an dialect has for them — **urban** and **southern suburb**: **Xi'an pinyin**, **IPA**, **tone**, and the dictionary's own notes. The interface comes in Simplified Chinese, Traditional Chinese, English and Japanese, chosen automatically from your system language and region.
 
 - **Live site**: <https://siqyin.github.io/xinganhua-ziyencaxin/>
-- **Character table**: urban 3,345 characters / 3,648 urban readings · 4,534 southern readings (3,931 southern characters, incl. 586 southern-only)
+- **Character table**: urban 3,345 characters / 3,648 urban readings · 4,594 southern readings (4,065 southern characters, incl. 720 southern-only)
 - **Languages**: 简体中文 · 繁體中文 · English · 日本語 (automatic + manual)
 - **Colours**: black `#000000` (Qin) · white `#FFFFFF` · crimson `#9F363A` (Han)
 - **Font**: a subset of LXGW WenKai, self-hosted, no CDN
