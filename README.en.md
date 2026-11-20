@@ -165,7 +165,7 @@ The "Xi'an phonology & the input scheme" strip below the search area opens a pop
 - the 41 final cells (40 + southern-only `yua`), grouped by the four classes (open, i-medial, u-medial, ü-medial), with `uu` and `iai` marked urban-only and `yua` southern-only
 - the four tones and their values (the same in both varieties)
 - **urban vs southern suburb**: the number of initials and finals, `rh` and `yua`, the `bf`/`pf` and `uu`/`iai` correspondences, and the other regular differences
-- **differences from Mandarin pinyin**: identical items, nasalised finals with the same letters, a spelling-difference table (`in→ien`, `ong→uong`, `ü→yu`…), the initials and finals Xi'an has extra, characters whose initial does not match, and same digit position with different pitch
+- **differences from Mandarin pinyin**: identical initials, the nasalised finals, the urban-only initials and finals (the south adds `rh` and `yua`), characters whose initial does not match, and same digit position with different pitch
 - the pop-up text follows the UI language (Simplified / Traditional / English / Japanese)
 
 ---

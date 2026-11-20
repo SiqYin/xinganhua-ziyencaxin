@@ -56,69 +56,19 @@
    "diffTitle": "与普通话拼音的异同",
    "diff": [
     {
-     "h": "① 完全一样的",
-     "p": "b p m f d t n l g k h z c s zh ch sh r j q x 这些声母字母与读音跟普通话一致；a i u e er ai ei ao ou ia ie iao ian iang ua uo uai uan uang 这些韵母拼写也一致。零声母的 y / w 规则与普通话完全相同。"
+     "h": "① 声母完全一样的",
+     "p": "b p m f d t n l g k h z c s zh ch sh r j q x 这些声母字母与读音跟普通话一致（含送气/不送气的对立）。"
     },
     {
-     "h": "② 字母相同、音值不同",
-     "p": "所有 -n / -ng 结尾的韵母在西安话里读鼻化元音：an = ã、en = ẽ、ang = ɑɣ̃、eng = əɣ̃。字母一样，念法不一样。"
+     "h": "② 鼻化韵母",
+     "p": "鼻尾韵母 an en ang eng（及各呼变体）在西安话里读鼻化元音：an = ã、en = ẽ、ang = ɑɣ̃、eng = əɣ̃，不带 -n / -ng 韵尾。"
     },
     {
-     "h": "③ 拼写不同",
-     "head": [
-      "普通话",
-      "西安话拼音",
-      "例"
-     ],
-     "rows": [
-      [
-       "in",
-       "ien",
-       "心 xien1"
-      ],
-      [
-       "ing",
-       "ieng",
-       "明 mieng2"
-      ],
-      [
-       "iu",
-       "iou",
-       "牛 niou2"
-      ],
-      [
-       "ui",
-       "uei",
-       "回 huei2"
-      ],
-      [
-       "un",
-       "uen",
-       "溫 wen1"
-      ],
-      [
-       "ong",
-       "uong",
-       "東 duong1"
-      ],
-      [
-       "iong",
-       "yuong",
-       "容 yuong2"
-      ],
-      [
-       "ü / üe / üan / ün",
-       "yu / yue / yuan / yuen",
-       "魚 yu2、月 yue1、元 yuan2、軍 jyuen1"
-      ]
-     ]
-    },
-    {
-     "h": "④ 城区音多出来的（南郊音没有）",
+     "h": "③ 城区音多出来的（南郊音没有）",
      "p": "声母：bf、pf（豬 bfu1、窗 pfang1）。韵母：uu（胳 guu1）、iai（皆 jiai1）。bf、pf、uu、iai 南郊音读 z、c、e、ie：豬 zu1、窗 cuang1、胳 ge1、皆 jie1。南郊音另有 rh（声母）与 yua（韵母），城区音没有。"
     },
     {
-     "h": "⑤ 声母对不上的字（城区音／南郊音）",
+     "h": "④ 声母对不上的字（城区音／南郊音）",
      "head": [
       "普通话",
       "城区音",
@@ -172,7 +122,7 @@
      "cmp": true
     },
     {
-     "h": "⑥ 调号位置一样、调值不同",
+     "h": "⑤ 调号位置一样、调值不同",
      "p": "普通话的 ā á ǎ à 对应本方案的 1 2 3 4，但西安话的调值是 21 / 24 / 53 / 44。母语者按本地调值念即可，不必换算。"
     }
    ],
@@ -320,69 +270,19 @@
    "diffTitle": "Differences from Mandarin pinyin",
    "diff": [
     {
-     "h": "① Identical",
-     "p": "The initial letters b p m f d t n l g k h z c s zh ch sh r j q x stand for the same sounds as in Mandarin; the finals a i u e er ai ei ao ou ia ie iao ian iang ua uo uai uan uang are spelled the same. The y / w rules for zero-initial syllables are exactly Mandarin’s."
+     "h": "① Identical initials (type them as is)",
+     "p": "The initials `b p m f d t n l g k h z c s zh ch sh r j q x` stand for the same sounds as in Mandarin (including the aspirated/unaspirated pairs)."
     },
     {
-     "h": "② Same letters, different sound",
-     "p": "Every final ending in -n / -ng is a nasalised vowel in Xi’an: an = ã, en = ẽ, ang = ɑɣ̃, eng = əɣ̃. The spelling matches, the pronunciation does not."
+     "h": "② Nasalised finals",
+     "p": "The finals ending in `-n / -ng` are nasalised vowels in Xi'an: an = ã, en = ẽ, ang = ɑɣ̃, eng = əɣ̃, with no -n / -ng coda."
     },
     {
-     "h": "③ Different spelling",
-     "head": [
-      "Mandarin",
-      "Xi’an",
-      "Example"
-     ],
-     "rows": [
-      [
-       "in",
-       "ien",
-       "心 xien1"
-      ],
-      [
-       "ing",
-       "ieng",
-       "明 mieng2"
-      ],
-      [
-       "iu",
-       "iou",
-       "牛 niou2"
-      ],
-      [
-       "ui",
-       "uei",
-       "回 huei2"
-      ],
-      [
-       "un",
-       "uen",
-       "溫 wen1"
-      ],
-      [
-       "ong",
-       "uong",
-       "東 duong1"
-      ],
-      [
-       "iong",
-       "yuong",
-       "容 yuong2"
-      ],
-      [
-       "ü / üe / üan / ün",
-       "yu / yue / yuan / yuen",
-       "魚 yu2, 月 yue1, 元 yuan2, 軍 jyuen1"
-      ]
-     ]
-    },
-    {
-     "h": "④ Extras in the urban variety (absent from the southern suburb)",
+     "h": "③ Extras in the urban variety (absent from the southern suburb)",
      "p": "Initials: bf, pf (豬 bfu1, 窗 pfang1). Finals: uu (胳 guu1), iai (皆 jiai1). Of these, bf, pf, uu and iai are read z, c, e and ie in the southern suburb: 豬 zu1, 窗 cuang1, 胳 ge1, 皆 jie1. The southern variety has rh (initial) and yua (final), absent in the urban variety."
     },
     {
-     "h": "⑤ Characters whose initial does not match (urban / southern suburb)",
+     "h": "④ Characters whose initial does not match (urban / southern suburb)",
      "head": [
       "Mandarin",
       "Urban",
@@ -436,7 +336,7 @@
      "cmp": true
     },
     {
-     "h": "⑥ Same digit position, different pitch",
+     "h": "⑤ Same digit position, different pitch",
      "p": "Mandarin’s ā á ǎ à map to 1 2 3 4 here, but the Xi’an values are 21 / 24 / 53 / 44. Speakers simply use their local pitch."
     }
    ],
@@ -584,69 +484,19 @@
    "diffTitle": "普通話ピンインとの異同",
    "diff": [
     {
-     "h": "① まったく同じもの",
-     "p": "b p m f d t n l g k h z c s zh ch sh r j q x の声母は、字も音も普通話と一致します。韻母 a i u e er ai ei ao ou ia ie iao ian iang ua uo uai uan uang の綴りも同じです。零声母の y / w の規則も普通話とまったく同じです。"
+     "h": "① 声母は完全に一致",
+     "p": "b p m f d t n l g k h z c s zh ch sh r j q x の各声母は、字も音も普通話と同じです（有気・無気の対立も含む）。"
     },
     {
-     "h": "② 綴りは同じで音価が異なる",
-     "p": "-n / -ng で終わる韻母は、西安方言ではすべて鼻母音で読まれます：an = ã、en = ẽ、ang = ɑɣ̃、eng = əɣ̃。綴りは同じでも、発音は異なります。"
+     "h": "② 鼻母音の韻母",
+     "p": "-n / -ng で終わる韻母は、西安方言では鼻母音で読みます：an = ã、en = ẽ、ang = ɑɣ̃、eng = əɣ̃。-n / -ng の韻尾を伴いません。"
     },
     {
-     "h": "③ 綴りが異なる",
-     "head": [
-      "普通話",
-      "西安方言ピンイン",
-      "例"
-     ],
-     "rows": [
-      [
-       "in",
-       "ien",
-       "心 xien1"
-      ],
-      [
-       "ing",
-       "ieng",
-       "明 mieng2"
-      ],
-      [
-       "iu",
-       "iou",
-       "牛 niou2"
-      ],
-      [
-       "ui",
-       "uei",
-       "回 huei2"
-      ],
-      [
-       "un",
-       "uen",
-       "溫 wen1"
-      ],
-      [
-       "ong",
-       "uong",
-       "東 duong1"
-      ],
-      [
-       "iong",
-       "yuong",
-       "容 yuong2"
-      ],
-      [
-       "ü / üe / üan / ün",
-       "yu / yue / yuan / yuen",
-       "魚 yu2、月 yue1、元 yuan2、軍 jyuen1"
-      ]
-     ]
-    },
-    {
-     "h": "④ 城区音だけにあるもの（南郊音にはない）",
+     "h": "③ 城区音だけにあるもの（南郊音にはない）",
      "p": "声母：bf・pf（豬 bfu1、窗 pfang1）。韻母：uu（胳 guu1）、iai（皆 jiai1）。このうち bf・pf・uu・iai は南郊音で z・c・e・ie となります：豬 zu1、窗 cuang1、胳 ge1、皆 jie1。南郊音には rh（声母）と yua（韻母）があり、城区音にはありません。"
     },
     {
-     "h": "⑤ 声母が対応しない字（城区音／南郊音）",
+     "h": "④ 声母が対応しない字（城区音／南郊音）",
      "head": [
       "普通話",
       "城区音",
@@ -700,7 +550,7 @@
      "cmp": true
     },
     {
-     "h": "⑥ 声調番号の位置は同じで調値が異なる",
+     "h": "⑤ 声調番号の位置は同じで調値が異なる",
      "p": "普通話の ā á ǎ à は本方案の 1 2 3 4 に対応しますが、西安方言の調値は 21 / 24 / 53 / 44 です。話者は地元の調値でそのまま読めばよく、換算は不要です。"
     }
    ],
