@@ -46,7 +46,7 @@
 - **簡拼**：輸入端兼容 `in / ing / iu / ui / un / ung / yun / yung`（分別對應 `ien / ieng / iou / uei / uen / uong / yuen / yuong`；零聲母只放行 `yuen`、`yuong`）；調號不輸入。
 - **拼音反查**：輸入一個音節（全拼或簡拼，帶不帶調號都行）即可反查讀它的字；界面上有**全拼／簡拼顯示開關**，切到簡拼後卡片上的注音就用簡拼寫法（音標不變）。
 
-下面四張圖把方案講全（與輸入法倉庫 [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa) 用的是同一套圖，各語言版本內容一致）：
+下面五張圖把方案講全（與輸入法倉庫 [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa) 用的是同一套圖，各語言版本內容一致）：
 
 ![西安話聲母（城區音 26；南郊音 25——多 rh，無 bf、pf）](figures/onsets.hant.svg)
 
@@ -55,6 +55,8 @@
 ![西安話四聲](figures/tones.hant.svg)
 
 ![音節結構：聲母 + 韻母 + 調號](figures/syllable.hant.svg)
+
+![西安話簡拼對照圖（輸入端 8 條縮寫規則）](figures/abbrev.hant.svg)
 
 ### 城區音與南郊音
 
@@ -229,7 +231,7 @@ data/xian.json                前端數據：字頭 → 城區音讀音數組
 data/nanjiao.json             前端數據：字頭 → 南郊音讀音數組
 data/variants.json            簡繁映射：s2t（簡→繁）、t2s（繁→簡，用於並列顯示）
 data/i18n.json                四語文案 + 音系表數據（簡 / 繁 / 英 / 日）
-figures/                      西安話拼音方案配圖：四張圖 × 四種語言（與輸入法倉庫同一套）
+figures/                      西安話拼音方案配圖：五張圖 × 四種語言（與輸入法倉庫同一套）
 fonts/lxgw-wenkai.woff2       霞鶩文楷子集
 fonts/OFL.txt                 字體授權
 tools/build_data.py           源表 → JSON（OpenCC 表缺失時自動下載）

@@ -187,7 +187,9 @@
    "njNote": "除表中各项外，两支的声母、韵母与声调完全相同；「其他成组对应」一行是具体字音上的成组差异（知系合口、遇摄一等）。",
    "legend": "例字读音：前为城区音，后为南郊音（相同只写一个）；虚线框为城区音或南郊音特有。",
    "abbrevTitle": "允许的简化拼写",
-   "abbrevNote": "只在输入端兼容：ien→in、ieng→ing、iou→iu、uei→ui、uen→un、uong→ung、yuen→yun、yuong→yung；零声母只放行 yuen、yuong。字表与注音仍写全拼。"
+   "abbrevNote": "只在输入端兼容：ien→in、ieng→ing、iou→iu、uei→ui、uen→un、uong→ung、yuen→yun、yuong→yung；零声母只放行 yuen、yuong。字表与注音仍写全拼。",
+   "abbrevNew": "v1.1.2 新增",
+   "abbrevZero": "零声母"
   },
   "countOne": "共 1 读",
   "varCq": "城区音",
@@ -405,7 +407,9 @@
    "njNote": "Apart from the items above the two varieties share initials, finals and tones; the \"other regular sets\" row lists differences in individual characters (zhī-series closed syllables, the yù rhyme grade 1).",
    "legend": "Example readings: urban first, southern suburb second (written once when identical); dashed boxes mark items unique to one variety.",
    "abbrevTitle": "Allowed abbreviations",
-   "abbrevNote": "Input side only: ien→in, ieng→ing, iou→iu, uei→ui, uen→un, uong→ung, yuen→yun, yuong→yung; the zero initial only allows yuen and yuong. The character table and notation keep the full spelling."
+   "abbrevNote": "Input side only: ien→in, ieng→ing, iou→iu, uei→ui, uen→un, uong→ung, yuen→yun, yuong→yung; the zero initial only allows yuen and yuong. The character table and notation keep the full spelling.",
+   "abbrevNew": "new in v1.1.2",
+   "abbrevZero": "zero initial"
   },
   "countOne": "1 reading",
   "varCq": "Urban",
@@ -623,7 +627,9 @@
    "njNote": "表中の項目のほか、声母・韻母・声調は両系統で共通です。「その他の対応」の段は字音における規則的な違い（知系合口・遇摂一等）です。",
    "legend": "例字の読み：前が城区音、後ろが南郊音（同じ場合は一つだけ）。破線枠はどちらかの系統特有の項目。",
    "abbrevTitle": "許される略式綴り",
-   "abbrevNote": "入力側のみ：ien→in、ieng→ing、iou→iu、uei→ui、uen→un、uong→ung、yuen→yun、yuong→yung。零声母は yuen・yuong のみ許可。字表と表記は全拼のまま。"
+   "abbrevNote": "入力側のみ：ien→in、ieng→ing、iou→iu、uei→ui、uen→un、uong→ung、yuen→yun、yuong→yung。零声母は yuen・yuong のみ許可。字表と表記は全拼のまま。",
+   "abbrevNew": "v1.1.2 で追加",
+   "abbrevZero": "零声母"
   },
   "countOne": "読み 1 種",
   "varCq": "城区音",

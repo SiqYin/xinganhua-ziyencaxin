@@ -10,7 +10,7 @@
 @font-face{
   font-family:"LXGW WenKai";
   font-style:normal;font-weight:400;font-display:swap;
-  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=13") format("woff2");
+  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=14") format("woff2");
 }
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -247,11 +247,17 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 .phon-cell .e .r-nj{color:#2F5D8C}
 .phon-cell.only{background:#F7ECEA;border:1px dashed rgba(159,54,58,.62)}
 .phon-cell.only .s{color:var(--crimson)}
-.phon-cell.only-nj{background:#F1ECF9;border:1px dashed rgba(123,95,192,.62)}
-.phon-cell.only-nj .s{color:#7B5FC0}
+.phon-cell.only-nj{background:#fff1e0;border:1px dashed rgba(47,93,140,.62)}
+.phon-cell.only-nj .s{color:#2F5D8C}
 .phon-legend{display:flex;align-items:center;gap:8px;margin:2px 0 0;font-size:.8em;color:var(--muted)}
 .phon-legend i{display:inline-block;width:16px;height:13px;background:#F7ECEA;border:1px dashed rgba(159,54,58,.62);border-radius:3px}
-.phon-legend i.nj{background:#F1ECF9;border-color:rgba(123,95,192,.62)}
+.phon-legend i.nj{background:#fff1e0;border-color:rgba(47,93,140,.62)}
+.abbrev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:6px 0 2px}
+.abbrev-cell{display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 8px;border-radius:6px;background:#f7fafc;border:1px solid #c9d4de}
+.abbrev-cell .p{font-weight:600}
+.abbrev-cell .tag{font-size:.72em;color:var(--muted)}
+.abbrev-cell.is-new{background:#fff1e0;border-color:#e0973c}
+.abbrev-cell.is-new .tag{color:#b06f1e}
 .fin-group{margin-top:12px}
 .fin-label{font-size:.8em;letter-spacing:.08em;color:var(--crimson);margin-bottom:4px}
 .modal-body table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:.86em}
@@ -500,10 +506,10 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   /* ───────── 数据 ───────── */
   function loadData() {
     return Promise.all([
-      fetch('data/xian.json?v=13').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/nanjiao.json?v=13').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/variants.json?v=13').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/i18n.json?v=13').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      fetch('data/xian.json?v=14').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/nanjiao.json?v=14').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json?v=14').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/i18n.json?v=14').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     ]).then(function (out) {
       out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
       out[1].forEach(function (rec) { byCharNj.set(rec.character, rec); });
@@ -936,7 +942,16 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     });
 
     if (d.phon.abbrevTitle) {
-      h += '<h3>' + esc(d.phon.abbrevTitle) + '</h3><p>' + esc(d.phon.abbrevNote || '') + '</p>';
+      var ap = [];
+      for (var ai = 0; ai < SHORT_PAIRS.length; ai++) ap.push([SHORT_PAIRS[ai][1], SHORT_PAIRS[ai][0]]);
+      for (var aj = 0; aj < SHORT_ZERO.length; aj++) ap.push([SHORT_ZERO[aj][1], SHORT_ZERO[aj][0]]);
+      h += '<h3>' + esc(d.phon.abbrevTitle) + '</h3><div class="phon-grid abbrev-grid">'
+        + ap.map(function (p) {
+            var isNew = p[1] === 'ui', isZero = p[0] === 'yuen' || p[0] === 'yuong';
+            var tag = isNew ? (d.phon.abbrevNew || '') : isZero ? (d.phon.abbrevZero || '') : '';
+            return '<div class="abbrev-cell' + (isNew ? ' is-new' : '') + '"><span class="p">' + esc(p[0]) + ' → ' + esc(p[1]) + '</span>'
+              + (tag ? '<span class="tag">' + esc(tag) + '</span>' : '') + '</div>';
+          }).join('') + '</div><p class="phon-note">' + esc(d.phon.abbrevNote || '') + '</p>';
     }
     h += '<p class="modal-link"><a href="https://github.com/SiqYin/xinganhua-fuvufa" target="_blank" rel="noopener">'
       + esc(d.phon.link) + '</a></p>';

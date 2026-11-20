@@ -46,7 +46,7 @@ Every reading on this site is written in **Xi'an pinyin**, one set each for the 
 - **Abbreviations (input side only)**: `in / ing / iu / ui / un / ung / yun / yung` stand for `ien / ieng / iou / uei / uen / uong / yuen / yuong` (the zero initial only allows `yuen`, `yuong`); the tone digit is not typed.
 - **Pinyin reverse lookup**: type one syllable (full or abbreviated spelling, with or without the tone digit) to find the characters read that way; the page has a **full/short display switch** — in the short mode the cards show abbreviated spellings (the IPA stays unchanged).
 
-The four figures below cover the whole scheme. They are the same figures used in the input-method repository [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa), one set per language, identical in content:
+The five figures below cover the whole scheme. They are the same figures used in the input-method repository [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa), one set per language, identical in content:
 
 ![Xi'an initials (urban 26; southern 25 — adds rh, no bf, pf)](figures/onsets.en.svg)
 
@@ -55,6 +55,8 @@ The four figures below cover the whole scheme. They are the same figures used in
 ![The four Xi'an tones](figures/tones.en.svg)
 
 ![Syllable structure: initial + final + tone](figures/syllable.en.svg)
+
+![Short forms for input: the 8 abbreviations](figures/abbrev.en.svg)
 
 ### Urban and southern-suburb varieties
 

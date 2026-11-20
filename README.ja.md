@@ -46,7 +46,7 @@
 - **簡拼**：入力側では `in / ing / iu / ui / un / ung / yun / yung` が使えます（それぞれ `ien / ieng / iou / uei / uen / uong / yuen / yuong` に対応。零声母は `yuen`・`yuong` のみ）。声調番号は入力しません。
 - **ピンインからの逆引き**：音節を 1 つ入力（全拼／簡拼、声調番号ありなし）すると、その読みを持つ字を検索できます。ページには**全拼／簡拼の表示切替**があり、簡拼に切り替えるとカードの注音が略式綴りになります（音声記号は変わりません）。
 
-以下の四枚で方案の全体が分かります。入力法リポジトリ [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa) と同じ図を言語ごとに用意したもので、内容は各言語版で一致しています：
+以下の五枚で方案の全体が分かります。入力法リポジトリ [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa) と同じ図を言語ごとに用意したもので、内容は各言語版で一致しています：
 
 ![西安方言の声母（城区音 26；南郊音 25——rh あり、bf・pf なし）](figures/onsets.ja.svg)
 
@@ -55,6 +55,8 @@
 ![西安方言の四声](figures/tones.ja.svg)
 
 ![音節の構造：声母＋韻母＋声調番号](figures/syllable.ja.svg)
+
+![入力側の略式綴り（8 つのルール）](figures/abbrev.ja.svg)
 
 ### 城区音と南郊音
 
@@ -229,7 +231,7 @@ data/xian.json                フロント用データ：字頭 → 城区音の
 data/nanjiao.json             フロント用データ：字頭 → 南郊音の読みの配列
 data/variants.json            簡繁の対応：s2t（簡→繁）、t2s（繁→簡、併記用）
 data/i18n.json                四言語のテキスト＋音韻表データ（簡 / 繁 / 英 / 日）
-figures/                      方案の図：四枚 × 四言語（入力法リポジトリと同じセット）
+figures/                      方案の図：五枚 × 四言語（入力法リポジトリと同じセット）
 fonts/lxgw-wenkai.woff2       霞鹜文楷のサブセット
 fonts/OFL.txt                 フォントのライセンス
 tools/build_data.py           原表 → JSON（OpenCC の表がなければ自動取得）
