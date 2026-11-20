@@ -5,7 +5,7 @@
 > Type Chinese characters (simplified or traditional, up to 30 at a time) and see both readings the Xi'an dialect has for them — **urban** and **southern suburb**: **Xi'an pinyin**, **IPA**, **tone**, and the dictionary's own notes. The interface comes in Simplified Chinese, Traditional Chinese, English and Japanese, chosen automatically from your system language and region.
 
 - **Live site**: <https://siqyin.github.io/xinganhua-ziyencaxin/>
-- **Character table**: urban 3,345 characters / 3,648 urban readings · 4,175 southern readings (3,931 southern characters, incl. 586 southern-only)
+- **Character table**: urban 3,345 characters / 3,648 urban readings · 4,534 southern readings (3,931 southern characters, incl. 586 southern-only)
 - **Languages**: 简体中文 · 繁體中文 · English · 日本語 (automatic + manual)
 - **Colours**: black `#000000` (Qin) · white `#FFFFFF` · crimson `#9F363A` (Han)
 - **Font**: a subset of LXGW WenKai, self-hosted, no CDN
@@ -45,7 +45,7 @@ Every reading on this site is written in **Xi'an pinyin**, one set each for the 
 - **Abbreviations (input side only)**: `in / ing / iu / ui / un / ung / yun / yung` stand for `ien / ieng / iou / uei / uen / uong / yuen / yuong` (the zero initial only allows `yuen`, `yuong`); the tone digit is not typed.
 - **Pinyin reverse lookup**: type one syllable (full or abbreviated spelling, with or without the tone digit) to find the characters read that way; the page has a **full/short display switch** — in the short mode the cards show abbreviated spellings (the IPA stays unchanged).
 
-The five figures below cover the whole scheme. They are the same figures used in the input-method repository [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa), one set per language, identical in content:
+The six figures below cover the whole scheme. They are the same figures used in the input-method repository [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa), one set per language, identical in content:
 
 ![Xi'an initials (urban 26; southern 25 — adds rh, no bf, pf)](figures/onsets.en.svg)
 
@@ -58,6 +58,11 @@ Xi'an tone sandhi is mainly a change of the first syllable, in two types: when t
 ![Syllable structure: initial + final + tone](figures/syllable.en.svg)
 
 ![Short forms for input: the 8 abbreviations](figures/abbrev.en.svg)
+
+![Southern-suburb variants](figures/variant.en.svg)
+
+**Southern-suburb variants**：Where the southern-suburb initials z, c, s and rh combine with u, the retroflex zh, ch, sh and r are also possible; and where sh combines with u (shu) there is in addition an f variant. These variants are noted only for characters whose urban reading has bf, pf, f or v — for example 水 is `suei3` in the southern suburb, with the variants `shuei3` and `fei3`. A variant keeps the tone of the base reading, gets its own row in the table and is marked “variant”.
+
 
 ### Urban and southern-suburb varieties
 

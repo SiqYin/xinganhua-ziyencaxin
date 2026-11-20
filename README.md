@@ -5,7 +5,7 @@
 > 输入汉字（简繁皆可，一次最多 30 字），查它在西安话里的两套读法——**城区音**与**南郊音**：**西安话拼音**、**国际音标**、**声调**，以及词典原有的释注。界面有简、繁、英、日四种语言，并按系统语言与接入地区自动判定。
 
 - **线上地址**：<https://siqyin.github.io/xinganhua-ziyencaxin/>
-- **字表**：城区字头 3,345 ／ 城区音 3,648 条 · 南郊音 4,350 条（南郊字头 4,065，含渭南独有等新增 720 字）
+- **字表**：城区字头 3,345 ／ 城区音 3,648 条 · 南郊音 4,534 条（南郊字头 4,065，含渭南独有等新增 720 字）
 - **语言**：简体中文 · 繁體中文 · English · 日本語（自动判定 + 手选）
 - **配色**：黑 `#000000`（秦）· 白 `#FFFFFF` · 绛红 `#9F363A`（汉）
 - **字体**：霞鹜文楷子集，自托管，不依赖 CDN
@@ -45,7 +45,7 @@
 - **简拼**：输入端兼容 `in / ing / iu / ui / un / ung / yun / yung`（分别对应 `ien / ieng / iou / uei / uen / uong / yuen / yuong`；零声母只放行 `yuen`、`yuong`）；调号不输入。
 - **拼音反查**：输入一个音节（全拼或简拼，带不带调号都行）即可反查读它的字；界面上有**全拼／简拼显示开关**，切到简拼后卡片上的注音就用简拼写法（音标不变）。
 
-下面五张图把方案讲全（与输入法仓库 [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa) 用的是同一套图，各语言版本内容一致）：
+下面六张图把方案讲全（与输入法仓库 [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa) 用的是同一套图，各语言版本内容一致）：
 
 ![西安话声母（城区音 26；南郊音 25——多 rh，无 bf、pf）](figures/onsets.hans.svg)
 
@@ -58,6 +58,11 @@
 ![音节结构：声母 + 韵母 + 调号](figures/syllable.hans.svg)
 
 ![西安话简拼对照图（输入端 8 条缩写规则）](figures/abbrev.hans.svg)
+
+![南郊音的变体](figures/variant.hans.svg)
+
+**南郊音变体**：南郊音 z、c、s、rh 四组声母与 u 相接时，分别存在 zhu、chu、shu、ru 的对应翘舌变体；其中 sh 与 u 相拼（shu）另有 f 声母变体。上述变体只在城区音读 bf、pf、f、v 的字上加注，例如「水」南郊音 `suei3` 另有变体 `shuei3`、`fei3`；变体与基本读音同调，字表中另立一行并注明「变体」。
+
 
 ### 城区音与南郊音
 
@@ -190,7 +195,7 @@ data/xian.json                前端数据：字头 → 城区音读音数组
 data/nanjiao.json             前端数据：字头 → 南郊音读音数组
 data/variants.json            简繁映射：s2t（简→繁）、t2s（繁→简，用于并列显示）
 data/i18n.json                四语文案 + 音系表数据（简 / 繁 / 英 / 日）
-figures/                      西安话拼音方案配图：五张图 × 四种语言（与输入法仓库同一套）
+figures/                      西安话拼音方案配图：六张图 × 四种语言（与输入法仓库同一套）
 fonts/lxgw-wenkai.woff2       霞鹜文楷子集
 fonts/OFL.txt                 字体授权
 tools/build_data.py           源表 → JSON（OpenCC 表缺失时自动下载）

@@ -10,7 +10,7 @@
 @font-face{
   font-family:"LXGW WenKai";
   font-style:normal;font-weight:400;font-display:swap;
-  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=16") format("woff2");
+  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=17") format("woff2");
 }
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -159,6 +159,11 @@ main{flex:1 0 auto}
   background:#F8F0ED;border-left:2px solid rgba(159,54,58,.42);border-radius:0 6px 6px 0;
 }
 .note .lbl{color:var(--crimson);margin-right:5px}
+.tag-var{
+  font-size:.72em;letter-spacing:.08em;color:#2F5D8C;
+  padding:1px 8px;border:1px dashed rgba(47,93,140,.55);border-radius:999px;background:rgba(47,93,140,.07);
+  margin-left:6px;vertical-align:middle;
+}
 
 .missing{border-left-color:rgba(28,21,18,.24)}
 .missing .glyph .main{color:var(--faint)}
@@ -244,14 +249,14 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 .phon-cell .e{font-size:.76em;color:var(--faint);margin-top:1px;line-height:1.5}
 .phon-cell .e + .e{margin-top:0}
 .phon-cell .e .r-cq{color:var(--crimson)}
-.phon-cell .e.r-nj{color:#7B5FC0}
+.phon-cell .e.r-nj{color:#2F5D8C}
 .phon-cell.only{background:#F7ECEA;border:1px dashed rgba(159,54,58,.62)}
 .phon-cell.only .s{color:var(--crimson)}
-.phon-cell.only-nj{background:#fff1e0;border:1px dashed #7B5FC0}
-.phon-cell.only-nj .s{color:#7B5FC0}
+.phon-cell.only-nj{background:#fff1e0;border:1px dashed #2F5D8C}
+.phon-cell.only-nj .s{color:#2F5D8C}
 .phon-legend{display:flex;align-items:center;gap:8px;margin:2px 0 0;font-size:.8em;color:var(--muted)}
 .phon-legend i{display:inline-block;width:16px;height:13px;background:#F7ECEA;border:1px dashed rgba(159,54,58,.62);border-radius:3px}
-.phon-legend i.nj{background:#fff1e0;border-color:#7B5FC0}
+.phon-legend i.nj{background:#fff1e0;border-color:#2F5D8C}
 .abbrev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:6px 0 2px}
 .abbrev-cell{display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 8px;border-radius:6px;background:#f7fafc;border:1px solid #c9d4de}
 .abbrev-cell .p{font-weight:600}
@@ -506,10 +511,10 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   /* ───────── 数据 ───────── */
   function loadData() {
     return Promise.all([
-      fetch('data/xian.json?v=16').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/nanjiao.json?v=16').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/variants.json?v=16').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/i18n.json?v=16').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      fetch('data/xian.json?v=17').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/nanjiao.json?v=17').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json?v=17').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/i18n.json?v=17').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     ]).then(function (out) {
       out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
       out[1].forEach(function (rec) { byCharNj.set(rec.character, rec); });
@@ -711,8 +716,9 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     html += '<span class="py">' + esc(pyShown.slice(0, -1)) + '<span class="tn">' + esc(pyShown.slice(-1)) + '</span></span>';
     html += '<span class="ipa">[' + esc(r.ipa) + '<span class="tone">' + esc(r.val_sup) + '</span>]</span>';
     html += '<span class="tone-tag">' + esc(toneName(r.tone)) + ' ' + esc(r.val) + '</span>';
+    if (r.note === '变体') html += '<span class="tag-var">' + esc(t('variantTag')) + '</span>';
     html += '</div>';
-    if (r.note) {
+    if (r.note && r.note !== '变体') {
       html += '<div class="note"><span class="lbl">' + esc(t('noteLabel')) + '</span>' + esc(localNote(r.note)) + '</div>';
     }
     return html + '</div>';
@@ -939,6 +945,10 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
         }).join('') + '</tbody></table>';
     }
     if (d.phon.njNote) h += phonNote(d.phon.njNote);
+
+    if (d.phon.njVariantNote) {
+      h += '<h4>' + esc(d.phon.njVariantTitle || '') + '</h4><p>' + d.phon.njVariantNote + '</p>';
+    }
 
     h += '<h3>' + esc(d.phon.diffTitle) + '</h3>';
     (d.phon.diff || []).forEach(function (block) {

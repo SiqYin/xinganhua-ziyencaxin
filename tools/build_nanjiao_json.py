@@ -24,15 +24,17 @@ def main() -> None:
     for n, line in enumerate(SRC.read_text(encoding="utf-8").splitlines()):
         if not line.strip() or line.startswith("#"):
             continue
-        ch, py, _t, tone_name, ipa, _ipa_tone, _src, _adj = line.split("\t")
+        ch, py, _t, tone_name, ipa, _ipa_tone, src, adj = line.split("\t")
         m = re.match(r"^(.*?)([0-9])$", py)
         if not m:
             continue
         body, tone = m.group(1), m.group(2)
+        # 变体读音：来源列为「变体」，卡片上要标出来
+        note = "变体" if src == "变体" else ""
         rows.setdefault(ch, []).append({
             "py": py, "ipa": ipa, "tone": tone_name,
             "val": VAL[tone], "val_sup": VAL[tone].translate(SUP),
-            "note": "", "first": False,
+            "note": note, "first": False,
         })
 
     order = []
