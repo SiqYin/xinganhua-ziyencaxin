@@ -10,7 +10,7 @@
 @font-face{
   font-family:"LXGW WenKai";
   font-style:normal;font-weight:400;font-display:swap;
-  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=14") format("woff2");
+  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=15") format("woff2");
 }
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -506,10 +506,10 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   /* ───────── 数据 ───────── */
   function loadData() {
     return Promise.all([
-      fetch('data/xian.json?v=14').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/nanjiao.json?v=14').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/variants.json?v=14').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/i18n.json?v=14').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      fetch('data/xian.json?v=15').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/nanjiao.json?v=15').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json?v=15').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/i18n.json?v=15').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     ]).then(function (out) {
       out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
       out[1].forEach(function (rec) { byCharNj.set(rec.character, rec); });
@@ -952,6 +952,9 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
             return '<div class="abbrev-cell' + (isNew ? ' is-new' : '') + '"><span class="p">' + esc(p[0]) + ' → ' + esc(p[1]) + '</span>'
               + (tag ? '<span class="tag">' + esc(tag) + '</span>' : '') + '</div>';
           }).join('') + '</div><p class="phon-note">' + esc(d.phon.abbrevNote || '') + '</p>';
+    }
+    if (d.phon.sourceTitle) {
+      h += '<h3>' + esc(d.phon.sourceTitle) + '</h3><p>' + (d.phon.sources || '') + '</p>';
     }
     h += '<p class="modal-link"><a href="https://github.com/SiqYin/xinganhua-fuvufa" target="_blank" rel="noopener">'
       + esc(d.phon.link) + '</a></p>';

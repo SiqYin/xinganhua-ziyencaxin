@@ -189,7 +189,9 @@
    "abbrevTitle": "允许的简化拼写",
    "abbrevNote": "只在输入端兼容：ien→in、ieng→ing、iou→iu、uei→ui、uen→un、uong→ung、yuen→yun、yuong→yung；零声母只放行 yuen、yuong。字表与注音仍写全拼。",
    "abbrevNew": "v1.1.2 新增",
-   "abbrevZero": "零声母"
+   "abbrevZero": "零声母",
+   "sourceTitle": "字音来源",
+   "sources": "西安话、渭南话、临潼话、华县话四个音档取自 MCPDict 项目：<a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv\" target=\"_blank\" rel=\"noopener\">西安话音档</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv\" target=\"_blank\" rel=\"noopener\">渭南话音档</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv\" target=\"_blank\" rel=\"noopener\">临潼话音档</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv\" target=\"_blank\" rel=\"noopener\">华县话音档</a>。南郊话音档没有现成字表可依：以西安话、渭南话、临潼话、华县话音档等为基底，参照知乎上关于南郊音、东郊音平翘舌归并情况的讨论，并与本人及家人的口音逐字校对整理而成，因此<b>仅供参考</b>。"
   },
   "countOne": "共 1 读",
   "varCq": "城区音",
@@ -409,7 +411,9 @@
    "abbrevTitle": "Allowed abbreviations",
    "abbrevNote": "Input side only: ien→in, ieng→ing, iou→iu, uei→ui, uen→un, uong→ung, yuen→yun, yuong→yung; the zero initial only allows yuen and yuong. The character table and notation keep the full spelling.",
    "abbrevNew": "new in v1.1.2",
-   "abbrevZero": "zero initial"
+   "abbrevZero": "zero initial",
+   "sourceTitle": "Sound-data sources",
+   "sources": "The Xi'an, Weinan, Lintong and Huaxian sound-data tables come from the MCPDict project: <a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv\" target=\"_blank\" rel=\"noopener\">Xi'an table</a>, <a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv\" target=\"_blank\" rel=\"noopener\">Weinan table</a>, <a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv\" target=\"_blank\" rel=\"noopener\">Lintong table</a>, <a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv\" target=\"_blank\" rel=\"noopener\">Huaxian table</a>. There is no ready-made table for the southern-suburb variety: it was compiled on the basis of the Xi'an, Weinan, Lintong and Huaxian tables, with reference to Zhihu discussions on how the flat and retroflex sibilants merge in the southern- and eastern-suburb accents, and checked character by character against the speech of the author and their family — therefore <b>for reference only</b>."
   },
   "countOne": "1 reading",
   "varCq": "Urban",
@@ -629,7 +633,9 @@
    "abbrevTitle": "許される略式綴り",
    "abbrevNote": "入力側のみ：ien→in、ieng→ing、iou→iu、uei→ui、uen→un、uong→ung、yuen→yun、yuong→yung。零声母は yuen・yuong のみ許可。字表と表記は全拼のまま。",
    "abbrevNew": "v1.1.2 で追加",
-   "abbrevZero": "零声母"
+   "abbrevZero": "零声母",
+   "sourceTitle": "字音データの出所",
+   "sources": "西安話・渭南話・臨潼話・華県話のデータ表は MCPDict プロジェクトによるものです：<a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv\" target=\"_blank\" rel=\"noopener\">西安話データ表</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv\" target=\"_blank\" rel=\"noopener\">渭南話データ表</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv\" target=\"_blank\" rel=\"noopener\">臨潼話データ表</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv\" target=\"_blank\" rel=\"noopener\">華県データ表</a>。南郊話に既成の字表はありません。西安話・渭南話・臨潼話・華県話などのデータ表を下敷きに、南郊音・東郊音の平翘舌（平舌／翘舌声母）の帰属をめぐる知乎（Zhihu）の議論を参照し、筆者自身と家族の発音で一字ずつ照合して整理したものであるため、<b>参考程度にとどめてください</b>。"
   },
   "countOne": "読み 1 種",
   "varCq": "城区音",
