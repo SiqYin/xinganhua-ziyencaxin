@@ -470,10 +470,10 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   function shortBody(body) {
     for (var i = 0; i < SHORT_PAIRS.length; i++) {
       var s = SHORT_PAIRS[i][0], f = SHORT_PAIRS[i][1];
-      if (body.length > s.length && body.slice(-s.length) === s) return body.slice(0, body.length - s.length) + f;
+      if (body.length > f.length && body.slice(-f.length) === f) return body.slice(0, body.length - f.length) + s;
     }
     for (var j = 0; j < SHORT_ZERO.length; j++) {
-      if (body === SHORT_ZERO[j][0]) return SHORT_ZERO[j][1];
+      if (body === SHORT_ZERO[j][1]) return SHORT_ZERO[j][0];
     }
     return body;
   }
