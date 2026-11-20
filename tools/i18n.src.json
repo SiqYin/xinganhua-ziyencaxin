@@ -26,7 +26,7 @@
   "legendEx": "例 <b>bfeng4</b> 中 · <b>jyuen1</b> 軍",
   "lead": "输入一个或多个汉字试试，比如 <b>西安话</b>、<b>着</b>、<b>鵝</b>",
   "schemeTitle": "西安话音系与输入方案",
-  "schemeDesc": "两支共用 24 声母 / 38 韵母；城区音另有 bf、pf 与 uu、iai，南郊音另有 rh 与 yua",
+  "schemeDesc": "两支共用 24 声母 / 38 韵母；城区音另有 bf、pf 与 uu、iai，南郊音另有 rh",
   "schemeMore": "查看 →",
   "modalTitle": "西安话音系与输入方案",
   "modalClose": "关闭",
@@ -48,11 +48,10 @@
   "phon": {
    "intro": "西安话（陕西方言·关中片）分<b>城区音</b>与<b>南郊音</b>两支，是同一方言的两种口音，不是两套话：<b>24 个声母、38 个韵母、四个声调</b>两支共用；城区音另有 <b>bf、pf</b> 两个声母和 <b>uu、iai</b> 两个韵母（26 声母、40 韵母），南郊音另有 <b>rh</b> 声母（25 声母、38 韵母）。下表中<b>虚线框</b>出的项即各支特有（红框城区音、紫框南郊音）。",
    "initialsTitle": "声母：共用 24；城区音 26（＋bf、pf）；南郊音 25（＋rh）",
-   "initialsNote": "bf、pf 只见于城区音：南郊音改读 z、c，韵母同时增生 u 介音（豬 bfu1→zu1、春 pfen1→cuen1）。rh 只见于南郊音：城区音读 v（入 vu1→rhu1、若 vo1→rhuo1）。其余 24 个声母两支相同。",
    "finalsTitle": "韵母 40（共用 38 ＋ 城区音特有 2）",
-   "finalsNote": "uu、iai 只见于城区音：南郊音把 uu 并入 e（圪 guu1→ge1），iai 并入 ie（階 jiai1→jie1）。其余 38 个韵母两支相同。",
    "tonesTitle": "声调",
-   "tonesNote": "四声两支相同：阴平 21、阳平 24、上声 53、去声 44；入声都已派入这四调。",
+   "sandhiTitle": "连读变调",
+   "sandhiNote": "西安话的连读变调主要是前字变调，分为两类：连续两字为一声（阴平）21-21 时，第一个一声字改读二声（阳平）24-21；连续两字为三声（上声）53-53 时，第一个三声字改读一声（阴平）21-53。",
    "diffTitle": "与普通话拼音的异同",
    "diff": [
     {
@@ -184,11 +183,9 @@
      ]
     ]
    },
-   "njNote": "除表中各项外，两支的声母、韵母与声调完全相同；「其他成组对应」一行是具体字音上的成组差异（知系合口、遇摄一等）。",
    "legend": "例字读音：前为城区音，后为南郊音（相同只写一个）；虚线框为城区音或南郊音特有。",
    "abbrevTitle": "允许的简化拼写",
    "abbrevNote": "只在输入端兼容：ien→in、ieng→ing、iou→iu、uei→ui、uen→un、uong→ung、yuen→yun、yuong→yung；零声母只放行 yuen、yuong。字表与注音仍写全拼。",
-   "abbrevNew": "v1.1.2 新增",
    "abbrevZero": "零声母",
    "sourceTitle": "字音来源",
    "sources": "西安话、渭南话、临潼话、华县话四个音档取自 MCPDict 项目：<a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv\" target=\"_blank\" rel=\"noopener\">西安话音档</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv\" target=\"_blank\" rel=\"noopener\">渭南话音档</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv\" target=\"_blank\" rel=\"noopener\">临潼话音档</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv\" target=\"_blank\" rel=\"noopener\">华县话音档</a>。南郊话音档没有现成字表可依：以西安话、渭南话、临潼话、华县话音档等为基底，参照知乎上关于南郊音、东郊音平翘舌归并情况的讨论，并与本人及家人的口音逐字校对整理而成，因此<b>仅供参考</b>。"
@@ -199,11 +196,11 @@
   "njMissing": "南郊音暂缺",
   "aboutTitle": "西安市的口音分区",
   "aboutParas": [
-   "当代西安市以西安古城区为中心，按方位分为<b>东郊、西郊、南郊、北郊</b>。西安话属<b>中原官话—关中片—东府方言</b>：城区、北郊、西郊属<b>西安型</b>；南郊、东郊、长安区、临潼，乃至以东到渭南市境内，都属<b>渭南型</b>。",
-   "两型在平翘舌的分布、具体字音等方面有若干区别。以往对西安话的描述多聚焦于城区方言，对当代西安市中心高新—小寨—曲江一线实际强势的南郊音反而关注较少。本站因此补上南郊音，与城区音并排给出。"
+   "当代西安市以古城区为中心，按方位分为<b>东郊、西郊、南郊、北郊</b>。西安话属于<b>中原官话-关中片-东府方言</b>。",
+   "西安话内部有差异，总体上依照北方官话平翘舌演变类型可以分为两类：<b>西安型</b>和<b>渭南型</b>。总体上讲，城区北郊、西郊属于<b>西安型</b>，亦是以往西安方言之代表。南郊、东郊、长安、临潼乃至渭南等地为<b>渭南型</b>。两者主要在平翘舌演变上有显著差异。西安型和渭南型可以大致划分西安话两种方言的不同类型，但并非有明确边界的分区，如某些南郊、东郊的方言点，平翘舌分布更倾向于西安型；某些西郊、北郊的方言点，平翘舌分布更倾向于渭南型等。",
+   "本站除给出以往代表西安方言的<b>城区音</b>外，另外追加反映西安话南郊方言（高新-小寨-曲江一线雁塔区方言）的<b>南郊音</b>。南郊音参照<a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv\" target=\"_blank\" rel=\"noopener\">西安城区音</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv\" target=\"_blank\" rel=\"noopener\">渭南话</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv\" target=\"_blank\" rel=\"noopener\">临潼话</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv\" target=\"_blank\" rel=\"noopener\">华县话</a>等音档为基础逐字厘定，仅供参考；如有错谬，敬请批评指正。"
   ],
   "aboutCap": "西安口音分区示意（城区即明城墙以内，非行政边界）",
-  "aboutNote": "南郊音据西安城区音、渭南音，以及本站作者本人与亲属的口音厘定，仅供参考；如有错谬，敬请批评指正。",
   "map": {
    "city": "城区",
    "north": "北郊",
@@ -248,7 +245,7 @@
   "legendEx": "e.g. <b>bfeng4</b> 中 · <b>jyuen1</b> 軍",
   "lead": "Try one or more characters, e.g. <b>西安话</b>, <b>着</b>, <b>鵝</b>",
   "schemeTitle": "Xi’an phonology & the input scheme",
-  "schemeDesc": "24 initials / 38 finals shared; urban adds bf, pf, uu, iai; southern adds rh, yua",
+  "schemeDesc": "24 initials / 38 finals shared; urban adds bf, pf, uu, iai; southern adds rh",
   "schemeMore": "Open →",
   "modalTitle": "Xi’an phonology & the input scheme",
   "modalClose": "Close",
@@ -270,11 +267,10 @@
   "phon": {
    "intro": "Xi'an speech (Guanzhong group) has two varieties, <b>urban</b> and <b>southern suburb</b> — two accents of one dialect, not two languages. <b>24 initials, 38 finals and four tones</b> are shared; the urban variety adds <b>bf, pf</b> (initials) and <b>uu, iai</b> (finals) — 26 initials, 40 finals; the southern variety adds <b>rh</b> (initial) — 25 initials, 38 finals. Dashed boxes below mark each variety's own items.",
    "initialsTitle": "Initials: 24 shared; urban 26 (+bf, pf); southern 25 (+rh)",
-   "initialsNote": "bf and pf occur only in the urban variety: the southern suburb reads z and c, adding a u medial to the final (豬 bfu1→zu1, 春 pfen1→cuen1). rh occurs only in the southern variety: the urban reading has v (入 vu1→rhu1, 若 vo1→rhuo1). The other 24 are the same in both.",
    "finalsTitle": "40 finals (38 shared + 2 urban-only)",
-   "finalsNote": "uu and iai occur only in the urban variety: the southern suburb merges uu into e (圪 guu1→ge1) and iai into ie (階 jiai1→jie1). The other 38 are the same in both.",
    "tonesTitle": "Tones",
-   "tonesNote": "The four tones are the same in both: Yinping 21, Yangping 24, Shangsheng 53, Qusheng 44; the entering tone has split into them.",
+   "sandhiTitle": "Tone sandhi",
+   "sandhiNote": "Xi'an tone sandhi is mainly a change of the first syllable, in two types: when two consecutive syllables are both Tone 1 (Yinping) 21-21, the first Tone 1 syllable changes to Tone 2 (Yangping), giving 24-21; when two consecutive syllables are both Tone 3 (Shangsheng) 53-53, the first Tone 3 syllable changes to Tone 1 (Yinping), giving 21-53.",
    "diffTitle": "Differences from Mandarin pinyin",
    "diff": [
     {
@@ -406,11 +402,9 @@
      ]
     ]
    },
-   "njNote": "Apart from the items above the two varieties share initials, finals and tones; the \"other regular sets\" row lists differences in individual characters (zhī-series closed syllables, the yù rhyme grade 1).",
    "legend": "Example readings: urban first, southern suburb second (written once when identical); dashed boxes mark items unique to one variety.",
    "abbrevTitle": "Allowed abbreviations",
    "abbrevNote": "Input side only: ien→in, ieng→ing, iou→iu, uei→ui, uen→un, uong→ung, yuen→yun, yuong→yung; the zero initial only allows yuen and yuong. The character table and notation keep the full spelling.",
-   "abbrevNew": "new in v1.1.2",
    "abbrevZero": "zero initial",
    "sourceTitle": "Sound-data sources",
    "sources": "The Xi'an, Weinan, Lintong and Huaxian sound-data tables come from the MCPDict project: <a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv\" target=\"_blank\" rel=\"noopener\">Xi'an table</a>, <a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv\" target=\"_blank\" rel=\"noopener\">Weinan table</a>, <a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv\" target=\"_blank\" rel=\"noopener\">Lintong table</a>, <a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv\" target=\"_blank\" rel=\"noopener\">Huaxian table</a>. There is no ready-made table for the southern-suburb variety: it was compiled on the basis of the Xi'an, Weinan, Lintong and Huaxian tables, with reference to Zhihu discussions on how the flat and retroflex sibilants merge in the southern- and eastern-suburb accents, and checked character by character against the speech of the author and their family — therefore <b>for reference only</b>."
@@ -421,11 +415,11 @@
   "njMissing": "No southern reading.",
   "aboutTitle": "Accents of Xi'an",
   "aboutParas": [
-   "Contemporary Xi'an is centred on the old walled city and divided by direction into the <b>eastern, western, southern and northern suburbs</b>. Xi'an speech belongs to <b>Central Plains Mandarin – Guanzhong group – Dongfu dialect</b>: the city centre, the northern and the western suburbs speak the <b>Xi'an type</b>; the southern and eastern suburbs, Chang'an district, Lintong and the land eastward into Weinan all speak the <b>Weinan type</b>.",
-   "The two types differ in the distribution of retroflex and dental sibilants and in specific readings. Earlier descriptions of Xi'an speech centred on the city proper and paid little attention to the southern-suburb variety, which is in fact the dominant accent along the Gaoxin–Xiaozhai–Qujiang line in central Xi'an. This site therefore adds it alongside the urban readings."
+   "Contemporary Xi'an is centred on the old walled city and divided by direction into the <b>eastern, western, southern and northern suburbs</b>. Xi'an speech belongs to <b>Central Plains Mandarin – Guanzhong group – Dongfu dialect</b>.",
+   "Xi'an speech varies internally. By the type of retroflex/dental sibilant evolution common to Northern Mandarin it falls into two groups: the <b>Xi'an type</b> and the <b>Weinan type</b>. Broadly speaking the city centre, the northern and the western suburbs belong to the <b>Xi'an type</b>, which has also been the representative form of Xi'an speech; the southern and eastern suburbs, Chang'an, Lintong and on to Weinan belong to the <b>Weinan type</b>. The two differ markedly in the evolution of the retroflex and dental sibilants. These two types can roughly distinguish the two kinds of Xi'an speech, but they are not zones with clear-cut boundaries: at some southern- and eastern-suburb localities the sibilant distribution leans towards the Xi'an type, while at some western and northern localities it leans towards the Weinan type.",
+   "Besides the <b>urban readings</b> that have represented Xi'an speech, this site also adds the <b>southern-suburb readings</b> of Xi'an speech (the Yanta-district variety along the Gaoxin–Xiaozhai–Qujiang line). They are worked out character by character with reference to the sound data of <a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv\" target=\"_blank\" rel=\"noopener\">urban Xi'an</a>, <a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv\" target=\"_blank\" rel=\"noopener\">Weinan</a>, <a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv\" target=\"_blank\" rel=\"noopener\">Lintong</a> and <a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv\" target=\"_blank\" rel=\"noopener\">Huaxian</a> sound data, and are offered for reference only; corrections are most welcome."
   ],
   "aboutCap": "Schematic accent map of Xi'an (the city area is inside the Ming wall; not administrative boundaries)",
-  "aboutNote": "The southern-suburb readings are established from the urban Xi'an readings, the Weinan readings, and the speech of the site's author and relatives. They are offered for reference only; corrections are most welcome.",
   "map": {
    "city": "City centre",
    "north": "North",
@@ -470,7 +464,7 @@
   "legendEx": "例：<b>bfeng4</b> 中 · <b>jyuen1</b> 軍",
   "lead": "漢字をひとつ、または複数入力してみてください（例：<b>西安话</b>、<b>着</b>、<b>鵝</b>）",
   "schemeTitle": "西安方言の音韻と入力方案",
-  "schemeDesc": "共通 24 声母・38 韻母、城区音のみ bf・pf・uu・iai、南郊音のみ rh・yua",
+  "schemeDesc": "共通 24 声母・38 韻母、城区音のみ bf・pf・uu・iai、南郊音のみ rh",
   "schemeMore": "開く →",
   "modalTitle": "西安方言の音韻と入力方案",
   "modalClose": "閉じる",
@@ -492,11 +486,10 @@
   "phon": {
    "intro": "西安方言（関中片）は<b>城区音</b>と<b>南郊音</b>の二系統で、同じ方言の二つのなまりであって別の言語ではありません。<b>声母 24・韻母 38・四声</b>は両系統に共通し、城区音だけに <b>bf・pf</b> の二声母と <b>uu・iai</b> の二韻母が加わり（26 声母・40 韻母）、南郊音だけに <b>rh</b> の声母が加わります（25 声母・38 韻母）。下図の<b>破線枠</b>はそれぞれの系統特有の項目です。",
    "initialsTitle": "声母：共通 24。城区音 26（＋bf・pf）、南郊音 25（＋rh）",
-   "initialsNote": "bf・pf は城区音だけに現れます。南郊音では z・c となり、韻母に u 介音が加わります（豬 bfu1→zu1、春 pfen1→cuen1）。rh は南郊音だけに現れます。城区音では v で読みます（入 vu1→rhu1、若 vo1→rhuo1）。残る 24 声母は両系統で同じです。",
    "finalsTitle": "韻母 40（共通 38 ＋ 城区音特有 2）",
-   "finalsNote": "uu・iai は城区音だけに現れます。南郊音では uu が e（圪 guu1→ge1）、iai が ie（階 jiai1→jie1）に統合されます。残る 38 韻母は両系統で同じです。",
    "tonesTitle": "声調",
-   "tonesNote": "四声は両系統で同じ：陰平 21・陽平 24・上声 53・去声 44。入声もすでにこの四声に分かれています。",
+   "sandhiTitle": "連続変調",
+   "sandhiNote": "西安方言の連続変調は主に前の字が変わるもので、二種類あります。二つの字が続けてともに一声（陰平）21-21 のとき、前の一声の字は二声（陽平）に変わって 24-21 になります。二つの字が続けてともに三声（上声）53-53 のとき、前の三声の字は一声（陰平）に変わって 21-53 になります。",
    "diffTitle": "普通話ピンインとの異同",
    "diff": [
     {
@@ -628,11 +621,9 @@
      ]
     ]
    },
-   "njNote": "表中の項目のほか、声母・韻母・声調は両系統で共通です。「その他の対応」の段は字音における規則的な違い（知系合口・遇摂一等）です。",
    "legend": "例字の読み：前が城区音、後ろが南郊音（同じ場合は一つだけ）。破線枠はどちらかの系統特有の項目。",
    "abbrevTitle": "許される略式綴り",
    "abbrevNote": "入力側のみ：ien→in、ieng→ing、iou→iu、uei→ui、uen→un、uong→ung、yuen→yun、yuong→yung。零声母は yuen・yuong のみ許可。字表と表記は全拼のまま。",
-   "abbrevNew": "v1.1.2 で追加",
    "abbrevZero": "零声母",
    "sourceTitle": "字音データの出所",
    "sources": "西安話・渭南話・臨潼話・華県話のデータ表は MCPDict プロジェクトによるものです：<a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv\" target=\"_blank\" rel=\"noopener\">西安話データ表</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv\" target=\"_blank\" rel=\"noopener\">渭南話データ表</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv\" target=\"_blank\" rel=\"noopener\">臨潼話データ表</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv\" target=\"_blank\" rel=\"noopener\">華県データ表</a>。南郊話に既成の字表はありません。西安話・渭南話・臨潼話・華県話などのデータ表を下敷きに、南郊音・東郊音の平翘舌（平舌／翘舌声母）の帰属をめぐる知乎（Zhihu）の議論を参照し、筆者自身と家族の発音で一字ずつ照合して整理したものであるため、<b>参考程度にとどめてください</b>。"
@@ -643,11 +634,11 @@
   "njMissing": "南郊音なし",
   "aboutTitle": "西安のアクセント分区",
   "aboutParas": [
-   "現在の西安は西安古城を中心に、方位によって<b>東郊・西郊・南郊・北郊</b>に分けられます。西安方言は<b>中原官話—関中片—東府方言</b>に属します。城区・北郊・西郊は<b>西安型</b>、南郊・東郊・長安区・臨潼、さらに東の渭南市域にかけては<b>渭南型</b>です。",
-   "両型はそり舌音と歯茎音の分布、具体的な字音などにいくつかの違いがあります。従来の西安方言の記述は城区に偏り、現代西安市中心の高新—小寨—曲江一帯で実際に優勢な南郊音はあまり顧みられてきませんでした。そこで当サイトは南郊音を加え、城区音と並べて示します。"
+   "現在の西安は古城を中心に、方位によって<b>東郊・西郊・南郊・北郊</b>に分けられます。西安方言は<b>中原官話—関中片—東府方言</b>に属します。",
+   "西安方言には内部差があります。北方官話の平舌音・そり舌音の変化類型によって、おおまかに<b>西安型</b>と<b>渭南型</b>の二類に分けられます。概していえば、城区・北郊・西郊は<b>西安型</b>で、これが従来の西安方言の代表でもあります。南郊・東郊・長安・臨潼、さらに渭南などは<b>渭南型</b>です。両者は主に平舌音・そり舌音の変化において著しく異なります。西安型と渭南型は西安方言の二つの類型をおおまかに分けるものですが、境界がはっきりした分区ではありません。たとえば南郊・東郊のある方言点では平舌音・そり舌音の分布が西安型に傾き、西郊・北郊のある方言点では渭南型に傾くといったことがあります。",
+   "当サイトは従来西安方言を代表してきた<b>城区音</b>のほかに、西安方言の南郊方言（高新—小寨—曲江一線の雁塔区方言）を反映する<b>南郊音</b>を併せて示します。南郊音は<a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv\" target=\"_blank\" rel=\"noopener\">西安城区音</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv\" target=\"_blank\" rel=\"noopener\">渭南話</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv\" target=\"_blank\" rel=\"noopener\">臨潼話</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv\" target=\"_blank\" rel=\"noopener\">華県話</a>などの音声資料を参照して一字ずつ定めたもので、参考程度にとどめてください。誤りがあればご指摘いただければ幸いです。"
   ],
   "aboutCap": "西安のアクセント分区（城区は明城壁の内側、行政界ではありません）",
-  "aboutNote": "南郊音は西安城区音、渭南音、そして作者本人と親族の発音をもとに定めたもので、参考程度にご覧ください。誤りがあればご指摘いただければ幸いです。",
   "map": {
    "city": "城区",
    "north": "北郊",

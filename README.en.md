@@ -18,17 +18,16 @@
 2. [What this site is](#s2)
 3. [Query rules](#s3)
 4. [How to read a result](#s4)
-5. [Language and automatic detection](#s5)
-6. [The phonology pop-up](#s6)
-7. [Where the data comes from](#s7)
-8. [Colours and font](#s8)
-9. [Directory layout](#s9)
-10. [Local preview](#s10)
-11. [Rebuilding](#s11)
-12. [Deployment](#s12)
-13. [Data notes and TODO](#s13)
-14. [Data and credits](#s14)
-15. [License](#s15)
+5. [The phonology pop-up](#s5)
+6. [Where the data comes from](#s6)
+7. [Colours and font](#s7)
+8. [Directory layout](#s8)
+9. [Local preview](#s9)
+10. [Rebuilding](#s10)
+11. [Deployment](#s11)
+12. [Data notes and TODO](#s12)
+13. [Data and credits](#s13)
+14. [License](#s14)
 
 ---
 
@@ -54,6 +53,8 @@ The five figures below cover the whole scheme. They are the same figures used in
 
 ![The four Xi'an tones](figures/tones.en.svg)
 
+Xi'an tone sandhi is mainly a change of the first syllable, in two types: when two consecutive syllables are both Tone 1 (Yinping) 21-21, the first Tone 1 syllable changes to Tone 2 (Yangping), giving 24-21; when two consecutive syllables are both Tone 3 (Shangsheng) 53-53, the first Tone 3 syllable changes to Tone 1 (Yinping), giving 21-53.
+
 ![Syllable structure: initial + final + tone](figures/syllable.en.svg)
 
 ![Short forms for input: the 8 abbreviations](figures/abbrev.en.svg)
@@ -63,7 +64,7 @@ The five figures below cover the whole scheme. They are the same figures used in
 Xi'an speech is not uniform, and the site carries two sets of readings:
 
 - **Urban (城区音)**: the variety of the city centre.
-- **Southern suburb (南郊音)**: the variety of the southern suburbs (Gaoxin, Xiaozhai, Qujiang). Its initials and finals follow the **Weinan** pattern: 25 initials (`rh`, no `bf`, `pf`) and 38 finals (no `uu`, `iai`); the tones are the same four.
+- **Southern suburb (南郊音)**: the variety of the southern suburbs (Gaoxin, Xiaozhai, Qujiang). Its retroflex/dental sibilant distribution follows the **Weinan** pattern: 25 initials (`rh`, no `bf`, `pf`) and 38 finals (no `uu`, `iai`); the tones are the same four.
 
 | Item | Urban | Southern suburb |
 |---|---|---|
@@ -134,33 +135,7 @@ Polyphonic characters are ordered Yinping → Yangping → Shangsheng → Qushen
 
 <a id="s5"></a>
 
-## 5. Language and automatic detection
-
-The top-right corner lets you pick **简 / 繁 / 日 / EN**; the choice is stored locally (`localStorage`). On a first visit the language is decided in this order:
-
-| Priority | Signal | Result |
-|---|---|---|
-| 1 | Manual choice (including `?lang=hans｜hant｜ja｜en`) | used as is |
-| 2 | System / browser language (**Chinese variants and Japanese only**) | `zh-Hant`, `zh-TW/HK/MO` → Traditional; other `zh-*` → Simplified; `ja-*` → Japanese; any other system language (`en-*`, `ko-*`, …) does not decide and falls through |
-| 3 | IP region | Japan → Japanese; US, UK, Canada, Australia, New Zealand, France, Germany, Korea → English; Hong Kong, Macao, Taiwan → Traditional; everything else → Simplified |
-| 4 | Fallback | Simplified |
-
-In other words, **a Chinese or Japanese system language outranks the IP**: a Traditional Chinese system stays Traditional even from mainland China, and a Japanese system stays Japanese even from the US. Other system languages (English, Korean, …) do not decide the UI language and leave it to the IP — so "English system + Japanese IP" shows Japanese, not English.
-
-> Manual choice and `?lang=` win over everything, and the manual choice is stored in `localStorage`. If you once clicked EN and the address bar still has `?lang=en`, the page will stay English; open `?lang=auto` once to clear the manual choice and re-detect.
-
-Implementation notes:
-
-- Geolocation uses `https://api.country.is/`, falling back to Cloudflare's `/cdn-cgi/trace`, with a 1.5 s timeout; if both fail the page uses Simplified
-- Local previews (`localhost` / `127.0.0.1` / `file:`) and search-engine crawlers skip detection and stay Simplified, so development is not steered by the network and crawlers do not index the English version
-- Debugging: `?lang=auto` clears the manual choice and re-detects; `?lang=debug` shows the decision and its reason in the page header (`url` / `manual` / `system` / `ip` / `offline`)
-- The four text packs live in `data/i18n.json`; Traditional is converted from Simplified with OpenCC, never written by hand
-
----
-
-<a id="s6"></a>
-
-## 6. The phonology pop-up
+## 5. The phonology pop-up
 
 The "Xi'an phonology & the input scheme" strip below the search area opens a pop-up (close with Esc or a click on the backdrop). Its content comes from the input-method repository's README:
 
@@ -173,38 +148,22 @@ The "Xi'an phonology & the input scheme" strip below the search area opens a pop
 
 ---
 
-<a id="s7"></a>
+<a id="s6"></a>
 
-## 7. Where the data comes from
+## 6. Where the data comes from
 
-```
-MCPDict Xi'an table (IPA)
-        │  tools/ipa2pinyin.mjs (input-method repo)
-        ▼
-   character / pinyin / IPA / notes  →  data/source.tsv
-        │  tools/build_data.py (+ OpenCC simplified↔traditional tables)
-        ▼
-   data/xian.json (character → readings)
-   data/variants.json (simplified→traditional, traditional→simplified)
-```
+The urban Xi'an readings come from the Xi'an sound-data table that records the urban variety; the southern-suburb readings are established character by character with reference to the Xi'an, Weinan, Lintong and Huaxian sound data. Corrections are most welcome.
 
-| Item | Count |
-|---|---|
-| Characters | urban 3,345 / southern 3,931 |
-| Readings | 3,648 urban / 4,175 southern (one reading per line) |
-| Polyphonic characters | urban 275 / southern 223 |
-| With notes | 102 |
-| Toneless syllables | 392 |
-
-The southern data has its own pipeline: `南郊音字表.tsv` (rebuilt 2026-11-20 from the 1,882-character adjudication sheet plus the shared readings) → `tools/build_nanjiao_json.py` → `data/nanjiao.json`, same shape as `xian.json`. The folding rules (no `bf`/`pf`, plus `rh`; no `uu`/`iai`) are described in section 13.
-
-The simplified/traditional mapping uses OpenCC's `STCharacters.txt` / `TSCharacters.txt`, downloaded on demand at build time and not distributed with the repository.
+- [Xi'an sound data](https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv)
+- [Weinan sound data](https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv)
+- [Lintong sound data](https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv)
+- [Huaxian sound data](https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv)
 
 ---
 
-<a id="s8"></a>
+<a id="s7"></a>
 
-## 8. Colours and font
+## 7. Colours and font
 
 | Colour | Value | Use |
 |---|---|---|
@@ -218,9 +177,9 @@ The font is a subset of [LXGW WenKai](https://github.com/lxgw/LxgwWenKai) (LXGW 
 
 ---
 
-<a id="s9"></a>
+<a id="s8"></a>
 
-## 9. Directory layout
+## 8. Directory layout
 
 ```
 index.html                    single page: styles, lookup logic, i18n and the pop-up
@@ -244,9 +203,9 @@ tools/make_font.py            font subsetting (WOFF2)
 
 ---
 
-<a id="s10"></a>
+<a id="s9"></a>
 
-## 10. Local preview
+## 9. Local preview
 
 The page reads JSON with `fetch`, so double-clicking the HTML will fail. Serve it:
 
@@ -257,9 +216,9 @@ python -m http.server 8765
 
 ---
 
-<a id="s11"></a>
+<a id="s10"></a>
 
-## 11. Rebuilding
+## 10. Rebuilding
 
 ```sh
 python tools/build_data.py          # data/xian.json, data/variants.json
@@ -278,17 +237,17 @@ After changing text in `index.html`, anything in `data/*.json`, or the data itse
 
 ---
 
-<a id="s12"></a>
+<a id="s11"></a>
 
-## 12. Deployment
+## 11. Deployment
 
 Pushing to `main` triggers GitHub Actions (Settings → Pages → Source: GitHub Actions). The workflow copies `index.html`, `data/xian.json`, `data/nanjiao.json`, `data/variants.json`, `data/i18n.json`, `fonts/*.woff2` and the OFL into `_site`; the source table and build scripts are not published.
 
 ---
 
-<a id="s13"></a>
+<a id="s12"></a>
 
-## 13. Data notes and TODO
+## 12. Data notes and TODO
 
 - Glyphs are traditional (as in the MCPDict source), with the simplified form shown alongside on each card for comparison
 - The southern readings are folded from the southern-suburb adjudication sheet (2026-11-20) plus the shared readings, under the same constraints — no `bf`/`pf` (urban-only), no `uu`/`iai` (urban-only), plus `rh` (urban v): `bf→z`, `pf→c` (the final gains a u medial), `uu→e`, `iai→ie`. A few characters are overridden by review: 癌 `ngai2` only, 涯 `ya2`, 後 `hou4` only, 芍 `shuo2`
@@ -298,9 +257,9 @@ Pushing to `main` triggers GitHub Actions (Settings → Pages → Source: GitHub
 
 ---
 
-<a id="s14"></a>
+<a id="s13"></a>
 
-## 14. Data and credits
+## 13. Data and credits
 
 - [Xi'an table](https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv), [Weinan table](https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv), [Lintong table](https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv), [Huaxian table](https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv) — all from [osfans/MCPDict](https://github.com/osfans/MCPDict); the Xi'an table is the source of the urban readings (IPA), while the Weinan, Lintong and Huaxian tables served as references for compiling the southern-suburb data
 - **The southern-suburb sound data** has no ready-made table of its own: it was compiled on the basis of the Xi'an, Weinan, Lintong and Huaxian tables, with reference to Zhihu discussions on how the flat and retroflex sibilants merge in the southern- and eastern-suburb accents, and checked character by character against the speech of the author and their family — it is therefore **for reference only**
@@ -311,9 +270,9 @@ Pushing to `main` triggers GitHub Actions (Settings → Pages → Source: GitHub
 
 ---
 
-<a id="s15"></a>
+<a id="s14"></a>
 
-## 15. License
+## 14. License
 
 The page and build scripts may be used, modified and redistributed freely. The reading data comes from MCPDict and the font from LXGW WenKai; follow their respective terms.
 

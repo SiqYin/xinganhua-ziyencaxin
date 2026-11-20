@@ -18,17 +18,16 @@
 2. [这个网站是什么](#s2)
 3. [查询规则](#s3)
 4. [结果怎么读](#s4)
-5. [语言与自动判定](#s5)
-6. [音系与输入方案浮窗](#s6)
-7. [数据从哪来](#s7)
-8. [配色与字体](#s8)
-9. [目录结构](#s9)
-10. [本地预览](#s10)
-11. [重新构建](#s11)
-12. [部署](#s12)
-13. [数据说明与待办](#s13)
-14. [数据与致谢](#s14)
-15. [授权](#s15)
+5. [音系与输入方案浮窗](#s5)
+6. [数据从哪来](#s6)
+7. [配色与字体](#s7)
+8. [目录结构](#s8)
+9. [本地预览](#s9)
+10. [重新构建](#s10)
+11. [部署](#s11)
+12. [数据说明与待办](#s12)
+13. [数据与致谢](#s13)
+14. [授权](#s14)
 
 ---
 
@@ -54,6 +53,8 @@
 
 ![西安话四声](figures/tones.hans.svg)
 
+西安话的连读变调主要是前字变调，分为两类：连续两字为一声（阴平）21-21 时，第一个一声字改读二声（阳平）24-21；连续两字为三声（上声）53-53 时，第一个三声字改读一声（阴平）21-53。
+
 ![音节结构：声母 + 韵母 + 调号](figures/syllable.hans.svg)
 
 ![西安话简拼对照图（输入端 8 条缩写规则）](figures/abbrev.hans.svg)
@@ -63,7 +64,7 @@
 西安话内部不止一种口音，本站同时收两套：
 
 - **城区音**：西安城区（城内）的口音。
-- **南郊音**：西安南郊（高新、小寨、曲江一带）的口音。声韵母格局属**渭南型**：声母 25 个（多 `rh`，没有 `bf`、`pf`），韵母 38 个（没有 `uu`、`iai`），声调仍是四声。
+- **南郊音**：西安南郊（高新、小寨、曲江一带）的口音。平翘舌分布属**渭南型**：声母 25 个（多 `rh`，没有 `bf`、`pf`），韵母 38 个（没有 `uu`、`iai`），声调仍是四声。
 
 | 项 | 城区音 | 南郊音 |
 |---|---|---|
@@ -134,33 +135,7 @@
 
 <a id="s5"></a>
 
-## 五、语言与自动判定
-
-界面右上角可以手选 **简 / 繁 / 日 / EN**，选择会记在本地（`localStorage`）。首次访问时按下面的优先级判定：
-
-| 优先级 | 依据 | 结果 |
-|---|---|---|
-| 1 | 手动选择（含网址 `?lang=hans｜hant｜ja｜en`） | 直接使用 |
-| 2 | 系统／浏览器语言（**只认中文变体与日文**） | `zh-Hant`、`zh-TW/HK/MO` → 繁体；其他 `zh-*` → 简体；`ja-*` → 日文；非中文、非日文的系统语言（`en-*`、`ko-*` 等）不参与判定，交给下一行 |
-| 3 | 访问 IP 归属地 | 日本 → 日文；美国、英国、加拿大、澳大利亚、新西兰、法国、德国、韩国 → 英文；香港、澳门、台湾 → 繁体；其余全部 → 简体 |
-| 4 | 兜底 | 简体 |
-
-也就是说**中文系统语言与日文系统语言优先于 IP**：系统是繁体中文，即使 IP 在中国大陆也显示繁体；系统是日文，即使 IP 在美国也显示日文。除此之外的系统语言（英文、韩文……）不决定界面语言，交给 IP 判断——所以「英文系统 + 日本 IP」显示日文，而不是英文。
-
-> 手选与网址 `?lang=` 的优先级最高，且手选会记在 `localStorage`。若之前点过 EN、地址栏还留着 `?lang=en`，页面就会一直是英文；打开一次 `?lang=auto` 即可清掉手选重新判定。
-
-实现细节：
-
-- 地理判定用 `https://api.country.is/`，失败时回退 Cloudflare 的 `/cdn-cgi/trace`，都超时（1.5 秒）就按简体
-- 本地预览（`localhost` / `127.0.0.1` / `file:`）与搜索引擎爬虫不做自动判定，保持简体，避免开发时被网络环境带着跑、也避免收录到英文版
-- 调试：`?lang=auto` 清掉手选后重新判定；`?lang=debug` 在页头显示判定结果与原因（`url` / `manual` / `system` / `ip` / `offline`）
-- 四套文案在 `data/i18n.json`；繁体由 OpenCC 从简体转换，不手写
-
----
-
-<a id="s6"></a>
-
-## 六、音系与输入方案浮窗
+## 五、音系与输入方案浮窗
 
 页面下方的「西安话音系与输入方案」是一整块可点的入口，点开是浮窗（Esc 或点遮罩关闭），内容取自输入法仓库的 README：
 
@@ -173,38 +148,22 @@
 
 ---
 
-<a id="s7"></a>
+<a id="s6"></a>
 
-## 七、数据从哪来
+## 六、数据从哪来
 
-```
-MCPDict《西安》数据表（国际音标）
-        │  tools/ipa2pinyin.mjs（输入法仓库）
-        ▼
-   字 / 拼音 / IPA / 释注  →  data/source.tsv
-        │  tools/build_data.py（+ OpenCC 简繁表）
-        ▼
-   data/xian.json（字头 → 读音数组）
-   data/variants.json（简→繁、繁→简）
-```
+西安话城区音来源于记录城区音的西安话音档；南郊音参考西安话、渭南话、临潼话、华县话等音档逐字厘定，如有错谬，敬请批评指正。
 
-| 项 | 数 |
-|---|---|
-| 字头 | 城区 3,345 ／ 南郊 4,065 |
-| 字音条目 | 城区音 3,648 ／ 南郊音 4,350（一字一音一行） |
-| 多音字 | 城区 275 ／ 南郊 223 |
-| 带释注 | 102 |
-| 不计调音节 | 392 |
-
-南郊音另有一条链路：归档里的 `南郊音字表.tsv`（2026-11-20 重建：西安南郊音裁定表 1,882 字 + 两地一致读音）→ `tools/build_nanjiao_json.py` → `data/nanjiao.json`，结构与 `xian.json` 相同。折算口径（无 `bf`／`pf`、有 `rh`；无 `uu`／`iai`）见第十三节。
-
-简繁映射用 OpenCC 的 `STCharacters.txt` / `TSCharacters.txt`，构建时按需下载，不随仓库分发。
+- [西安话音档](https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv)
+- [渭南话音档](https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv)
+- [临潼话音档](https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv)
+- [华县话音档](https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv)
 
 ---
 
-<a id="s8"></a>
+<a id="s7"></a>
 
-## 八、配色与字体
+## 七、配色与字体
 
 | 颜色 | 值 | 用途 |
 |---|---|---|
@@ -218,9 +177,9 @@ MCPDict《西安》数据表（国际音标）
 
 ---
 
-<a id="s9"></a>
+<a id="s8"></a>
 
-## 九、目录结构
+## 八、目录结构
 
 ```
 index.html                    单页：样式、查询逻辑、i18n 与浮窗都在这一个文件里
@@ -244,9 +203,9 @@ tools/make_font.py            字体子集化（WOFF2）
 
 ---
 
-<a id="s10"></a>
+<a id="s9"></a>
 
-## 十、本地预览
+## 九、本地预览
 
 页面用 `fetch` 读 JSON，直接双击 HTML 会失败，起个静态服务器即可：
 
@@ -257,9 +216,9 @@ python -m http.server 8765
 
 ---
 
-<a id="s11"></a>
+<a id="s10"></a>
 
-## 十一、重新构建
+## 十、重新构建
 
 ```sh
 python tools/build_data.py          # 生成 data/xian.json、data/variants.json
@@ -278,17 +237,17 @@ python tools/make_font.py /path/to/LXGWWenKai-Regular.ttf
 
 ---
 
-<a id="s12"></a>
+<a id="s11"></a>
 
-## 十二、部署
+## 十一、部署
 
 推到 `main` 后由 GitHub Actions 发布（仓库 Settings → Pages → Source 选 GitHub Actions）。工作流把 `index.html`、`data/xian.json`、`data/nanjiao.json`、`data/variants.json`、`data/i18n.json`、`fonts/*.woff2` 与 OFL 拷进 `_site`，源表与构建脚本不随站点发布。
 
 ---
 
-<a id="s13"></a>
+<a id="s12"></a>
 
-## 十三、数据说明与待办
+## 十二、数据说明与待办
 
 - 用字是繁体（MCPDict 原表如此），卡片上并列显示简体形，便于对照
 - 南郊音按西安南郊音逐字裁定表（2026-11-20）与两地一致读音折出，硬约束是「没有 `bf`／`pf`（城区特有）、没有 `uu`／`iai`（城区特有）」，另有 `rh`（城区读 v）；`bf→z`、`pf→c`（韵母增生 u 介音），`uu→e`，`iai→ie`。个别字按核定覆盖：癌只读 `ngai2`、涯读 `ya2`、後只读 `hou4`、芍读 `shuo2`
@@ -298,9 +257,9 @@ python tools/make_font.py /path/to/LXGWWenKai-Regular.ttf
 
 ---
 
-<a id="s14"></a>
+<a id="s13"></a>
 
-## 十四、数据与致谢
+## 十三、数据与致谢
 
 - [西安话音档](https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv)、[渭南话音档](https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv)、[临潼话音档](https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv)、[华县话音档](https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv)——均出自 [osfans/MCPDict](https://github.com/osfans/MCPDict)；西安话音档即城区音字音数据源（国际音标），渭南、临潼、华县三档用于南郊音的整理参照
 - **南郊话音档**没有现成字表可依：以西安话、渭南话、临潼话、华县话音档等为基底，参照知乎上关于南郊音、东郊音平翘舌归并情况的讨论，并与本人及家人的口音逐字校对整理而成，因此**仅供参考**
@@ -311,9 +270,9 @@ python tools/make_font.py /path/to/LXGWWenKai-Regular.ttf
 
 ---
 
-<a id="s15"></a>
+<a id="s14"></a>
 
-## 十五、授权
+## 十四、授权
 
 网页与构建脚本可自由使用、修改、再分发。字音数据来自 MCPDict，字体来自霞鹜文楷，版权与授权请遵循各自项目说明。
 

@@ -10,7 +10,7 @@
 @font-face{
   font-family:"LXGW WenKai";
   font-style:normal;font-weight:400;font-display:swap;
-  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=15") format("woff2");
+  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=16") format("woff2");
 }
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -256,8 +256,6 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 .abbrev-cell{display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 8px;border-radius:6px;background:#f7fafc;border:1px solid #c9d4de}
 .abbrev-cell .p{font-weight:600}
 .abbrev-cell .tag{font-size:.72em;color:var(--muted)}
-.abbrev-cell.is-new{background:#fff1e0;border-color:#e0973c}
-.abbrev-cell.is-new .tag{color:#b06f1e}
 .fin-group{margin-top:12px}
 .fin-label{font-size:.8em;letter-spacing:.08em;color:var(--crimson);margin-bottom:4px}
 .modal-body table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:.86em}
@@ -289,6 +287,8 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 .about-text p{font-size:.9em;line-height:1.95;color:var(--muted);margin:0 0 11px}
 .about-text p:last-child{margin-bottom:0}
 .about-text b{font-weight:400;color:var(--ink);border-bottom:1px solid rgba(159,54,58,.38);padding-bottom:1px}
+.about-text a{color:var(--crimson);text-decoration:none;border-bottom:1px solid rgba(159,54,58,.45)}
+.about-text a:hover,.about-text a:focus-visible{border-bottom-color:var(--crimson);background:#F7ECEA}
 .about-fig svg{display:block;width:100%;height:auto}
 .about-cap{margin-top:7px;font-size:.76em;line-height:1.6;color:var(--faint);text-align:center}
 .about-note{
@@ -506,10 +506,10 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   /* ───────── 数据 ───────── */
   function loadData() {
     return Promise.all([
-      fetch('data/xian.json?v=15').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/nanjiao.json?v=15').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/variants.json?v=15').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/i18n.json?v=15').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      fetch('data/xian.json?v=16').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/nanjiao.json?v=16').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json?v=16').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/i18n.json?v=16').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     ]).then(function (out) {
       out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
       out[1].forEach(function (rec) { byCharNj.set(rec.character, rec); });
@@ -878,7 +878,9 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     document.getElementById('tAboutText').innerHTML =
       (d.aboutParas || []).map(function (p) { return '<p>' + p + '</p>'; }).join('');
     document.getElementById('tAboutCap').textContent = d.aboutCap || '';
-    document.getElementById('tAboutNote').textContent = d.aboutNote || '';
+    var an = document.getElementById('tAboutNote');
+    an.textContent = d.aboutNote || '';
+    an.style.display = d.aboutNote ? '' : 'none';
     document.getElementById('aboutMap').innerHTML = buildMap();
   }
 
@@ -895,6 +897,11 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
       + '<div class="i">' + esc(item[1]) + '</div>' + e + '</div>';
   }
 
+  /* 注释行：文案为空时整段不输出，避免留下空的灰底块 */
+  function phonNote(text) {
+    return text ? '<p class="phon-note">' + text + '</p>' : '';
+  }
+
   function buildModal() {
     var d = pack(), T = I18N.tables;
     var h = '<p>' + (d.phon.intro || '') + '</p>';
@@ -902,21 +909,25 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 
     h += '<h3>' + esc(d.phon.initialsTitle) + '</h3><div class="phon-grid">'
       + T.initials.map(phonCell).join('') + '</div>'
-      + '<p class="phon-note">' + (d.phon.initialsNote || '') + '</p>';
+      + phonNote(d.phon.initialsNote);
 
     h += '<h3>' + esc(d.phon.finalsTitle) + '</h3>';
     T.finals.forEach(function (group, i) {
       h += '<div class="fin-group"><div class="fin-label">' + esc((d.phon.groupNames || [])[i] || '') + '</div>'
         + '<div class="phon-grid">' + group.map(phonCell).join('') + '</div></div>';
     });
-    h += '<p class="phon-note">' + (d.phon.finalsNote || '') + '</p>';
+    h += phonNote(d.phon.finalsNote);
 
     h += '<h3>' + esc(d.phon.tonesTitle) + '</h3><div class="phon-grid">'
       + T.tones.map(function (row, i) {
         return '<div class="phon-cell"><div class="s">' + esc(row[0]) + ' ' + esc((d.phon.toneNames || [])[i] || '')
           + '</div><div class="i">' + esc(row[1]) + '</div><div class="e">' + esc(row[2] + ' ' + row[3]) + '</div></div>';
       }).join('') + '</div>'
-      + '<p class="phon-note">' + (d.phon.tonesNote || '') + '</p>';
+      + phonNote(d.phon.tonesNote);
+
+    if (d.phon.sandhiNote) {
+      h += '<h4>' + esc(d.phon.sandhiTitle || '') + '</h4><p>' + d.phon.sandhiNote + '</p>';
+    }
 
     // 城区音与南郊音的区别
     h += '<h3>' + esc(d.phon.njDiffTitle) + '</h3>';
@@ -927,7 +938,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
           return '<tr>' + r.map(function (x) { return '<td>' + esc(x) + '</td>'; }).join('') + '</tr>';
         }).join('') + '</tbody></table>';
     }
-    if (d.phon.njNote) h += '<p class="phon-note">' + d.phon.njNote + '</p>';
+    if (d.phon.njNote) h += phonNote(d.phon.njNote);
 
     h += '<h3>' + esc(d.phon.diffTitle) + '</h3>';
     (d.phon.diff || []).forEach(function (block) {
@@ -947,11 +958,11 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
       for (var aj = 0; aj < SHORT_ZERO.length; aj++) ap.push([SHORT_ZERO[aj][1], SHORT_ZERO[aj][0]]);
       h += '<h3>' + esc(d.phon.abbrevTitle) + '</h3><div class="phon-grid abbrev-grid">'
         + ap.map(function (p) {
-            var isNew = p[1] === 'ui', isZero = p[0] === 'yuen' || p[0] === 'yuong';
-            var tag = isNew ? (d.phon.abbrevNew || '') : isZero ? (d.phon.abbrevZero || '') : '';
-            return '<div class="abbrev-cell' + (isNew ? ' is-new' : '') + '"><span class="p">' + esc(p[0]) + ' → ' + esc(p[1]) + '</span>'
+            var isZero = p[0] === 'yuen' || p[0] === 'yuong';
+            var tag = isZero ? (d.phon.abbrevZero || '') : '';
+            return '<div class="abbrev-cell' + (isZero ? ' is-zero' : '') + '"><span class="p">' + esc(p[0]) + ' → ' + esc(p[1]) + '</span>'
               + (tag ? '<span class="tag">' + esc(tag) + '</span>' : '') + '</div>';
-          }).join('') + '</div><p class="phon-note">' + esc(d.phon.abbrevNote || '') + '</p>';
+          }).join('') + '</div>' + phonNote(esc(d.phon.abbrevNote || ''));
     }
     if (d.phon.sourceTitle) {
       h += '<h3>' + esc(d.phon.sourceTitle) + '</h3><p>' + (d.phon.sources || '') + '</p>';
