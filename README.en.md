@@ -38,7 +38,7 @@
 Every reading on this site is written in **Xi'an pinyin**, one set each for the urban and the southern-suburb accent. A syllable is initial + final + tone digit, e.g. `ba1` 巴, `jyuen1` 軍; `bfeng4` 中 is the urban reading, the southern one is `zuong4`:
 
 - **Initials**: 24 shared (including the zero initial), plus `bf`, `pf` in the urban variety (26 in all) and `rh` in the southern variety (25 in all): `b p m f v bf pf d t n l z c s rh j q x zh ch sh r g k h ng`
-- **Finals**: 38 shared (15 open / 8 i-medial / 9 u-medial / 6 ü-medial), plus `uu`, `iai` in the urban variety — 40 in all (16 / 9 / 9 / 6)
+- **Finals**: 38 shared (15 open / 8 i-medial / 9 u-medial / 6 ü-medial), plus `uu`, `iae` in the urban variety — 40 in all (16 / 9 / 9 / 6)
 - **Four tones**: Yinping 21, Yangping 24, Shangsheng 53, Qusheng 44; the entering tone has merged into these four
 - **The tone digit follows the syllable** with no space: `bfeng4` 中, `jyuen1` 軍
 - **Syllable boundaries use an apostrophe**: `xi'ngan1` 西安 (otherwise it would split into xin 心 + gan 干)
@@ -49,7 +49,7 @@ The six figures below cover the whole scheme. They are the same figures used in 
 
 ![Xi'an initials (urban 26; southern 25 — adds rh, no bf, pf)](figures/onsets.en.svg)
 
-![Xi'an finals (urban 40; southern 38, no uu, iai)](figures/rhymes.en.svg)
+![Xi'an finals (urban 40; southern 38, no uu, iae)](figures/rhymes.en.svg)
 
 ![The four Xi'an tones](figures/tones.en.svg)
 
@@ -69,12 +69,12 @@ Xi'an tone sandhi is mainly a change of the first syllable, in two types: when t
 Xi'an speech is not uniform, and the site carries two sets of readings:
 
 - **Urban (城区音)**: the variety of the city centre.
-- **Southern suburb (南郊音)**: the variety of the southern suburbs (Gaoxin, Xiaozhai, Qujiang). Its retroflex/dental sibilant distribution follows the **Weinan** pattern: 25 initials (`rh`, no `bf`, `pf`) and 38 finals (no `uu`, `iai`); the tones are the same four.
+- **Southern suburb (南郊音)**: the variety of the southern suburbs (Gaoxin, Xiaozhai, Qujiang). Its retroflex/dental sibilant distribution follows the **Weinan** pattern: 25 initials (`rh`, no `bf`, `pf`) and 38 finals (no `uu`, `iae`); the tones are the same four.
 
 | Item | Urban | Southern suburb |
 |---|---|---|
 | Initials | 26 (incl. `bf`, `pf`) | 25 (incl. `rh`, no `bf`, `pf`) |
-| Finals | 40 (incl. `uu`, `iai`) | 38 (no `uu`, `iai`) |
+| Finals | 40 (incl. `uu`, `iae`) | 38 (no `uu`, `iae`) |
 | rh | 入 `vu1`, 若 `vo1` | `rhu1`, `rhuo1` |
 | Zhī-series closed | 豬 `bfu1`, 春 `pfen1` | `zu1`, `cuen1` |
 | Shū-series closed | 書 `fu1`, 水 `fei3` | `su1`, `suei3` |
@@ -145,9 +145,9 @@ Polyphonic characters are ordered Yinping → Yangping → Shangsheng → Qushen
 The "Xi'an phonology & the input scheme" strip below the search area opens a pop-up (close with Esc or a click on the backdrop). Its content comes from the input-method repository's README:
 
 - the 27 initial cells (24 shared + urban-only `bf`, `pf` + southern-only `rh`, dashed boxes)
-- the 40 final cells, grouped by the four classes (open, i-medial, u-medial, ü-medial), with `uu` and `iai` marked urban-only
+- the 40 final cells, grouped by the four classes (open, i-medial, u-medial, ü-medial), with `uu` and `iae` marked urban-only
 - the four tones and their values (the same in both varieties)
-- **urban vs southern suburb**: the number of initials and finals, `rh`, the `bf`/`pf` and `uu`/`iai` correspondences, and the other regular differences
+- **urban vs southern suburb**: the number of initials and finals, `rh`, the `bf`/`pf` and `uu`/`iae` correspondences, and the other regular differences
 - **differences from Mandarin pinyin**: identical initials, the nasalised finals, the urban-only initials and finals (the south adds `rh`), characters whose initial does not match, and same digit position with different pitch
 - the pop-up text follows the UI language (Simplified / Traditional / English / Japanese)
 
@@ -255,7 +255,7 @@ Pushing to `main` triggers GitHub Actions (Settings → Pages → Source: GitHub
 ## 12. Data notes and TODO
 
 - Glyphs are traditional (as in the MCPDict source), with the simplified form shown alongside on each card for comparison
-- The southern readings are folded from the southern-suburb adjudication sheet (2026-11-20) plus the shared readings, under the same constraints — no `bf`/`pf` (urban-only), no `uu`/`iai` (urban-only), plus `rh` (urban v): `bf→z`, `pf→c` (the final gains a u medial), `uu→e`, `iai→ie`. A few characters are overridden by review: 癌 `ngai2` only, 涯 `ya2`, 後 `hou4` only, 芍 `shuo2`
+- The southern readings are folded from the southern-suburb adjudication sheet (2026-11-20) plus the shared readings, under the same constraints — no `bf`/`pf` (urban-only), no `uu`/`iae` (urban-only), plus `rh` (urban v): `bf→z`, `pf→c` (the final gains a u medial), `uu→e`, `iae→ie`. A few characters are overridden by review: 癌 `ngai2` only, 涯 `ya2`, 後 `hou4` only, 芍 `shuo2`
 - Three syllables in the source have a sound but no character (`zou2`, `tai3`, `sao2`) and are not searchable
 - If a reading disagrees with your own dialect, `data/source.tsv` is the authority; edit it and rerun the build
 - TODO: reverse lookup by IPA, query by tone, paginated browsing of the character table (pinyin reverse lookup and the full/short display switch are live)

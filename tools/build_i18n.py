@@ -73,13 +73,13 @@ INITIALS = [
 # 韵母：四呼分组，写法 / IPA / 例字 / 读音
 FINALS = [
     [["a", "a", "巴", "ba1"], ["o", "o", "若", "vo1"], ["er", "ɚ", "兒", "er2"], ["e", "ɤ", "鵝", "nge2"],
-     ["uu", "ɯ", "胳", "guu1", 1], ["i", "ɿ", "字", "zi4"], ["i", "ʅ", "吃", "chi1"], ["ai", "ai", "菜", "cai4"],
+     ["uu", "ɯ", "胳", "guu1", 1], ["i", "ɿ", "字", "zi4"], ["i", "ʅ", "吃", "chi1"], ["ae", "ai", "菜", "cae4"],
      ["ao", "au", "到", "dao4"], ["an", "ã", "山", "san1"], ["ei", "ei", "水", "fei3"], ["en", "ẽ", "人", "ren2"],
      ["ou", "ɤu", "狗", "gou3"], ["ang", "ɑɣ̃", "上", "shang4"], ["eng", "əɣ̃", "中", "bfeng4"]],
-    [["i", "i", "衣", "yi1"], ["ia", "ia", "家", "jia1"], ["ie", "iɛ", "姐", "jie3"], ["iai", "iai", "皆", "jiai1", 1],
+    [["i", "i", "衣", "yi1"], ["ia", "ia", "家", "jia1"], ["ie", "iɛ", "姐", "jie3"], ["iae", "iai", "皆", "jiae1", 1],
      ["iao", "iau", "小", "xiao3"], ["ian", "iã", "煙", "yan1"], ["ien", "iẽ", "音", "yen1"], ["ieng", "iɣ̃", "英", "yeng1"],
      ["iou", "iɤu", "有", "you3"], ["iang", "iɑɣ̃", "央", "yang1"]],
-    [["u", "u", "烏", "wu1"], ["ua", "ua", "花", "hua1"], ["uo", "uɤ", "窩", "wo1"], ["uai", "uai", "快", "kuai4"],
+    [["u", "u", "烏", "wu1"], ["ua", "ua", "花", "hua1"], ["uo", "uɤ", "窩", "wo1"], ["uae", "uai", "快", "kuae4"],
      ["uan", "uã", "彎", "wan1"], ["uei", "uei", "回", "huei2"], ["uen", "uẽ", "溫", "wen1"],
      ["uong", "uoɣ̃", "翁", "wong1"], ["uang", "uɑɣ̃", "汪", "wang1"]],
     [["yu", "y", "魚", "yu2"], ["yue", "yɛ", "月", "yue1"], ["yuo", "yɤ", "樂", "yuo1"],
@@ -146,7 +146,7 @@ def main() -> None:
     }
     OUT.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     hant = out["langs"]["hant"]
-    print("i18n.json 已生成：4 种语言；声母 %d（城区特有 bf、pf ＋ 南郊特有 rh）、韵母 %d（城区特有 uu、iai ＋ 南郊特有 yua）、声调 %d" % (
+    print("i18n.json 已生成：4 种语言；声母 %d（城区特有 bf、pf ＋ 南郊特有 rh）、韵母 %d（城区特有 uu、iae）、声调 %d" % (
         len(INITIALS), sum(len(g) for g in FINALS), len(TONES)))
     print("繁体样例：", hant["h1"], "|", hant["search"], "|", hant["phon"]["initialsTitle"])
     print("日文样例：", out["langs"]["ja"]["h1"], "|", out["langs"]["ja"]["search"])
