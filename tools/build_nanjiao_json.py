@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT.parent / "南郊音字表.tsv"
 OUT = ROOT / "data" / "nanjiao.json"
 
-VAL = {"1": "21", "2": "24", "3": "53", "4": "44", "0": "0"}
+VAL = {"1": "31", "2": "24", "3": "53", "4": "55", "0": "0"}
 SUP = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
 TONE = {"1": "阴平", "2": "阳平", "3": "上声", "4": "去声", "0": "轻声"}
 

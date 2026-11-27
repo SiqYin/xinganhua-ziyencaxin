@@ -10,7 +10,7 @@
 @font-face{
   font-family:"LXGW WenKai";
   font-style:normal;font-weight:400;font-display:swap;
-  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=24") format("woff2");
+  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=25") format("woff2");
 }
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -240,9 +240,10 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 .modal-body p{font-size:.9em;line-height:1.9;color:var(--muted);margin:6px 0}
 .modal-body code{font-family:inherit;background:var(--bg-deep);border-radius:4px;padding:0 4px;color:var(--text)}
 .phon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:7px;margin:10px 0 4px}
+.phon-row{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;margin:7px 0 0}
 .phon-cell{
   background:var(--bg-card);border:1px solid var(--line);border-radius:8px;
-  padding:7px 8px;text-align:center;line-height:1.45;min-width:0;
+  padding:7px 6px;text-align:center;line-height:1.45;min-width:0;
 }
 .phon-cell .s{font-size:1.02em;font-weight:700;color:var(--ink)}
 .phon-cell .i{font-size:.72em;color:var(--muted)}
@@ -338,7 +339,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   .modal-panel{margin:3vh 10px 0;max-height:93vh;border-radius:12px}
   .modal-head{padding:12px 14px}
   .modal-body{padding:4px 14px 22px}
-  .phon-grid{grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:6px}
+  .phon-grid,.phon-row{grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:6px}
   footer{font-size:.78em}
 }
 </style>
@@ -392,7 +393,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     <div class="scheme-bar" id="schemeBar" role="button" tabindex="0">
       <div>
         <div class="scheme-title" id="tSchemeTitle">西安话音系与输入方案</div>
-        <div class="scheme-desc" id="tSchemeDesc">声母 26 · 韵母 40 · 四声；点开看与普通话拼音的异同</div>
+        <div class="scheme-desc" id="tSchemeDesc">两支共用 24 声母、37 韵母；城区音多 bf、pf 与 uu、iae，南郊音多 rh</div>
       </div>
       <span class="scheme-more" id="tSchemeMore">查看 →</span>
     </div>
@@ -456,8 +457,12 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   var ready = false;
   var PY_KEY = 'xianhua-pymode';
   var PYMODE = 'full';
-  var SHORT_PAIRS = [['in', 'ien'], ['ing', 'ieng'], ['iu', 'iou'], ['ui', 'uei'], ['un', 'uen'], ['ung', 'uong']];
-  var SHORT_ZERO = [['yun', 'yuen'], ['yung', 'yuong']];
+  var SHORT_PAIRS = [['in', 'ien'], ['iu', 'iou'], ['o', 'uo'], ['ui', 'uei'], ['un', 'uen'], ['ung', 'uong']];
+  var SHORT_ZERO = [['yo', 'yuo'], ['yun', 'yuen']];
+  var SHORT_INI_RE = /^(bf|pf|zh|ch|sh|rh|ng|[bpmfvdtnlzcsjqxrgh])(ien|iou|uo|uei|uen|uong)$/;
+  var EXPAND_INI_RE = /^(bf|pf|zh|ch|sh|rh|ng|[bpmfvdtnlzcsjqxrgh])(in|iu|o|ui|un|ung)$/;
+  var SHORT_MAP = { ien: 'in', iou: 'iu', uo: 'o', uei: 'ui', uen: 'un', uong: 'ung' };
+  var EXPAND_MAP = { in: 'ien', iu: 'iou', o: 'uo', ui: 'uei', un: 'uen', ung: 'uong' };
   var pyCq = {}, pyNj = {};
 
   var TONE_HANT = { '阴平': '陰平', '阳平': '陽平', '上声': '上聲', '去声': '去聲' };
@@ -479,25 +484,18 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   }
 
   function shortBody(body) {
-    for (var i = 0; i < SHORT_PAIRS.length; i++) {
-      var s = SHORT_PAIRS[i][0], f = SHORT_PAIRS[i][1];
-      if (body.length > f.length && body.slice(-f.length) === f) return body.slice(0, body.length - f.length) + s;
-    }
-    for (var j = 0; j < SHORT_ZERO.length; j++) {
-      if (body === SHORT_ZERO[j][1]) return SHORT_ZERO[j][0];
-    }
-    return body;
+    if (body.slice(-3) === 'yuo') return body.slice(0, -3) + 'yo';
+    if (body.slice(-4) === 'yuen') return body.slice(0, -4) + 'yun';
+    var m = SHORT_INI_RE.exec(body);
+    return m ? m[1] + SHORT_MAP[m[2]] : body;
   }
 
   function expandBody(body) {
     var out = [body];
-    for (var i = 0; i < SHORT_PAIRS.length; i++) {
-      var s = SHORT_PAIRS[i][0], f = SHORT_PAIRS[i][1];
-      if (body.length > s.length && body.slice(-s.length) === s) out.push(body.slice(0, body.length - s.length) + f);
-    }
-    for (var j = 0; j < SHORT_ZERO.length; j++) {
-      if (body === SHORT_ZERO[j][0]) out.push(SHORT_ZERO[j][1]);
-    }
+    var zm = /^([jqxnl])?(yo|yun)$/.exec(body);
+    if (zm) out.push((zm[1] || '') + (zm[2] === 'yo' ? 'yuo' : 'yuen'));
+    var m = EXPAND_INI_RE.exec(body);
+    if (m) out.push(m[1] + EXPAND_MAP[m[2]]);
     return out;
   }
 
@@ -511,10 +509,10 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   /* ───────── 数据 ───────── */
   function loadData() {
     return Promise.all([
-      fetch('data/xian.json?v=24').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/nanjiao.json?v=24').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/variants.json?v=24').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/i18n.json?v=24').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      fetch('data/xian.json?v=25').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/nanjiao.json?v=25').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json?v=25').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/i18n.json?v=25').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     ]).then(function (out) {
       out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
       out[1].forEach(function (rec) { byCharNj.set(rec.character, rec); });
@@ -892,6 +890,16 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   }
 
   /* ───────── 音系浮窗 ───────── */
+  function fmtIpaCell(raw) {
+    if (raw === '—' || raw === 'Ø') return '[Ø]';
+    if (raw.indexOf('/') >= 0) {
+      var sm = /^(.+?)\/(.+?)([¹²³]?)$/.exec(raw);
+      if (sm) return '[' + sm[1] + ']/[' + sm[2] + ']' + sm[3];
+    }
+    var m = /^(.+?)([¹²³]?)$/.exec(raw);
+    return m ? '[' + m[1] + ']' + m[2] : '[' + raw + ']';
+  }
+
   function phonCell(item) {
     var e;
     if (item[5]) {
@@ -901,7 +909,15 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
       e = '<div class="e">' + esc(item[2]) + ' ' + esc(item[3]) + '</div>';
     }
     return '<div class="phon-cell' + (item[4] === 2 ? ' only-nj' : item[4] ? ' only' : '') + '"><div class="s">' + esc(item[0]) + '</div>'
-      + '<div class="i">' + esc(item[1]) + '</div>' + e + '</div>';
+      + '<div class="i">' + esc(fmtIpaCell(item[1])) + '</div>' + e + '</div>';
+  }
+
+  function chunkRows(arr, n) {
+    var out = '';
+    for (var i = 0; i < arr.length; i += n) {
+      out += '<div class="phon-row">' + arr.slice(i, i + n).map(phonCell).join('') + '</div>';
+    }
+    return out;
   }
 
   /* 注释行：文案为空时整段不输出，避免留下空的灰底块 */
@@ -914,14 +930,14 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     var h = '<p>' + (d.phon.intro || '') + '</p>';
     if (d.phon.legend) h += '<p class="phon-legend"><i></i><i class="nj"></i>' + esc(d.phon.legend) + '</p>';
 
-    h += '<h3>' + esc(d.phon.initialsTitle) + '</h3><div class="phon-grid">'
-      + T.initials.map(phonCell).join('') + '</div>'
+    h += '<h3>' + esc(d.phon.initialsTitle) + '</h3>'
+      + T.initials.map(function (row) { return '<div class="phon-row">' + row.map(phonCell).join('') + '</div>'; }).join('')
       + phonNote(d.phon.initialsNote);
 
     h += '<h3>' + esc(d.phon.finalsTitle) + '</h3>';
     T.finals.forEach(function (group, i) {
       h += '<div class="fin-group"><div class="fin-label">' + esc((d.phon.groupNames || [])[i] || '') + '</div>'
-        + '<div class="phon-grid">' + group.map(phonCell).join('') + '</div></div>';
+        + chunkRows(group, 7) + '</div>';
     });
     h += phonNote(d.phon.finalsNote);
 
@@ -969,7 +985,7 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
       for (var aj = 0; aj < SHORT_ZERO.length; aj++) ap.push([SHORT_ZERO[aj][1], SHORT_ZERO[aj][0]]);
       h += '<h3>' + esc(d.phon.abbrevTitle) + '</h3><div class="phon-grid abbrev-grid">'
         + ap.map(function (p) {
-            var isZero = p[0] === 'yuen' || p[0] === 'yuong';
+            var isZero = p[0] === 'yuo' || p[0] === 'yuen';
             var tag = isZero ? (d.phon.abbrevZero || '') : '';
             return '<div class="abbrev-cell' + (isZero ? ' is-zero' : '') + '"><span class="p">' + esc(p[0]) + ' → ' + esc(p[1]) + '</span>'
               + (tag ? '<span class="tag">' + esc(tag) + '</span>' : '') + '</div>';
