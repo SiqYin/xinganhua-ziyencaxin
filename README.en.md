@@ -5,7 +5,7 @@
 > Look up how any Chinese character is pronounced in both the **urban** and **southern-suburb** varieties of the Xi'an dialect (Guanzhong Mandarin), complete with Xi'an pinyin, IPA, tone values, and original dictionary glosses. The interface supports Simplified Chinese, Traditional Chinese, English, and Japanese.
 
 - **Live site**: <https://siqyin.github.io/xinganhua-ziyencaxin/>
-- **Coverage**: 3,346 urban characters (3,649 readings) · 4,065 southern-suburb characters (4,594 readings, including 720 additions)
+- **Coverage**: 3,346 urban characters (3,649 readings) · 4,065 southern-suburb characters (4,596 readings, including 720 additions)
 - **Languages**: 简体中文 · 繁體中文 · English · 日本語
 - **Palette**: ink black `#000000` (Qin) · paper white `#FFFFFF` · crimson `#9F363A` (Han)
 - **Font**: self-hosted LXGW WenKai subset (OFL), no external font CDN
