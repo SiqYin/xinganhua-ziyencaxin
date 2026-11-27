@@ -35,13 +35,13 @@
 
 ## 1. The Xi'an pinyin scheme
 
-All entries are transcribed in **Xi'an pinyin**, maintaining parallel tables for urban and southern-suburb Xi'an. Each syllable takes the form `initial + final + tone digit` (e.g. `ba1` 巴, `jyuen1` 軍; 中 is `bfeng4` in the urban city and `zuong4` in the southern suburb):
+All entries are transcribed in **Xi'an pinyin**, maintaining parallel tables for urban and southern-suburb Xi'an. Each syllable takes the form `initial + final + tone digit` (e.g. `ba1` 巴, `jyuen1` 軍; 中 is `bfeng4` in the urban city and `zung4` in the southern suburb):
 
 - **Initials**: 24 shared (including the zero initial), plus `bf`, `pf` in urban Xi'an (26 total) and `rh` in the southern suburb (25 total): `b p m bf pf f v` / `d t n l` / `g k h ng` / `j q x` / `zh ch sh r` / `z c s rh` (`n` is realised as `[ȵ]` before `i`/`y` finals).
-- **Finals**: 37 shared (13 open / 9 `i`-medial / 9 `u`-medial / 6 `ü`-medial), plus urban `uu`, `iae` — 39 total (14 / 10 / 9 / 6).
+- **Finals**: 39 in urban Xi'an (14 open / 10 `i`-medial / 9 `u`-medial / 6 `ü`-medial, including `uu`, `iae`, and `uong`), and 37 in the southern suburb (13 / 9 / 9 / 6; no `uu`/`iae`, spelling `uong` directly as `ung`).
 - **Tones**: Yinping 31, Yangping 24, Shangsheng 53, Qusheng 55; historical entering-tone syllables have merged into these four classes.
 - **Formatting & apostrophe**: Tone digits attach directly with no space (`bfeng4`, `jyuen1`); `'` separates ambiguous syllable boundaries (`xi'ngan1` 西安).
-- **Short mode & reverse lookup**: Supports single-syllable pinyin lookup (full or any of the 8 input abbreviations: `in / iu / o / ui / un / ung` after an initial consonant, plus `yo / yun` including the zero initial). The header toggle switches cards between full and abbreviated spelling while keeping IPA unchanged.
+- **Short mode & reverse lookup**: Supports single-syllable lookup including shortcuts (`in / iu / o / ui / un` after a consonant, `yo / yun` incl. zero initial; for `uong → ung`, urban Xi'an pinyin can be simplified this way, whereas `ung` is already the original spelling in the southern suburb). The header toggle switches between full and short display without changing IPA.
 
 The six diagrams below are shared with the input-method repository [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa):
 
@@ -55,7 +55,7 @@ The six diagrams below are shared with the input-method repository [xinganhua-fu
 
 ![Syllable structure: initial + final + tone](figures/syllable.en.svg)
 
-![Input-side short forms: the 8 abbreviations](figures/abbrev.en.svg)
+![Input-side short forms: 8 in urban · 7 in southern](figures/abbrev.en.svg)
 
 ![Southern-suburb variants](figures/variant.en.svg)
 
@@ -64,17 +64,17 @@ The six diagrams below are shared with the input-method repository [xinganhua-fu
 ### Urban vs. southern suburb
 
 - **Urban**: Traditional speech inside the walled city.
-- **Southern suburb**: Yanta corridor speech (Gaoxin, Xiaozhai, Qujiang), following the **Weinan** sibilant pattern with 25 initials (`rh`, no `bf`/`pf`) and 37 finals (no `uu`/`iae`).
+- **Southern suburb**: Yanta corridor speech (Gaoxin, Xiaozhai, Qujiang), following the **Weinan** sibilant pattern with 25 initials (`rh`, no `bf`/`pf`) and 37 finals (no `uu`/`iae`; `ung` in place of `uong`).
 
 | Item | Urban | Southern suburb |
 |---|---|---|
 | Initials | 26 (incl. `bf`, `pf`) | 25 (incl. `rh`, no `bf`, `pf`) |
-| Finals | 39 (incl. `uu`, `iae`) | 37 (no `uu`, `iae`) |
+| Finals | 39 (`uu`, `iae`, `uong`) | 37 (no `uu`/`iae`; `ung`) |
 | `rh` | 入 `vu1`, 若 `vuo1` | `rhu1`, `rhuo1` |
 | Zhī-series closed | 豬 `bfu1`, 春 `pfen1` | `zu1`, `cuen1` |
 | Shū-series closed | 書 `fu1`, 水 `fei3` | `su1`, `suei3` |
 | Yù rhyme, grade 1 | 都 `du1`, 粗 `cu1` | `dou1`, `cou1` |
-| `uong` realization | `[uɤŋ]` (東 `[tuɤŋ]`) | `[uŋ]` (東 `[tuŋ]`) |
+| `uong` vs. `ung` | `uong [uɤŋ]` (東 `duong1`, 翁 `wong1`) | `ung [uŋ]` (東 `dung1`, 翁 `wung1`) |
 | Tones | 31 / 24 / 53 / 55 | same as urban |
 
 Full distribution rules and comparisons with Mandarin pinyin are documented in [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa) ([简体](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.md) / [繁體](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.zh-Hant.md) / [English](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.en.md) / [日本語](https://github.com/SiqYin/xinganhua-fuvufa/blob/main/README.ja.md)).
@@ -112,7 +112,7 @@ Each card displays the traditional glyph and its simplified counterpart on the l
 
 | Field | Content | Example |
 |---|---|---|
-| Pinyin | Full or abbreviated spelling + tone digit | `bfeng4` / `zuong4` |
+| Pinyin | Full or abbreviated spelling + tone digit | `bfeng4` / `zung4` |
 | IPA | IPA + superscript pitch contour | `[pfəŋ⁵⁵]` / `[tsuŋ⁵⁵]` |
 | Tone | Tone class + pitch contour | Qusheng 55 |
 | Gloss | Source `{}` notes, `白读／文读`, or `variant` badges | Note 白读, 西~, 北~ |
@@ -136,9 +136,9 @@ Multiple readings sort by tone class (Yinping → Yangping → Shangsheng → Qu
 Clicking the "Xi'an phonology & input scheme" bar opens a modal (`Esc` or backdrop click to close) presenting:
 
 - Initials arranged in the 7 canonical rows (`7 / 4 / 4 / 3 / 4 / 4 / 1`), marking urban-only `bf`/`pf`, southern-only `rh`, and `[ȵ]` palatalization of `n` before `i`/`y`.
-- Finals grouped by medial (`14 / 10 / 9 / 6`), noting `uu`/`iae` as urban-only and `[uɤŋ]`/`[uŋ]` for `uong`.
+- Finals grouped by medial (`14 / 10 / 9 / 6`), noting `uu`/`iae` as urban-only and pairing `uong [uɤŋ]` (`duong1`) with `ung [uŋ]` (`dung1`).
 - Four tones (`31 / 24 / 53 / 55`) and tone sandhi (`31-31→24-31`, `53-53→31-53`).
-- Urban vs. southern comparisons, southern variants, Mandarin pinyin contrasts, the 8 input abbreviations, and source links.
+- Urban vs. southern comparisons, southern variants, Mandarin pinyin contrasts, input abbreviations, and source links.
 
 ---
 

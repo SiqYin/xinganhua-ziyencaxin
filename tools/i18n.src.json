@@ -26,7 +26,7 @@
   "legendEx": "例 <b>bfeng4</b> 中 · <b>jyuen1</b> 軍",
   "lead": "试试输入几个字，或者点下面现成的例子：<b>西安话</b>、<b>着</b>、<b>鵝</b>",
   "schemeTitle": "西安话音系与输入方案",
-  "schemeDesc": "两支共用 24 声母、37 韵母；城区音多 bf、pf 与 uu、iae，南郊音多 rh",
+  "schemeDesc": "城区音 26 声母 / 39 韵母（含 bf、pf、uu、iae、uong）；南郊音 25 声母 / 37 韵母（含 rh、ung）",
   "schemeMore": "查看 →",
   "modalTitle": "西安话音系与输入方案",
   "modalClose": "关闭",
@@ -46,11 +46,11 @@
   "sig": "玄为秦，绛为汉",
   "langLabel": "语言",
   "phon": {
-   "intro": "西安话属关中片方言，本站并列收录<b>城区音</b>与<b>南郊音</b>两支口音。两者共用 <b>24 个声母、37 个韵母与四个声调</b>；城区音另有 <b>bf、pf</b> 与 <b>uu、iae</b>（共 26 声母、39 韵母），南郊音另有 <b>rh</b>（共 25 声母、37 韵母）。下表按音系顺序列出，<b>虚线框</b>标出各自独有的声韵。",
+   "intro": "西安话属关中片方言，本站并列收录<b>城区音</b>与<b>南郊音</b>两支口音。两者共用 <b>24 个声母与四个声调</b>；城区音共 26 声母、39 韵母（多出 <b>bf、pf</b> 与 <b>uu、iae</b>，合口鼻尾韵写作 <b>uong</b>），南郊音共 25 声母、37 韵母（多出 <b>rh</b>，无 <b>uu、iae</b>，合口鼻尾韵直接作 <b>ung</b>）。下表按音系顺序列出，<b>虚线框</b>标出各自独有的声韵。",
    "initialsTitle": "声母：共用 24 · 城区音 26（＋bf、pf）· 南郊音 25（＋rh）",
    "initialsNote": "注¹：声母 n 拼 i、y 起头的细音韵母时，实际音值为 [ȵ]（如 南 nan2 为 [n]，你 ni3、女 nyu3 为 [ȵ]）。",
-   "finalsTitle": "韵母：城区音 39（共用 37 ＋ 特有 2）· 南郊音 37",
-   "finalsNote": "注¹：ɿ 用于 zi ci si rhi；注²：ʅ 用于 zhi chi shi ri；注³：uong（含 wong）在城区音读 [uɤŋ]，在南郊音读 [uŋ]。",
+   "finalsTitle": "韵母：城区音 39（含 uu、iae、uong）· 南郊音 37（作 ung）",
+   "finalsNote": "注¹：ɿ 用于 zi ci si rhi；注²：ʅ 用于 zhi chi shi ri；注³：城区音写作 uong [uɤŋ]（零声母 wong），南郊音直接写作 ung [uŋ]（零声母 wung）。",
    "tonesTitle": "声调",
    "sandhiTitle": "连读变调",
    "sandhiNote": "两字连读时，变调主要落在前字：连续两个阴平（31-31）连读，前字改读阳平（24-31）；连续两个上声（53-53）连读，前字改读阴平（31-53）。",
@@ -62,7 +62,7 @@
     },
     {
      "h": "② -n 与 -ng 韵母的音值",
-     "p": "拼作 -n 尾的韵母（an en ian ien uan uen yuan yuen）实读鼻化元音 [ã ẽ iã iɛ̃ uã uẽ yã yɛ̃]，不收舌尖鼻音尾；拼作 -ng 尾的韵母（ang eng iang ing uang uong yung）收舌根鼻音 [-ŋ]。"
+     "p": "拼作 -n 尾的韵母（an en ian ien uan uen yuan yuen）实读鼻化元音 [ã ẽ iã iɛ̃ uã uẽ yã yɛ̃]，不收舌尖鼻音尾；拼作 -ng 尾的韵母（ang eng iang ing uang uong/ung yung）收舌根鼻音 [-ŋ]。"
     },
     {
      "h": "③ 两支口音独有的声韵",
@@ -110,7 +110,7 @@
       [
        "zhōng / chūn",
        "bfeng4 / pfen1",
-       "zuong4 / cuen1",
+       "zung4 / cuen1",
        "中 / 春"
       ],
       [
@@ -155,8 +155,8 @@
      ],
      [
       "韵母",
-      "39（共用 37 ＋ 特有 uu、iae）",
-      "37（无 uu、iae）"
+      "39（含 uu、iae，以及 uong）",
+      "37（无 uu、iae，作 ung）"
      ],
      [
       "bf、pf",
@@ -174,9 +174,9 @@
       "rhu1、rhuo1"
      ],
      [
-      "uong 韵母音值",
-      "[uɤŋ]（東 [tuɤŋ]、翁 [uɤŋ]）",
-      "[uŋ]（東 [tuŋ]、翁 [uŋ]）"
+      "uong / ung 韵",
+      "uong [uɤŋ]（東 duong1、翁 wong1）",
+      "ung [uŋ]（東 dung1、翁 wung1）"
      ],
      [
       "其他成组差异",
@@ -194,8 +194,9 @@
    "njVariantNote": "南郊音 z、c、s、rh 接 u 韵母时，另有 zh、ch、sh、r 翘舌变体（zu、cu、su、rhu 亦读 zhu、chu、shu、ru）；其中 sh 拼 u 时另有 f 变体。变体加注在城区音读 bf、pf、f、v 的字及逐字审定的渭南独有字上，卡片内标作「变体」或「变体（少）」。",
    "legend": "例字读音：红字城区音，蓝字南郊音（两音相同只列一读）；虚线框标示独有音位。",
    "abbrevTitle": "输入端简化拼写",
-   "abbrevNote": "仅限输入端与网页简拼模式：ien→in、iou→iu、uo→o、uei→ui、uen→un、uong→ung（以上六条须前有辅音声母，wo/wei/wen/wong 不简），另 yuo→yo、yuen→yun 连同零声母一并放行。字表与注音本身仍写全拼。",
+   "abbrevNote": "仅限输入端与网页简拼模式：ien→in、iou→iu、uo→o、uei→ui、uen→un 限前有辅音声母（wo/wei/wen 不简），yuo→yo、yuen→yun 含零声母放行；其中 uong→ung 这条简化规则，城区音中拼音可以这样简化，南郊音本来的拼写就是 ung（零声母 wung 不简）。字表与注音本身仍写全拼。",
    "abbrevZero": "含零声母",
+   "abbrevCqOnly": "城区简拼 · 南郊本即 ung",
    "sourceTitle": "字音来源",
    "sources": "城区音取自 MCPDict <a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv\" target=\"_blank\" rel=\"noopener\">西安话音档</a>；南郊音以西安话、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv\" target=\"_blank\" rel=\"noopener\">渭南话音档</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv\" target=\"_blank\" rel=\"noopener\">临潼话音档</a>、<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv\" target=\"_blank\" rel=\"noopener\">华县话音档</a>为底本，参照知乎上关于南郊音、东郊音平翘舌归并情况的讨论，并与本人及家人的口音逐字校对整理而成，<b>仅供参考</b>。"
   },
@@ -256,7 +257,7 @@
   "legendEx": "e.g. <b>bfeng4</b> 中 · <b>jyuen1</b> 軍",
   "lead": "Enter one or more characters above, or click a sample: <b>西安话</b>, <b>着</b>, <b>鵝</b>",
   "schemeTitle": "Xi’an phonology & input scheme",
-  "schemeDesc": "24 initials and 37 finals shared; urban adds bf, pf, uu, iae; southern adds rh",
+  "schemeDesc": "Urban: 26 initials, 39 finals (bf, pf, uu, iae, uong) · Southern: 25 initials, 37 finals (rh, ung)",
   "schemeMore": "Open →",
   "modalTitle": "Xi’an phonology & input scheme",
   "modalClose": "Close",
@@ -276,11 +277,11 @@
   "sig": "Black for Qin, crimson for Han",
   "langLabel": "Language",
   "phon": {
-   "intro": "This site displays two varieties of Xi’an speech (Guanzhong Mandarin) side by side: <b>urban</b> and <b>southern suburb</b>. They share <b>24 initials, 37 finals, and four tones</b>. Urban Xi’an adds <b>bf, pf</b> and <b>uu, iae</b> (26 initials, 39 finals), while the southern suburb adds <b>rh</b> (25 initials, 37 finals). Dashed cells below mark variety-specific phonemes.",
+   "intro": "This site displays two varieties of Xi’an speech (Guanzhong Mandarin) side by side: <b>urban</b> and <b>southern suburb</b>. They share <b>24 initials and four tones</b>. Urban Xi’an has 26 initials and 39 finals (adding <b>bf, pf</b> and <b>uu, iae</b>, spelling the closed-back velar nasal final as <b>uong</b>), whereas the southern suburb has 25 initials and 37 finals (adding <b>rh</b>, without <b>uu, iae</b>, and spelling that final directly as <b>ung</b>). Dashed cells below mark variety-specific phonemes.",
    "initialsTitle": "Initials: 24 shared · urban 26 (+bf, pf) · southern 25 (+rh)",
    "initialsNote": "Note 1: Initial n is realised as [ȵ] before narrow finals starting with i or y (e.g. 南 nan2 [n], 你 ni3 / 女 nyu3 [ȵ]).",
-   "finalsTitle": "Finals: urban 39 (37 shared + 2 urban-only) · southern 37",
-   "finalsNote": "Note 1: ɿ appears in zi ci si rhi. Note 2: ʅ appears in zhi chi shi ri. Note 3: uong (incl. wong) is [uɤŋ] in urban Xi’an and [uŋ] in the southern suburb.",
+   "finalsTitle": "Finals: urban 39 (incl. uu, iae, uong) · southern 37 (ung)",
+   "finalsNote": "Note 1: ɿ appears in zi ci si rhi. Note 2: ʅ appears in zhi chi shi ri. Note 3: Spelled uong [uɤŋ] (zero-initial wong) in urban Xi’an, and directly ung [uŋ] (zero-initial wung) in the southern suburb.",
    "tonesTitle": "Tones",
    "sandhiTitle": "Tone sandhi",
    "sandhiNote": "Tone sandhi falls on the first syllable of a two-syllable group: Yinping + Yinping (31-31) becomes 24-31 (first syllable turns Yangping); Shangsheng + Shangsheng (53-53) becomes 31-53 (first syllable turns Yinping).",
@@ -292,7 +293,7 @@
     },
     {
      "h": "② Nasalised -n finals vs. velar -ng finals",
-     "p": "Finals spelled with -n (an en ian ien uan uen yuan yuen) are nasalised vowels [ã ẽ iã iɛ̃ uã uẽ yã yɛ̃] with no alveolar nasal coda; finals spelled with -ng (ang eng iang ing uang uong yung) end in velar [-ŋ]."
+     "p": "Finals spelled with -n (an en ian ien uan uen yuan yuen) are nasalised vowels [ã ẽ iã iɛ̃ uã uẽ yã yɛ̃] with no alveolar nasal coda; finals spelled with -ng (ang eng iang ing uang uong/ung yung) end in velar [-ŋ]."
     },
     {
      "h": "③ Variety-specific phonemes",
@@ -340,7 +341,7 @@
       [
        "zhōng / chūn",
        "bfeng4 / pfen1",
-       "zuong4 / cuen1",
+       "zung4 / cuen1",
        "中 / 春"
       ],
       [
@@ -385,8 +386,8 @@
      ],
      [
       "Finals",
-      "39 (37 shared + uu, iae)",
-      "37 (no uu, iae)"
+      "39 (incl. uu, iae, uong)",
+      "37 (no uu/iae; ung)"
      ],
      [
       "bf, pf",
@@ -404,9 +405,9 @@
       "rhu1, rhuo1"
      ],
      [
-      "uong realization",
-      "[uɤŋ] (東 [tuɤŋ], 翁 [uɤŋ])",
-      "[uŋ] (東 [tuŋ], 翁 [uŋ])"
+      "uong vs. ung",
+      "uong [uɤŋ] (東 duong1, 翁 wong1)",
+      "ung [uŋ] (東 dung1, 翁 wung1)"
      ],
      [
       "Other regular shifts",
@@ -424,8 +425,9 @@
    "njVariantNote": "Before u-medials, southern z, c, s, and rh also admit retroflex variants zh, ch, sh, and r (zu, cu, su, rhu ~ zhu, chu, shu, ru), and sh+u additionally allows f variants. These are annotated on characters whose urban reading begins with bf, pf, f, or v, plus reviewed Weinan-only characters, tagged “variant” or “variant (rare)” on the cards.",
    "legend": "Example readings: red = urban, blue = southern (shown once when identical); dashed borders mark variety-only items.",
    "abbrevTitle": "Input-side abbreviations",
-   "abbrevNote": "Active for IME input and the Short display toggle: ien→in, iou→iu, uo→o, uei→ui, uen→un, uong→ung (after a consonant initial only; wo/wei/wen/wong stay full), plus yuo→yo and yuen→yun (including zero initial). Dictionaries and canonical notation always use full spelling.",
+   "abbrevNote": "Active for IME input and the Short display toggle: ien→in, iou→iu, uo→o, uei→ui, uen→un apply after a consonant initial (wo/wei/wen stay full), while yuo→yo and yuen→yun include the zero initial. As for uong→ung, urban Xi’an pinyin can be simplified this way, whereas ung is already the original spelling in the southern suburb (zero-initial wung stays full). Dictionaries and canonical notation always keep full spelling.",
    "abbrevZero": "incl. zero initial",
+   "abbrevCqOnly": "urban only · native ung in south",
    "sourceTitle": "Sources",
    "sources": "Urban readings come from MCPDict's <a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv\" target=\"_blank\" rel=\"noopener\">Xi'an table</a>. No pre-existing table exists for the southern suburb; its readings were compiled character by character from the Xi'an, <a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv\" target=\"_blank\" rel=\"noopener\">Weinan</a>, <a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv\" target=\"_blank\" rel=\"noopener\">Lintong</a>, and <a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv\" target=\"_blank\" rel=\"noopener\">Huaxian</a> tables alongside Zhihu discussions on suburban sibilant mergers and checked against the author's family speech — offered <b>for reference only</b>."
   },
@@ -486,7 +488,7 @@
   "legendEx": "例：<b>bfeng4</b> 中 · <b>jyuen1</b> 軍",
   "lead": "漢字を入力するか、下の例をクリックしてみてください：<b>西安话</b>・<b>着</b>・<b>鵝</b>",
   "schemeTitle": "西安方言の音韻と入力方案",
-  "schemeDesc": "共通 24 声母・37 韻母｜城区音のみ bf・pf・uu・iae、南郊音のみ rh",
+  "schemeDesc": "城区音 26 声母・39 韻母（bf・pf・uu・iae・uong）｜南郊音 25 声母・37 韻母（rh・ung）",
   "schemeMore": "開く →",
   "modalTitle": "西安方言の音韻と入力方案",
   "modalClose": "閉じる",
@@ -506,11 +508,11 @@
   "sig": "黒は秦、絳は漢",
   "langLabel": "言語",
   "phon": {
-   "intro": "西安方言（関中片）の<b>城区音</b>と<b>南郊音</b>の二系統を並べて収録しています。<b>24 声母・37 韻母・四声</b>を共有し、城区音には <b>bf・pf</b> と <b>uu・iae</b> が加わり（26 声母・39 韻母）、南郊音には <b>rh</b> が加わります（25 声母・37 韻母）。下表の<b>破線枠</b>は各系統特有の音素を示します。",
+   "intro": "西安方言（関中片）の<b>城区音</b>と<b>南郊音</b>の二系統を並べて収録しています。<b>24 声母・四声</b>を共有し、城区音は 26 声母・39 韻母（<b>bf・pf</b> と <b>uu・iae</b> を備え、合口鼻尾韻を <b>uong</b> と綴ります）、南郊音は 25 声母・37 韻母（<b>rh</b> を備え、<b>uu・iae</b> はなく <b>uong</b> にあたる韻母を本来の綴りとして <b>ung</b> と記します）。下表の<b>破線枠</b>は各系統特有の音素を示します。",
    "initialsTitle": "声母：共通 24 · 城区音 26（＋bf・pf）· 南郊音 25（＋rh）",
    "initialsNote": "注¹：n は i・y で始まる細音の韻母と結合するとき [ȵ] と発音されます（南 nan2 は [n]、你 ni3・女 nyu3 は [ȵ]）。",
-   "finalsTitle": "韻母：城区音 39（共通 37 ＋ 特有 2）· 南郊音 37",
-   "finalsNote": "注¹：ɿ は zi ci si rhi に、注²：ʅ は zhi chi shi ri に用います。注³：uong（wong を含む）は城区音では [uɤŋ]、南郊音では [uŋ] となります。",
+   "finalsTitle": "韻母：城区音 39（uu・iae・uong を含む）· 南郊音 37（ung と表記）",
+   "finalsNote": "注¹：ɿ は zi ci si rhi に、注²：ʅ は zhi chi shi ri に用います。注³：城区音では uong [uɤŋ]（零声母 wong）、南郊音では ung [uŋ]（零声母 wung）と綴ります。",
    "tonesTitle": "声調",
    "sandhiTitle": "連続変調",
    "sandhiNote": "二音節の連続変調では前の字が変わります。陰平が続く（31-31）と前字が陽平（24-31）に、上声が続く（53-53）と前字が陰平（31-53）に変わります。",
@@ -522,7 +524,7 @@
     },
     {
      "h": "② -n 韻母と -ng 韻母の音価",
-     "p": "-n で綴る韻母（an en ian ien uan uen yuan yuen）は鼻母音 [ã ẽ iã iɛ̃ uã uẽ yã yɛ̃] であり、-n の閉鎖はありません。-ng で綴る韻母（ang eng iang ing uang uong yung）は軟口蓋鼻音 [-ŋ] で閉じます。"
+     "p": "-n で綴る韻母（an en ian ien uan uen yuan yuen）は鼻母音 [ã ẽ iã iɛ̃ uã uẽ yã yɛ̃] であり、-n の閉鎖はありません。-ng で綴る韻母（ang eng iang ing uang uong/ung yung）は軟口蓋鼻音 [-ŋ] で閉じます。"
     },
     {
      "h": "③ 各系統特有の声母・韻母",
@@ -570,7 +572,7 @@
       [
        "zhōng / chūn",
        "bfeng4 / pfen1",
-       "zuong4 / cuen1",
+       "zung4 / cuen1",
        "中 / 春"
       ],
       [
@@ -615,8 +617,8 @@
      ],
      [
       "韻母",
-      "39（共通 37 ＋ 特有 uu・iae）",
-      "37（uu・iae なし）"
+      "39（uu・iae と uong を含む）",
+      "37（uu・iae なし、ung と表記）"
      ],
      [
       "bf・pf",
@@ -634,9 +636,9 @@
       "rhu1、rhuo1"
      ],
      [
-      "uong の音価",
-      "[uɤŋ]（東 [tuɤŋ]、翁 [uɤŋ]）",
-      "[uŋ]（東 [tuŋ]、翁 [uŋ]）"
+      "uong と ung",
+      "uong [uɤŋ]（東 duong1、翁 wong1）",
+      "ung [uŋ]（東 dung1、翁 wung1）"
      ],
      [
       "その他の主な対応",
@@ -654,8 +656,9 @@
    "njVariantNote": "南郊音の z・c・s・rh が u と結合する場合、zh・ch・sh・r のそり舌変体も併用されます（zu・cu・su・rhu ↔ zhu・chu・shu・ru）。さらに sh＋u には f 変体もあります。城区音が bf・pf・f・v の字および審定済みの渭南独自字に付与され、カード上では「変体」「変体（少）」と表示されます。",
    "legend": "例字の読み：赤＝城区音、青＝南郊音（同音は一読のみ表示）。破線枠は各系統特有の音素。",
    "abbrevTitle": "入力側の簡拼（略式綴り）",
-   "abbrevNote": "IME 入力と簡拼表示切替で有効：ien→in、iou→iu、uo→o、uei→ui、uen→un、uong→ung（前に子音声母がある場合のみ。wo・wei・wen・wong は省略しません）、さらに yuo→yo、yuen→yun は零声母を含め許容します。字表と標準表記は全拼のままです。",
+   "abbrevNote": "IME 入力と簡拼表示切替で有効：ien→in、iou→iu、uo→o、uei→ui、uen→un は前に子音声母がある場合のみ（wo・wei・wen は省略しません）、yuo→yo、yuen→yun は零声母を含め許容します。また uong→ung は城区音ではこのように簡略化できますが、南郊音では本来の綴りそのものが ung です（零声母 wung は全拼のまま）。字表と標準表記は全拼を保ちます。",
    "abbrevZero": "零声母も可",
+   "abbrevCqOnly": "城区のみ・南郊は元々 ung",
    "sourceTitle": "字音データの出典",
    "sources": "城区音は MCPDict の <a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E8%A5%BF%E5%AE%89.tsv\" target=\"_blank\" rel=\"noopener\">西安話音档</a>に基づきます。南郊音には既成字表がないため、西安話・<a href=\"https://github.com/osfans/MCPDict/blob/master/tools/tables/data/%E6%B8%AD%E5%8D%97.tsv\" target=\"_blank\" rel=\"noopener\">渭南話</a>・<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E4%B8%B4%E6%BD%BC%E6%96%B9%E8%A8%80%E8%AF%AD%E9%9F%B3%E7%A0%94%E7%A9%B6.tsv\" target=\"_blank\" rel=\"noopener\">臨潼話</a>・<a href=\"https://github.com/osfans/MCPDict/blob/master/tools%2Ftables%2Fdata%2F%E5%8D%8E%E5%8E%BF.tsv\" target=\"_blank\" rel=\"noopener\">華県話</a>のデータ表を底本に、知乎（Zhihu）における南郊音・東郊音の平舌／そり舌合流に関する議論を参照し、筆者本人と家族の発音で一字ずつ照合して整理した<b>参考資料</b>です。"
   },
