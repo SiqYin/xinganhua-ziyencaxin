@@ -10,7 +10,7 @@
 @font-face{
   font-family:"LXGW WenKai";
   font-style:normal;font-weight:400;font-display:swap;
-  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=26") format("woff2");
+  src:local("LXGW WenKai"),local("霞鹜文楷"),url("fonts/lxgw-wenkai.woff2?v=27") format("woff2");
 }
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -484,7 +484,9 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   }
 
   function shortBody(body) {
-    if (body.slice(-3) === 'yuo') return body.slice(0, -3) + 'yo';
+    if (body === 'yuo' || body === 'nyuo') return body.slice(0, -3) + 'yo';
+    var mj = /^([jqx])yuo$/.exec(body);
+    if (mj) return mj[1] + 'o';
     if (body.slice(-4) === 'yuen') return body.slice(0, -4) + 'yun';
     var m = SHORT_INI_RE.exec(body);
     return m ? m[1] + SHORT_MAP[m[2]] : body;
@@ -492,8 +494,12 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
 
   function expandBody(body) {
     var out = [body];
-    var zm = /^([jqxnl])?(yo|yun)$/.exec(body);
-    if (zm) out.push((zm[1] || '') + (zm[2] === 'yo' ? 'yuo' : 'yuen'));
+    var zm = /^([jqxnl])?yun$/.exec(body);
+    if (zm) out.push((zm[1] || '') + 'yuen');
+    var zo = /^(n)?yo$/.exec(body);
+    if (zo) out.push((zo[1] || '') + 'yuo');
+    var zj = /^([jqx])o$/.exec(body);
+    if (zj) out.push(zj[1] + 'yuo');
     var m = EXPAND_INI_RE.exec(body);
     if (m) out.push(m[1] + EXPAND_MAP[m[2]]);
     return out;
@@ -509,10 +515,10 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
   /* ───────── 数据 ───────── */
   function loadData() {
     return Promise.all([
-      fetch('data/xian.json?v=26').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/nanjiao.json?v=26').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/variants.json?v=26').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
-      fetch('data/i18n.json?v=26').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      fetch('data/xian.json?v=27').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/nanjiao.json?v=27').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/variants.json?v=27').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }),
+      fetch('data/i18n.json?v=27').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     ]).then(function (out) {
       out[0].forEach(function (rec) { byChar.set(rec.character, rec); });
       out[1].forEach(function (rec) { byCharNj.set(rec.character, rec); });
@@ -982,12 +988,12 @@ footer .sig{letter-spacing:.1em;color:rgba(255,255,255,.66)}
     if (d.phon.abbrevTitle) {
       var ap = [];
       for (var ai = 0; ai < SHORT_PAIRS.length; ai++) ap.push([SHORT_PAIRS[ai][1], SHORT_PAIRS[ai][0]]);
-      for (var aj = 0; aj < SHORT_ZERO.length; aj++) ap.push([SHORT_ZERO[aj][1], SHORT_ZERO[aj][0]]);
+      ap.push(['yuo', 'o', 'abbrevJqx'], ['yuo', 'yo', 'abbrevZeroN'], ['yuen', 'yun', 'abbrevZero']);
       h += '<h3>' + esc(d.phon.abbrevTitle) + '</h3><div class="phon-grid abbrev-grid">'
         + ap.map(function (p) {
-            var isZero = p[0] === 'yuo' || p[0] === 'yuen';
-            var isCqOnly = p[0] === 'uong';
-            var tag = isZero ? (d.phon.abbrevZero || '') : (isCqOnly ? (d.phon.abbrevCqOnly || '') : '');
+            var tagKey = p[2] || (p[0] === 'uong' ? 'abbrevCqOnly' : '');
+            var isZero = tagKey === 'abbrevZero';
+            var tag = tagKey ? (d.phon[tagKey] || '') : '';
             return '<div class="abbrev-cell' + (isZero ? ' is-zero' : '') + '"><span class="p">' + esc(p[0]) + ' → ' + esc(p[1]) + '</span>'
               + (tag ? '<span class="tag">' + esc(tag) + '</span>' : '') + '</div>';
           }).join('') + '</div>' + phonNote(esc(d.phon.abbrevNote || ''));

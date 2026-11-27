@@ -41,7 +41,7 @@ All entries are transcribed in **Xi'an pinyin**, maintaining parallel tables for
 - **Finals**: 39 in urban Xi'an (14 open / 10 `i`-medial / 9 `u`-medial / 6 `ü`-medial, including `uu`, `iae`, and `uong`), and 37 in the southern suburb (13 / 9 / 9 / 6; no `uu`/`iae`, spelling `uong` directly as `ung`).
 - **Tones**: Yinping 31, Yangping 24, Shangsheng 53, Qusheng 55; historical entering-tone syllables have merged into these four classes.
 - **Formatting & apostrophe**: Tone digits attach directly with no space (`bfeng4`, `jyuen1`); `'` separates ambiguous syllable boundaries (`xi'ngan1` 西安).
-- **Short mode & reverse lookup**: Supports single-syllable lookup including shortcuts (`in / iu / o / ui / un` after a consonant, `yo / yun` incl. zero initial; for `uong → ung`, urban Xi'an pinyin can be simplified this way, whereas `ung` is already the original spelling in the southern suburb). The header toggle switches between full and short display without changing IPA.
+- **Short mode & reverse lookup**: Supports single-syllable lookup including shortcuts (`in / iu / o / ui / un` after a consonant, `o` for `yuo` after `j q x`, `yo` for zero-initial or `n`+`yuo`, `yun` for `yuen`; for `uong → ung`, urban Xi'an pinyin can be simplified this way, whereas `ung` is already the original spelling in the southern suburb). The header toggle switches between full and short display without changing IPA.
 
 The six diagrams below are shared with the input-method repository [xinganhua-fuvufa](https://github.com/SiqYin/xinganhua-fuvufa):
 
@@ -97,7 +97,7 @@ This is a self-contained static web page with no backend server. It loads static
 |---|---|
 | Simplified & traditional | Simplified queries expand via OpenCC to traditional dictionary headwords (`鹅`→`鵝`, `边`→`邊`); traditional matches directly |
 | Query limit & deduplication | Up to 30 characters per query; duplicates collapse into one card; whitespace and punctuation are stripped |
-| Pinyin reverse lookup | Entering a single syllable (with optional tone 1–4, full or any of the 8 short forms) searches both urban and southern tables |
+| Pinyin reverse lookup | Entering a single syllable (with optional tone 1–4, full or any short form) searches both urban and southern tables |
 | Mixed input | Mixing Chinese characters and Latin letters prompts you to query them separately |
 | Missing characters | Unlisted characters render an explicit "not found" card |
 | Shareable URLs | Queries update `?q=…` in the address bar |
